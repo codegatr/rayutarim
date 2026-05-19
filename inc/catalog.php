@@ -6,6 +6,22 @@ declare(strict_types=1);
 
 function ru_catalog_categories(): array
 {
+    try {
+        $rows = ru_fetch_all('SELECT * FROM ' . ru_t('product_categories') . ' WHERE is_active = 1 ORDER BY sort_order ASC, title ASC');
+        if ($rows) {
+            $out = [];
+            foreach ($rows as $row) {
+                $out[(string)$row['slug']] = [
+                    'id' => (int)$row['id'],
+                    'title' => (string)$row['title'],
+                    'summary' => (string)($row['summary'] ?? ''),
+                    'icon' => (string)($row['icon'] ?? ''),
+                ];
+            }
+            return $out;
+        }
+    } catch (Throwable) {
+    }
     return [
         'toprak-isleme' => [
             'title' => 'Toprak İşleme',
@@ -32,6 +48,13 @@ function ru_catalog_categories(): array
 
 function ru_catalog_products(): array
 {
+    try {
+        $rows = ru_fetch_all('SELECT p.*, c.slug category_slug FROM ' . ru_t('products') . ' p LEFT JOIN ' . ru_t('product_categories') . ' c ON c.id = p.category_id WHERE p.is_active = 1 ORDER BY p.is_featured DESC, p.sort_order ASC, p.name ASC');
+        if ($rows) {
+            return array_map('ru_catalog_product_from_row', $rows);
+        }
+    } catch (Throwable) {
+    }
     return [
         [
             'category' => 'toprak-isleme',
@@ -73,8 +96,31 @@ function ru_catalog_products(): array
 
 function ru_catalog_products_by_category(string $category): array
 {
+    try {
+        $rows = ru_fetch_all('SELECT p.*, c.slug category_slug FROM ' . ru_t('products') . ' p LEFT JOIN ' . ru_t('product_categories') . ' c ON c.id = p.category_id WHERE p.is_active = 1 AND c.slug = ? ORDER BY p.sort_order ASC, p.name ASC', [$category]);
+        if ($rows) {
+            return array_map('ru_catalog_product_from_row', $rows);
+        }
+    } catch (Throwable) {
+    }
     return array_values(array_filter(
         ru_catalog_products(),
         static fn (array $product): bool => $product['category'] === $category
     ));
+}
+
+function ru_catalog_product_from_row(array $row): array
+{
+    $specs = json_decode((string)($row['specs_json'] ?? '[]'), true);
+    return [
+        'id' => (int)$row['id'],
+        'category' => (string)($row['category_slug'] ?? ''),
+        'slug' => (string)$row['slug'],
+        'name' => (string)$row['name'],
+        'badge' => (string)($row['badge'] ?? ''),
+        'summary' => (string)($row['summary'] ?? ''),
+        'description' => (string)($row['description'] ?? ''),
+        'specs' => is_array($specs) ? $specs : [],
+        'image' => (string)($row['image'] ?? ''),
+    ];
 }

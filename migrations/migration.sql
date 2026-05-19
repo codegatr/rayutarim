@@ -437,3 +437,80 @@ UPDATE `ru_slider` SET
   `link_url` = '/urunler/ilaclama',
   `link_text` = 'Kataloğu Gör'
   WHERE `id` = 2;
+
+CREATE TABLE IF NOT EXISTS `ru_product_categories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `slug` VARCHAR(160) NOT NULL,
+  `title` VARCHAR(200) NOT NULL,
+  `summary` TEXT NULL,
+  `icon` TEXT NULL,
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_slug` (`slug`),
+  KEY `idx_active_sort` (`is_active`, `sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `ru_products` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category_id` INT UNSIGNED NULL,
+  `slug` VARCHAR(180) NOT NULL,
+  `name` VARCHAR(220) NOT NULL,
+  `badge` VARCHAR(80) NOT NULL DEFAULT '',
+  `summary` TEXT NULL,
+  `description` LONGTEXT NULL,
+  `specs_json` LONGTEXT NULL,
+  `price` DECIMAL(12,2) NULL,
+  `currency` VARCHAR(3) NOT NULL DEFAULT 'TRY',
+  `image` VARCHAR(255) NOT NULL DEFAULT '',
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `is_featured` TINYINT(1) NOT NULL DEFAULT 0,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_slug` (`slug`),
+  KEY `idx_category` (`category_id`),
+  KEY `idx_active_sort` (`is_active`, `sort_order`),
+  KEY `idx_featured` (`is_featured`, `is_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `ru_inquiries` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type` ENUM('contact','quote','dealer','service','used') NOT NULL DEFAULT 'contact',
+  `full_name` VARCHAR(160) NOT NULL,
+  `email` VARCHAR(190) NOT NULL DEFAULT '',
+  `phone` VARCHAR(50) NOT NULL DEFAULT '',
+  `company` VARCHAR(160) NOT NULL DEFAULT '',
+  `city` VARCHAR(120) NOT NULL DEFAULT '',
+  `subject` VARCHAR(180) NOT NULL DEFAULT '',
+  `message` TEXT NULL,
+  `status` ENUM('new','in_progress','closed','spam') NOT NULL DEFAULT 'new',
+  `source_url` VARCHAR(500) NOT NULL DEFAULT '',
+  `ip` VARCHAR(45) NOT NULL DEFAULT '',
+  `user_agent` VARCHAR(255) NOT NULL DEFAULT '',
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_status` (`status`, `created_at`),
+  KEY `idx_type` (`type`, `created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT IGNORE INTO `ru_product_categories` (`slug`, `title`, `summary`, `icon`, `sort_order`, `is_active`) VALUES
+  ('toprak-isleme', 'Toprak İşleme', 'Pulluk, kültivatör, çizel, merdane ve tarla hazırlık ekipmanları.', 'M4 18c5-8 10-11 16-12-2 7-1 12 3 16 4-4 1-9 2-16 8Z', 1, 1),
+  ('ekim-dikim', 'Ekim ve Dikim', 'Hassas ekim makineleri, mibzerler ve sezon verimini artıran çözümler.', 'M12 3c4 4 6 8 6 12a6 6 0 0 1-12 0c0-4 2-8 6-12Z', 2, 1),
+  ('ilaclama', 'Zirai İlaçlama', 'Lisanslı ürün portföyü, atomizörler ve doğru uygulama ekipmanları.', 'M7 3h10v4l-2 3v8a3 3 0 0 1-6 0v-8L7 7V3Z', 3, 1),
+  ('yedek-parca', 'Yedek Parça ve Servis', 'Sezon içinde hızlı tedarik, teknik servis ve bakım planlama.', 'M19 13a7 7 0 1 1-8-8l2 2-2 4 4-2 2 2a7 7 0 0 1 2 4Z', 4, 1);
+
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'agir-tip-cizel', 'Ağır Tip Çizel', 'Yoğun toprak', 'Derin patlatma, düşük yakıt tüketimi ve güçlendirilmiş şase.', 'Derin toprak işlemede yüksek dayanım ve düşük bakım maliyeti için tasarlanmıştır.', '["9-13 ayak","70-120 HP","Opsiyonel merdane"]', 1, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'toprak-isleme';
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'diskli-goble', 'Diskli Goble', 'Saha hazırlığı', 'Anız parçalama ve homojen karıştırma için dengeli disk geometrisi.', 'Tarla hazırlığında homojen karıştırma ve güçlü gövde yapısı sunar.', '["20-32 disk","Hidrolik ayar","Ağır hizmet rulman"]', 2, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'toprak-isleme';
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'pnomatik-hassas-ekim', 'Pnömatik Hassas Ekim', 'Yüksek verim', 'Tohum aralığı kontrolü, gübre ünitesi ve sezonluk kalibrasyon desteği.', 'Hassas ekim performansı ve farklı ürün desenlerine uyum için tasarlanmıştır.', '["4-8 sıra","Vakum sistem","Gübre deposu"]', 1, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'ekim-dikim';
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'asilir-tip-pulverizator', 'Asılır Tip Tarla Pülverizatörü', 'Bitki sağlığı', 'Dengeli bom yapısı ve kontrollü uygulama için nozül seçenekleri.', 'Tarla ilaçlamasında dengeli dağılım, kolay bakım ve güvenli kullanım sunar.', '["600-1000 L","12-16 m bom","Basınç regülatörü"]', 1, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'ilaclama';
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'sezon-bakim-paketi', 'Sezon Bakım Paketi', 'Servis', 'Aşınan parçalar, rulman, bıçak, hortum ve saha servis planı.', 'Sezon öncesi bakım ve hızlı parça tedariği için kurumsal servis paketi.', '["Hızlı sevk","Orijinal parça","Servis kaydı"]', 1, 0, 1 FROM `ru_product_categories` c WHERE c.slug = 'yedek-parca';

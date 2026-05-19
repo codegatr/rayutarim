@@ -109,6 +109,34 @@ function ru_handle_home(): void
 
 function ru_handle_contact(): void
 {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!ru_csrf_check()) {
+            ru_flash('error', 'Güvenlik doğrulaması başarısız.');
+            ru_redirect('/iletisim');
+        }
+        $name = trim((string)($_POST['full_name'] ?? ''));
+        $phone = trim((string)($_POST['phone'] ?? ''));
+        $email = trim((string)($_POST['email'] ?? ''));
+        if ($name === '' || ($phone === '' && $email === '')) {
+            ru_flash('error', 'Lütfen ad soyad ve en az bir iletişim bilgisi girin.');
+            ru_redirect('/iletisim');
+        }
+        ru_exec('INSERT INTO ' . ru_t('inquiries') . ' (type, full_name, email, phone, company, city, subject, message, source_url, ip, user_agent, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())', [
+            (string)($_POST['type'] ?? 'contact'),
+            $name,
+            $email,
+            $phone,
+            trim((string)($_POST['company'] ?? '')),
+            trim((string)($_POST['city'] ?? '')),
+            trim((string)($_POST['subject'] ?? 'İletişim')),
+            trim((string)($_POST['message'] ?? '')),
+            (string)($_SERVER['REQUEST_URI'] ?? '/iletisim'),
+            ru_client_ip(),
+            substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255),
+        ]);
+        ru_flash('success', 'Talebiniz alındı. Ekibimiz en kısa sürede dönüş yapacak.');
+        ru_redirect('/iletisim');
+    }
     $page = ru_page_by_slug('iletisim');
     ru_render('contact', [
         'page'        => $page ?: ['title' => 'Iletisim', 'content' => ''],

@@ -95,44 +95,55 @@ ru_partial('breadcrumb', [
         <?php endif; ?>
       </div>
 
-      <!-- Form (Faz 5'te aktiflesecek) -->
+      <!-- Form -->
       <div class="contact__form">
         <h2 class="contact__h">Mesaj Gonderin</h2>
-        <p class="contact__note">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-3px"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-          Iletisim formu Faz 5 (v0.5.0) ile aktif olacak. Su an direkt e-posta veya telefon ile ulasabilirsiniz.
-        </p>
+        <?php foreach (ru_flash_get() as $flash): ?>
+          <p class="contact__note"><?= h($flash['message'] ?? '') ?></p>
+        <?php endforeach; ?>
 
-        <form class="contact-form is-disabled" onsubmit="event.preventDefault(); alert('Iletisim formu Faz 5 ile aktiflesecek. Lutfen e-posta veya telefon ile ulasin.');">
+        <form class="contact-form" method="post" action="/iletisim">
+          <?= ru_csrf_field() ?>
           <div class="form-row">
             <div class="form-group">
               <label>Ad Soyad</label>
-              <input type="text" disabled placeholder="Adiniz Soyadiniz">
+              <input type="text" name="full_name" required placeholder="Adınız Soyadınız">
             </div>
             <div class="form-group">
               <label>Telefon</label>
-              <input type="tel" disabled placeholder="0 5xx xxx xx xx">
+              <input type="tel" name="phone" placeholder="0 5xx xxx xx xx">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Firma</label>
+              <input type="text" name="company" placeholder="Firma / işletme adı">
+            </div>
+            <div class="form-group">
+              <label>Şehir</label>
+              <input type="text" name="city" placeholder="Şehir">
             </div>
           </div>
           <div class="form-group">
             <label>E-posta</label>
-            <input type="email" disabled placeholder="ornek@email.com">
+            <input type="email" name="email" placeholder="ornek@email.com">
           </div>
           <div class="form-group">
             <label>Konu</label>
-            <select disabled>
-              <option>Genel Bilgi</option>
-              <option>Urun Teklifi</option>
-              <option>Bayilik Basvurusu</option>
-              <option>Teknik Servis</option>
-              <option>2. El Pazar Basvurusu</option>
+            <select name="type">
+              <option value="contact">Genel Bilgi</option>
+              <option value="quote">Ürün Teklifi</option>
+              <option value="dealer">Bayilik Başvurusu</option>
+              <option value="service">Teknik Servis</option>
+              <option value="used">2. El Başvurusu</option>
             </select>
           </div>
+          <input type="hidden" name="subject" value="Web sitesi iletişim formu">
           <div class="form-group">
             <label>Mesaj</label>
-            <textarea rows="5" disabled placeholder="Mesajiniz..."></textarea>
+            <textarea rows="5" name="message" placeholder="Mesajınız..."></textarea>
           </div>
-          <button type="submit" class="btn btn--primary btn--lg" disabled>Gonder (Faz 5'te aktif)</button>
+          <button type="submit" class="btn btn--primary btn--lg">Gönder</button>
         </form>
       </div>
     </div>

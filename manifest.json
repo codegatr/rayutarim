@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak Islemede Uzman",
   "description": "Kurumsal tarim makineleri ve ziraai ilac satis platformu",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "release_date": "2026-05-19",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -56,6 +56,12 @@
       "title": "Smart Update v5",
       "released": "2026-05-19",
       "summary": "GitHub Release tabanli otomatik guncelleme, yedek, migration runner, dosya senkronizasyonu"
+    },
+    {
+      "version": "0.6.1",
+      "title": "Yonetim Paneli ve Formlar",
+      "released": "2026-05-19",
+      "summary": "Admin login, dashboard, urun/kategori/sayfa/slider/menu/ayar/kullanici CRUD, talep yonetimi ve aktif iletisim formu"
     },
     {
       "version": "0.7.0",
