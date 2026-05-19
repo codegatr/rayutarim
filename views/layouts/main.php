@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-$siteName = h((string)ru_setting('site_name', 'RAYU Tarim Makineleri'));
+$siteName = h((string)ru_setting('site_name', 'RAYU Tarım Makineleri'));
 $tagline  = h((string)ru_setting('site_tagline', ''));
 $logo     = (string)ru_setting('site_logo', '');
 
@@ -68,7 +68,7 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "<?= addslashes((string)ru_setting('site_name', 'RAYU Tarim Makineleri')) ?>",
+  "name": "<?= addslashes((string)ru_setting('site_name', 'RAYU Tarım Makineleri')) ?>",
   "url": "<?= addslashes((string)ru_setting('site_url', 'https://rayutarim.com')) ?>",
   "logo": "<?= $logo ? addslashes(ru_upload_url($logo)) : 'https://rayutarim.com/assets/img/logo.png' ?>",
   "telephone": "<?= addslashes((string)ru_setting('site_phone', '')) ?>",

@@ -43,7 +43,7 @@ final class RuSmartUpdater
     {
         $check = $this->check();
         if (!$check['has_update']) {
-            return $check + ['updated' => false, 'message' => 'Sistem zaten guncel.'];
+            return $check + ['updated' => false, 'message' => 'Sistem zaten güncel.'];
         }
 
         $asset = $check['asset'];
@@ -66,12 +66,12 @@ final class RuSmartUpdater
 
             return $check + [
                 'updated' => true,
-                'message' => 'Guncelleme tamamlandi.',
+                'message' => 'Güncelleme tamamlandı.',
                 'backup' => $backup,
             ];
         } catch (Throwable $e) {
             $this->removeDir($work);
-            throw new RuUpdateException('Guncelleme durduruldu: ' . $e->getMessage(), 0, $e);
+            throw new RuUpdateException('Güncelleme durduruldu: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -85,7 +85,7 @@ final class RuSmartUpdater
         $json = $this->httpGet($endpoint);
         $data = json_decode($json, true);
         if (!is_array($data)) {
-            throw new RuUpdateException('GitHub release yaniti okunamadi.');
+            throw new RuUpdateException('GitHub release yanıtı okunamadı.');
         }
         return $data;
     }
@@ -111,7 +111,7 @@ final class RuSmartUpdater
     {
         $body = $this->httpGet($url, true);
         if (file_put_contents($target, $body) === false) {
-            throw new RuUpdateException('ZIP dosyasi yazilamadi.');
+            throw new RuUpdateException('ZIP dosyası yazılamadı.');
         }
     }
 
@@ -139,7 +139,7 @@ final class RuSmartUpdater
             $err = curl_error($ch);
             curl_close($ch);
             if ($body === false || $code >= 400) {
-                throw new RuUpdateException('GitHub istegi basarisiz: HTTP ' . $code . ' ' . $err);
+                throw new RuUpdateException('GitHub isteği başarısız: HTTP ' . $code . ' ' . $err);
             }
             return (string)$body;
         }
@@ -147,7 +147,7 @@ final class RuSmartUpdater
         $context = stream_context_create(['http' => ['header' => implode("\r\n", $headers), 'timeout' => 90]]);
         $body = file_get_contents($url, false, $context);
         if ($body === false) {
-            throw new RuUpdateException('GitHub istegi basarisiz.');
+            throw new RuUpdateException('GitHub isteği başarısız.');
         }
         return $body;
     }
@@ -158,13 +158,13 @@ final class RuSmartUpdater
             throw new RuUpdateException('ZipArchive eklentisi gerekli.');
         }
         if (!is_dir($this->backupDir) && !mkdir($this->backupDir, 0755, true)) {
-            throw new RuUpdateException('Yedek klasoru olusturulamadi.');
+            throw new RuUpdateException('Yedek klasörü oluşturulamadı.');
         }
 
         $file = $this->backupDir . '/rayutarim-backup-' . date('Ymd-His') . '.zip';
         $zip = new ZipArchive();
         if ($zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-            throw new RuUpdateException('Yedek ZIP olusturulamadi.');
+            throw new RuUpdateException('Yedek ZIP oluşturulamadı.');
         }
 
         foreach ($this->trackedPaths() as $path) {
@@ -185,12 +185,12 @@ final class RuSmartUpdater
             throw new RuUpdateException('ZipArchive eklentisi gerekli.');
         }
         if (!mkdir($target, 0755, true) && !is_dir($target)) {
-            throw new RuUpdateException('Gecici klasor olusturulamadi.');
+            throw new RuUpdateException('Geçici klasör oluşturulamadı.');
         }
 
         $zip = new ZipArchive();
         if ($zip->open($zipFile) !== true) {
-            throw new RuUpdateException('Release ZIP acilamadi.');
+            throw new RuUpdateException('Release ZIP açılamadı.');
         }
         $zip->extractTo($target);
         $zip->close();
@@ -207,7 +207,7 @@ final class RuSmartUpdater
                 return $candidate;
             }
         }
-        throw new RuUpdateException('ZIP icinde manifest.json bulunamadi.');
+        throw new RuUpdateException('ZIP içinde manifest.json bulunamadı.');
     }
 
     private function syncTrackedPaths(string $source): void
@@ -225,10 +225,10 @@ final class RuSmartUpdater
                 $this->copyDir($from, $to, trim($path, '/'));
             } else {
                 if (!is_dir(dirname($to)) && !mkdir(dirname($to), 0755, true)) {
-                    throw new RuUpdateException('Hedef klasor olusturulamadi: ' . dirname($to));
+                    throw new RuUpdateException('Hedef klasör oluşturulamadı: ' . dirname($to));
                 }
                 if (!copy($from, $to)) {
-                    throw new RuUpdateException('Dosya kopyalanamadi: ' . $path);
+                    throw new RuUpdateException('Dosya kopyalanamadı: ' . $path);
                 }
             }
         }
@@ -284,7 +284,7 @@ final class RuSmartUpdater
     {
         $path = trim(str_replace('\\', '/', $path), '/');
         if ($path === '' || str_contains($path, '..')) {
-            throw new RuUpdateException('Gecersiz yol: ' . $path);
+            throw new RuUpdateException('Geçersiz yol: ' . $path);
         }
         return $this->base . '/' . $path;
     }
@@ -293,7 +293,7 @@ final class RuSmartUpdater
     {
         $dir = $this->base . '/logs/update-' . date('Ymd-His') . '-' . bin2hex(random_bytes(3));
         if (!mkdir($dir, 0755, true) && !is_dir($dir)) {
-            throw new RuUpdateException('Gecici update klasoru olusturulamadi.');
+            throw new RuUpdateException('Geçici update klasörü oluşturulamadı.');
         }
         return $dir;
     }
@@ -318,7 +318,7 @@ final class RuSmartUpdater
     private function copyDir(string $from, string $to, string $relative = ''): void
     {
         if (!is_dir($to) && !mkdir($to, 0755, true)) {
-            throw new RuUpdateException('Hedef klasor olusturulamadi: ' . $to);
+            throw new RuUpdateException('Hedef klasör oluşturulamadı: ' . $to);
         }
         foreach (scandir($from) ?: [] as $item) {
             if ($item === '.' || $item === '..') {
@@ -333,7 +333,7 @@ final class RuSmartUpdater
             if (is_dir($src)) {
                 $this->copyDir($src, $dst, $itemRelative);
             } elseif (!copy($src, $dst)) {
-                throw new RuUpdateException('Dosya kopyalanamadi: ' . $dst);
+                throw new RuUpdateException('Dosya kopyalanamadı: ' . $dst);
             }
         }
     }

@@ -514,3 +514,84 @@ INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summa
 SELECT c.id, 'asilir-tip-pulverizator', 'Asılır Tip Tarla Pülverizatörü', 'Bitki sağlığı', 'Dengeli bom yapısı ve kontrollü uygulama için nozül seçenekleri.', 'Tarla ilaçlamasında dengeli dağılım, kolay bakım ve güvenli kullanım sunar.', '["600-1000 L","12-16 m bom","Basınç regülatörü"]', 1, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'ilaclama';
 INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
 SELECT c.id, 'sezon-bakim-paketi', 'Sezon Bakım Paketi', 'Servis', 'Aşınan parçalar, rulman, bıçak, hortum ve saha servis planı.', 'Sezon öncesi bakım ve hızlı parça tedariği için kurumsal servis paketi.', '["Hızlı sevk","Orijinal parça","Servis kaydı"]', 1, 0, 1 FROM `ru_product_categories` c WHERE c.slug = 'yedek-parca';
+
+-- ============================================================================
+-- v0.6.2 - Türkçe karakter düzeltmeleri
+-- ============================================================================
+UPDATE `ru_settings` SET `sval` = 'RAYU Tarım Makineleri' WHERE `skey` = 'site_name';
+UPDATE `ru_settings` SET `sval` = 'Toprak İşlemede Uzman' WHERE `skey` = 'site_tagline';
+UPDATE `ru_settings` SET `sval` = 'Konya, Türkiye' WHERE `skey` = 'site_address';
+UPDATE `ru_settings` SET `sval` = 'Toprağın gücünü teknolojiyle buluşturuyoruz' WHERE `skey` = 'hero_title';
+UPDATE `ru_settings` SET `sval` = 'Tarım makineleri, zirai ilaçlama ve servis çözümlerinde Türkiye geneli kurumsal satış platformu.' WHERE `skey` = 'hero_subtitle';
+UPDATE `ru_settings` SET `sval` = 'Ürünlerimizi İnceleyin' WHERE `skey` = 'hero_cta_primary_text';
+UPDATE `ru_settings` SET `sval` = 'Bize Ulaşın' WHERE `skey` = 'hero_cta_secondary_text';
+UPDATE `ru_settings` SET `sval` = 'RAYU Tarım Makineleri; toprak işleme, ekim, ilaçlama, yedek parça ve servis süreçlerini tek kurumsal çatı altında yöneten satış ve destek platformudur.' WHERE `skey` = 'footer_about';
+UPDATE `ru_settings` SET `sval` = 'Toprak işleme makinelerinde uzmanlaşmış, üreticinin yanında kurumsal yapı.' WHERE `skey` = 'about_short';
+UPDATE `ru_settings` SET `sval` = 'Yerli mühendislik' WHERE `skey` = 'feature_1_title';
+UPDATE `ru_settings` SET `sval` = 'Anadolu saha tecrübesi, dünya kalite standardı' WHERE `skey` = 'feature_1_text';
+UPDATE `ru_settings` SET `sval` = 'Satış sonrası servis' WHERE `skey` = 'feature_2_title';
+UPDATE `ru_settings` SET `sval` = 'Bakım, yedek parça ve sezon desteği tek ekipte' WHERE `skey` = 'feature_2_text';
+UPDATE `ru_settings` SET `sval` = 'Bayi ve filo satışı' WHERE `skey` = 'feature_3_title';
+UPDATE `ru_settings` SET `sval` = 'Türkiye genelinde kurumsal teklif ve teslimat akışı' WHERE `skey` = 'feature_3_text';
+UPDATE `ru_settings` SET `sval` = 'Garanti ve kayıt' WHERE `skey` = 'feature_4_title';
+UPDATE `ru_settings` SET `sval` = 'Her teslimatta ürün, servis ve bakım kaydı' WHERE `skey` = 'feature_4_text';
+UPDATE `ru_settings` SET `sval` = 'Konya Organize Sanayi Bölgesi, Konya / Türkiye' WHERE `skey` = 'contact_address_full';
+
+UPDATE `ru_menu` SET `label` = 'Anasayfa' WHERE `url` = '/';
+UPDATE `ru_menu` SET `label` = 'Kurumsal' WHERE `url` = '/hakkimizda' AND `location` = 'header';
+UPDATE `ru_menu` SET `label` = 'Ürünler' WHERE `url` = '/urunler' AND `location` = 'header';
+UPDATE `ru_menu` SET `label` = 'İletişim' WHERE `url` = '/iletisim';
+UPDATE `ru_menu` SET `label` = 'Hakkımızda' WHERE `url` = '/hakkimizda';
+UPDATE `ru_menu` SET `label` = 'Tüm Ürünler' WHERE `url` = '/urunler' AND `location` = 'footer_2';
+UPDATE `ru_menu` SET `label` = 'Toprak İşleme', `url` = '/urunler/toprak-isleme' WHERE `url` IN ('/urunler/tarim-aletleri', '/urunler/toprak-isleme');
+UPDATE `ru_menu` SET `label` = 'Zirai İlaçlama', `url` = '/urunler/ilaclama' WHERE `url` IN ('/urunler/ziraai-ilaclar', '/urunler/ilaclama');
+UPDATE `ru_menu` SET `label` = 'Tarihçe' WHERE `url` = '/tarihce';
+UPDATE `ru_menu` SET `label` = 'İnsan Kaynakları' WHERE `url` = '/insan-kaynaklari';
+UPDATE `ru_menu` SET `label` = 'Kalite Politikası' WHERE `url` = '/kalite-politikasi';
+
+UPDATE `ru_pages` SET
+  `title` = 'Hakkımızda',
+  `subtitle` = 'Topraktan gelen güç, kurumsal satış disiplini',
+  `excerpt` = 'RAYU Tarım Makineleri, üreticinin yanında olan teknoloji ve servis ortağıdır.',
+  `content` = '<p>RAYU Tarım Makineleri, Konya merkezli yapısıyla tarım makineleri, zirai ilaçlama çözümleri, yedek parça ve saha servis süreçlerini tek kurumsal çatı altında sunar.</p><p>Satış ekibimiz ürün seçimini toprak yapısı, traktör gücü, ürün deseni ve sezon takvimine göre planlar. Teslimat sonrasında bakım, yedek parça ve operatör desteğiyle üreticinin yanında kalır.</p><h2>Kurumsal çalışma modelimiz</h2><p>Bayi yönetimi, filo satışı, teknik teklif, teslimat ve servis kayıtları ölçülebilir süreçlerle ilerler. Amacımız yalnızca makine satmak değil, sezon verimliliğini artıran sürdürülebilir bir iş ortaklığı kurmaktır.</p>'
+  WHERE `slug` = 'hakkimizda';
+UPDATE `ru_pages` SET
+  `title` = 'Misyon & Vizyon',
+  `subtitle` = 'Yarının tarımı için bugün',
+  `content` = '<h2>Misyonumuz</h2><p>Üreticinin verimliliğini artıran, kullanıcıya değer katan, çevreye duyarlı tarım makineleri ve bitki sağlığı çözümleri sunmak.</p><h2>Vizyonumuz</h2><p>Türkiye’de güvenilir satış ve servis standardını yükselten, bölgesel pazarlarda tercih edilen kurumsal tarım teknolojileri markası olmak.</p>'
+  WHERE `slug` = 'misyon-vizyon';
+UPDATE `ru_pages` SET `title` = 'Tarihçe', `subtitle` = 'Kilometre taşları' WHERE `slug` = 'tarihce';
+UPDATE `ru_pages` SET `title` = 'Kalite Politikası', `subtitle` = 'Standardın ötesi' WHERE `slug` = 'kalite-politikasi';
+UPDATE `ru_pages` SET `title` = 'İnsan Kaynakları', `subtitle` = 'Bizimle çalışmak isteyenler için' WHERE `slug` = 'insan-kaynaklari';
+UPDATE `ru_pages` SET `title` = 'İletişim', `subtitle` = 'Bize ulaşın' WHERE `slug` = 'iletisim';
+
+UPDATE `ru_slider` SET
+  `title` = 'Toprağın Gücünü Teknolojiyle Buluşturuyoruz',
+  `subtitle` = 'Kurumsal tarım makineleri satışı',
+  `description` = 'Toprak işleme, ekim, ilaçlama ve yedek parça çözümlerini teknik teklif ve servis desteğiyle sunuyoruz.',
+  `link_text` = 'Ürünleri İncele'
+  WHERE `id` = 1;
+UPDATE `ru_slider` SET
+  `title` = 'Zirai İlaçlama ve Bitki Sağlığı',
+  `subtitle` = 'Doğru ürün, doğru uygulama',
+  `description` = 'Lisanslı portföy ve saha danışmanlığıyla bitki sağlığı süreçlerinizi planlayın.',
+  `link_url` = '/urunler/ilaclama',
+  `link_text` = 'Kataloğu Gör'
+  WHERE `id` = 2;
+UPDATE `ru_slider` SET
+  `title` = '2. El Pazarı',
+  `subtitle` = 'Güvenli, garantili, ekspertiz onaylı',
+  `description` = 'İkinci el tarım makinelerini RAYU güvencesiyle alıp satın. Tüm ilanlar uzman ekibimizce kontrol edilir.',
+  `link_text` = '2. El Pazarına Gir'
+  WHERE `id` = 3;
+
+UPDATE `ru_product_categories` SET `title` = 'Toprak İşleme', `summary` = 'Pulluk, kültivatör, çizel, merdane ve tarla hazırlık ekipmanları.' WHERE `slug` = 'toprak-isleme';
+UPDATE `ru_product_categories` SET `title` = 'Ekim ve Dikim', `summary` = 'Hassas ekim makineleri, mibzerler ve sezon verimini artıran çözümler.' WHERE `slug` = 'ekim-dikim';
+UPDATE `ru_product_categories` SET `title` = 'Zirai İlaçlama', `summary` = 'Lisanslı ürün portföyü, atomizörler ve doğru uygulama ekipmanları.' WHERE `slug` = 'ilaclama';
+UPDATE `ru_product_categories` SET `title` = 'Yedek Parça ve Servis', `summary` = 'Sezon içinde hızlı tedarik, teknik servis ve bakım planlama.' WHERE `slug` = 'yedek-parca';
+
+UPDATE `ru_products` SET `name` = 'Ağır Tip Çizel', `badge` = 'Yoğun toprak', `summary` = 'Derin patlatma, düşük yakıt tüketimi ve güçlendirilmiş şase.', `description` = 'Derin toprak işlemede yüksek dayanım ve düşük bakım maliyeti için tasarlanmıştır.' WHERE `slug` = 'agir-tip-cizel';
+UPDATE `ru_products` SET `name` = 'Diskli Goble', `badge` = 'Saha hazırlığı', `summary` = 'Anız parçalama ve homojen karıştırma için dengeli disk geometrisi.', `description` = 'Tarla hazırlığında homojen karıştırma ve güçlü gövde yapısı sunar.', `specs_json` = '["20-32 disk","Hidrolik ayar","Ağır hizmet rulman"]' WHERE `slug` = 'diskli-goble';
+UPDATE `ru_products` SET `name` = 'Pnömatik Hassas Ekim', `badge` = 'Yüksek verim', `summary` = 'Tohum aralığı kontrolü, gübre ünitesi ve sezonluk kalibrasyon desteği.', `description` = 'Hassas ekim performansı ve farklı ürün desenlerine uyum için tasarlanmıştır.', `specs_json` = '["4-8 sıra","Vakum sistem","Gübre deposu"]' WHERE `slug` = 'pnomatik-hassas-ekim';
+UPDATE `ru_products` SET `name` = 'Asılır Tip Tarla Pülverizatörü', `badge` = 'Bitki sağlığı', `summary` = 'Dengeli bom yapısı ve kontrollü uygulama için nozül seçenekleri.', `description` = 'Tarla ilaçlamasında dengeli dağılım, kolay bakım ve güvenli kullanım sunar.', `specs_json` = '["600-1000 L","12-16 m bom","Basınç regülatörü"]' WHERE `slug` = 'asilir-tip-pulverizator';
+UPDATE `ru_products` SET `name` = 'Sezon Bakım Paketi', `summary` = 'Aşınan parçalar, rulman, bıçak, hortum ve saha servis planı.', `description` = 'Sezon öncesi bakım ve hızlı parça tedariği için kurumsal servis paketi.', `specs_json` = '["Hızlı sevk","Orijinal parça","Servis kaydı"]' WHERE `slug` = 'sezon-bakim-paketi';

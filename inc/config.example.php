@@ -34,8 +34,8 @@ return [
     // ─────────────────────────────────────────────────────────────────
     'site' => [
         'url'       => 'https://rayutarim.com',
-        'name'      => 'RAYU Tarim Makineleri',
-        'tagline'   => 'Tarim makineleri ve ziraai ilaclar',
+        'name'      => 'RAYU Tarım Makineleri',
+        'tagline'   => 'Tarım makineleri ve zirai ilaçlar',
         'admin_email' => 'admin@rayutarim.com',
         'timezone'  => 'Europe/Istanbul',
         'locale'    => 'tr_TR',
@@ -89,7 +89,7 @@ return [
         'user'     => 'noreply@rayutarim.com',
         'pass'     => '',
         'from'     => 'noreply@rayutarim.com',
-        'from_name'=> 'RAYU Tarim Makineleri',
+        'from_name'=> 'RAYU Tarım Makineleri',
         'secure'   => 'tls',                   // tls | ssl | ''
     ],
 ];

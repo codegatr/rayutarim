@@ -5,7 +5,7 @@
 declare(strict_types=1);
 
 $navItems = ru_menu_items('header');
-$siteName = (string)ru_setting('site_name', 'RAYU Tarim Makineleri');
+$siteName = (string)ru_setting('site_name', 'RAYU Tarım Makineleri');
 $logo     = (string)ru_setting('site_logo', '');
 $phone    = (string)ru_setting('site_phone', '');
 $email    = (string)ru_setting('site_email', '');

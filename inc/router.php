@@ -24,7 +24,7 @@ function ru_dispatch(): void
         // Admin oturumu varsa gec
         if (empty($_SESSION['user_id'])) {
             ru_render('maintenance', [
-                'page_title' => 'Bakim',
+                'page_title' => 'Bakım',
             ]);
         }
     }
@@ -37,7 +37,7 @@ function ru_dispatch(): void
         return;
     }
 
-    // Iletisim sayfasi (ozel sablon)
+    // İletişim sayfası (özel şablon)
     if ($route === '/iletisim') {
         ru_handle_contact();
         return;
@@ -139,8 +139,8 @@ function ru_handle_contact(): void
     }
     $page = ru_page_by_slug('iletisim');
     ru_render('contact', [
-        'page'        => $page ?: ['title' => 'Iletisim', 'content' => ''],
-        'page_title'  => 'Iletisim',
+        'page'        => $page ?: ['title' => 'İletişim', 'content' => ''],
+        'page_title'  => 'İletişim',
         'page_class'  => 'page-contact',
     ]);
 }
@@ -160,7 +160,7 @@ function ru_handle_products(string $category = ''): void
         'categories' => $categories,
         'products'   => $category === '' ? ru_catalog_products() : ru_catalog_products_by_category($category),
         'activeCategory' => $category,
-        'page_title' => $category === '' ? 'Urunler' : $categories[$category]['title'],
+        'page_title' => $category === '' ? 'Ürünler' : $categories[$category]['title'],
         'page_class' => 'page-products',
     ]);
 }

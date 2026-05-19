@@ -83,7 +83,7 @@ function ru_version_info(): array
 {
     $m = ru_manifest();
     return [
-        'name'         => (string)($m['name'] ?? 'RAYU Tarim Makineleri'),
+        'name'         => (string)($m['name'] ?? 'RAYU Tarım Makineleri'),
         'version'      => ru_version(),
         'release_date' => (string)($m['release_date'] ?? ''),
         'repo'         => ru_repo(),

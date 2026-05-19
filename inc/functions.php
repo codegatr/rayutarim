@@ -152,11 +152,11 @@ function ru_abort(int $code, string $message = ''): never
 {
     http_response_code($code);
     $title = match ($code) {
-        400 => 'Hatali Istek',
+        400 => 'Hatalı İstek',
         401 => 'Yetkisiz',
-        403 => 'Erisim Engellendi',
-        404 => 'Bulunamadi',
-        429 => 'Cok Fazla Istek',
+        403 => 'Erişim Engellendi',
+        404 => 'Bulunamadı',
+        429 => 'Çok Fazla İstek',
         default => 'Hata',
     };
     echo "<!doctype html><html lang='tr'><head><meta charset='utf-8'><title>$code - $title</title>";
@@ -165,7 +165,7 @@ function ru_abort(int $code, string $message = ''): never
     echo "a{color:#2d5a3d;text-decoration:none;border-bottom:1px solid currentColor}</style></head><body>";
     echo "<h1>$code</h1><h2>" . h($title) . "</h2>";
     if ($message !== '') echo '<p>' . h($message) . '</p>';
-    echo "<p><a href='/'>Anasayfaya don</a></p></body></html>";
+    echo "<p><a href='/'>Anasayfaya dön</a></p></body></html>";
     exit;
 }
 

@@ -1,9 +1,9 @@
 {
-  "name": "RAYU Tarim Makineleri",
+  "name": "RAYU Tarım Makineleri",
   "slug": "rayutarim",
-  "tagline": "Toprak Islemede Uzman",
-  "description": "Kurumsal tarim makineleri ve ziraai ilac satis platformu",
-  "version": "0.6.1",
+  "tagline": "Toprak İşlemede Uzman",
+  "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
+  "version": "0.6.2",
   "release_date": "2026-05-19",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -17,57 +17,63 @@
   "phases": [
     {
       "version": "0.1.0",
-      "title": "Cekirdek & Iskelet",
+      "title": "Çekirdek & İskelet",
       "released": "2026-05-19",
-      "summary": "Repo iskeleti, manifest, version SSOT, PDO db, idempotent migration, .htaccess, kurulum sihirbazi taslagi"
+      "summary": "Repo iskeleti, manifest, version SSOT, PDO db, idempotent migration, .htaccess, kurulum sihirbazı taslağı"
     },
     {
       "version": "0.2.0",
       "title": "Public Tema",
       "released": "2026-05-19",
-      "summary": "Header/footer, slider, anasayfa, kurumsal sayfalar (Hakkimizda, Misyon/Vizyon, Tarihce, Iletisim)"
+      "summary": "Header/footer, slider, anasayfa, kurumsal sayfalar (Hakkımızda, Misyon/Vizyon, Tarihçe, İletişim)"
     },
     {
       "version": "0.2.1",
-      "title": "Marka Kimligi",
+      "title": "Marka Kimliği",
       "released": "2026-05-19",
-      "summary": "Resmi logo entegrasyonu, favicon seti (ICO + PNG 16-512 + SVG), OG banner, renk paleti logoya gore guncellendi (yesil + gri)"
+      "summary": "Resmi logo entegrasyonu, favicon seti (ICO + PNG 16-512 + SVG), OG banner, renk paleti logoya göre güncellendi (yeşil + gri)"
     },
     {
       "version": "0.3.0",
-      "title": "Urun Katalogu",
+      "title": "Ürün Kataloğu",
       "released": "2026-05-19",
-      "summary": "Public katalog sayfalari, urun gruplari, teknik teklif akisi ve kurumsal satis sunumu"
+      "summary": "Public katalog sayfaları, ürün grupları, teknik teklif akışı ve kurumsal satış sunumu"
     },
     {
       "version": "0.4.0",
-      "title": "Yonetim Paneli",
+      "title": "Yönetim Paneli",
       "released": null,
-      "summary": "Auth, dashboard, slider/sayfa/urun/kullanici CRUD, ayarlar"
+      "summary": "Auth, dashboard, slider/sayfa/ürün/kullanıcı CRUD, ayarlar"
     },
     {
       "version": "0.5.0",
-      "title": "2. El Satis & Formlar",
+      "title": "2. El Satış & Formlar",
       "released": "2026-05-19",
-      "summary": "Ikinci el guven sayfasi, ekspertiz ve basvuru akisi"
+      "summary": "İkinci el güven sayfası, ekspertiz ve başvuru akışı"
     },
     {
       "version": "0.6.0",
       "title": "Smart Update v5",
       "released": "2026-05-19",
-      "summary": "GitHub Release tabanli otomatik guncelleme, yedek, migration runner, dosya senkronizasyonu"
+      "summary": "GitHub Release tabanlı otomatik güncelleme, yedek, migration runner, dosya senkronizasyonu"
     },
     {
       "version": "0.6.1",
-      "title": "Yonetim Paneli ve Formlar",
+      "title": "Yönetim Paneli ve Formlar",
       "released": "2026-05-19",
-      "summary": "Admin login, dashboard, urun/kategori/sayfa/slider/menu/ayar/kullanici CRUD, talep yonetimi ve aktif iletisim formu"
+      "summary": "Admin login, dashboard, ürün/kategori/sayfa/slider/menü/ayar/kullanıcı CRUD, talep yönetimi ve aktif iletişim formu"
+    },
+    {
+      "version": "0.6.2",
+      "title": "Türkçe Karakter Düzeltmeleri",
+      "released": "2026-05-19",
+      "summary": "Public alanlar, kurulum sihirbazı, manifest ve migration seed metinlerinde Türkçe karakter standardizasyonu"
     },
     {
       "version": "0.7.0",
-      "title": "Uluslararasilasma (i18n)",
+      "title": "Uluslararasılaşma (i18n)",
       "released": null,
-      "summary": "TR/EN/AR/RU dil sistemi, cevirilebilir alanlar, locale switcher, slug i18n"
+      "summary": "TR/EN/AR/RU dil sistemi, çevrilebilir alanlar, locale switcher, slug i18n"
     }
   ],
   "update": {

@@ -15,7 +15,7 @@ declare(strict_types=1);
       </p>
       <div class="page-404__cta">
         <a class="btn btn--primary btn--lg" href="/">Anasayfaya Don</a>
-        <a class="btn btn--ghost btn--lg" href="/iletisim">Bize Ulasin</a>
+        <a class="btn btn--ghost btn--lg" href="/iletisim">Bize Ulaşın</a>
       </div>
     </div>
   </div>

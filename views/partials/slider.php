@@ -1,18 +1,18 @@
 <?php
 /**
  * Hero Slider
- * $slides — ru_active_sliders() ciktisi
+ * $slides — ru_active_sliders() çıktısı
  */
 declare(strict_types=1);
 
 $slides = $slides ?? [];
 if (empty($slides)) {
-    // Fallback hero — slider hic yoksa veya hepsi pasif ise
-    $heroTitle    = (string)ru_setting('hero_title', 'Topragin gucunu teknolojiyle bulusturuyoruz');
+    // Fallback hero — slider hiç yoksa veya hepsi pasif ise
+    $heroTitle    = (string)ru_setting('hero_title', 'Toprağın gücünü teknolojiyle buluşturuyoruz');
     $heroSub      = (string)ru_setting('hero_subtitle', '');
-    $ctaPriText   = (string)ru_setting('hero_cta_primary_text', 'Urunler');
+    $ctaPriText   = (string)ru_setting('hero_cta_primary_text', 'Ürünler');
     $ctaPriUrl    = (string)ru_setting('hero_cta_primary_url', '/urunler');
-    $ctaSecText   = (string)ru_setting('hero_cta_secondary_text', 'Iletisim');
+    $ctaSecText   = (string)ru_setting('hero_cta_secondary_text', 'İletişim');
     $ctaSecUrl    = (string)ru_setting('hero_cta_secondary_url', '/iletisim');
 ?>
 <section class="hero hero--fallback" aria-label="Hero">
@@ -85,7 +85,7 @@ if (empty($slides)) {
   </div>
 
   <?php if (count($slides) > 1): ?>
-  <button class="hero__nav hero__nav--prev" id="heroPrev" aria-label="Onceki slayt">
+  <button class="hero__nav hero__nav--prev" id="heroPrev" aria-label="Önceki slayt">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
   </button>
   <button class="hero__nav hero__nav--next" id="heroNext" aria-label="Sonraki slayt">

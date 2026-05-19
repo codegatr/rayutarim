@@ -9,7 +9,7 @@ Kurumsal tarım makineleri, zirai ilaçlama, yedek parça, servis ve ikinci el g
 
 ## Kapsam
 
-v0.6.1 ile public yüzey ve yönetim paneli kurumsal satış standardına taşındı:
+v0.6.2 ile public yüzey, yönetim paneli ve Türkçe metin standardı kurumsal satış seviyesine taşındı:
 
 - Temiz SVG marka seti: `assets/img/logo.svg`
 - Kurumsal anasayfa: güven bandı, ürün grupları, öne çıkan ürünler, servis süreci
@@ -81,7 +81,7 @@ Smart Update şu yolları korur:
 ## Dizinler
 
 ```text
-admin/              Smart Update endpoint ve gelecek yönetim paneli
+admin/              Yönetim paneli, talep yönetimi ve Smart Update ekranı
 assets/             CSS, JS, logo ve statik görseller
 docs/               Mimari ve update dokümanları
 inc/                Bootstrap, DB, router, katalog, updater

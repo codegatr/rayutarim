@@ -34,7 +34,7 @@ function ru_render(string $page, array $vars = [], string $layout = 'main'): nev
 
     // View ortak verileri
     $vars = array_merge([
-        'site_name'    => (string)ru_setting('site_name', 'RAYU Tarim Makineleri'),
+        'site_name'    => (string)ru_setting('site_name', 'RAYU Tarım Makineleri'),
         'site_tagline' => (string)ru_setting('site_tagline', ''),
         'page_title'   => '',
         'page_meta'    => '',

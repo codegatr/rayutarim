@@ -1,11 +1,11 @@
 <?php
 /**
- * RAYU TARIM MAKİNELERİ — Kurulum Sihirbazi
+ * RAYU TARIM MAKİNELERİ — Kurulum Sihirbazı
  *
  * Adimlar:
  *  1. Sistem gereksinim kontrolu (PHP 8.3+, eklentiler, yazma izinleri)
  *  2. DB baglanti bilgileri + site temel ayarlari
- *  3. Yonetici hesabi olusturma
+ *  3. Yönetici hesabı oluşturma
  *  4. migration.sql calistirma + .installed mark
  *
  * Kurulumdan sonra:
@@ -68,7 +68,7 @@ if ($step === 2 && $_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     $site = [
         'url'         => rtrim(trim((string)($_POST['site_url'] ?? '')), '/'),
-        'name'        => trim((string)($_POST['site_name'] ?? 'RAYU Tarim Makineleri')),
+        'name'        => trim((string)($_POST['site_name'] ?? 'RAYU Tarım Makineleri')),
         'admin_email' => trim((string)($_POST['admin_email'] ?? '')),
     ];
 
@@ -84,12 +84,12 @@ if ($step === 2 && $_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: install.php?step=3');
         exit;
     } catch (\Throwable $e) {
-        $error = 'DB baglantisi basarisiz: ' . $e->getMessage();
+        $error = 'DB bağlantısı başarısız: ' . $e->getMessage();
     }
 }
 
 // ──────────────────────────────────────────────────────────────────────
-// Adim 3: Yonetici bilgileri kaydet (sessiona)
+// Adım 3: Yönetici bilgileri kaydet (sessiona)
 // ──────────────────────────────────────────────────────────────────────
 if ($step === 3 && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin = [
@@ -99,11 +99,11 @@ if ($step === 3 && $_SERVER['REQUEST_METHOD'] === 'POST') {
         'pass2' => (string)($_POST['admin_pass2'] ?? ''),
     ];
     if ($admin['name'] === '' || !filter_var($admin['email'], FILTER_VALIDATE_EMAIL)) {
-        $error = 'Ad ve gecerli e-posta zorunlu.';
+        $error = 'Ad ve geçerli e-posta zorunlu.';
     } elseif (strlen($admin['pass']) < 8) {
-        $error = 'Sifre en az 8 karakter olmali.';
+        $error = 'Şifre en az 8 karakter olmalı.';
     } elseif ($admin['pass'] !== $admin['pass2']) {
-        $error = 'Sifreler eslesmiyor.';
+        $error = 'Şifreler eşleşmiyor.';
     } else {
         $_SESSION['ru_install']['admin'] = [
             'name'  => $admin['name'],
@@ -124,7 +124,7 @@ if ($step === 4 && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin = $_SESSION['ru_install']['admin'] ?? null;
 
     if (!$db || !$site || !$admin) {
-        $error = 'Oturum verisi kayboldu, lutfen 1. adimdan baslayin.';
+        $error = 'Oturum verisi kayboldu, lütfen 1. adımdan başlayın.';
         $step = 1;
     } else {
         try {
@@ -138,7 +138,7 @@ if ($step === 4 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             // 2) Migration calistir
             $sql = file_get_contents(__DIR__ . '/migrations/migration.sql');
             if ($sql === false) {
-                throw new \RuntimeException('migration.sql okunamadi');
+                throw new \RuntimeException('migration.sql okunamadı');
             }
             // Multi-statement
             $pdo->exec($sql);
@@ -177,7 +177,7 @@ if ($step === 4 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $appKey = bin2hex(random_bytes(32));
             $cfg = build_config_php($db, $site, $appKey);
             if (file_put_contents(RU_CONFIG_PATH, $cfg) === false) {
-                throw new \RuntimeException('inc/config.php yazilamadi');
+                throw new \RuntimeException('inc/config.php yazılamadı');
             }
             @chmod(RU_CONFIG_PATH, 0640);
 
@@ -190,7 +190,7 @@ if ($step === 4 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: install.php?step=5');
             exit;
         } catch (\Throwable $e) {
-            $error = 'Kurulum hatasi: ' . $e->getMessage();
+            $error = 'Kurulum hatası: ' . $e->getMessage();
         }
     }
 }
@@ -205,8 +205,8 @@ function build_config_php(array $db, array $site, string $appKey): string
     return <<<PHP
 <?php
 /**
- * RAYU TARIM MAKİNELERİ — Otomatik olusturulan yapilandirma
- * install.php tarafindan {$site['name']} icin uretildi.
+ * RAYU TARIM MAKİNELERİ — Otomatik oluşturulan yapılandırma
+ * install.php tarafından {$site['name']} için üretildi.
  */
 
 declare(strict_types=1);
@@ -225,7 +225,7 @@ return [
     'site' => [
         'url'         => '{$esc($site['url'])}',
         'name'        => '{$esc($site['name'])}',
-        'tagline'     => 'Tarim makineleri ve ziraai ilaclar',
+        'tagline'     => 'Tarım makineleri ve zirai ilaçlar',
         'admin_email' => '{$esc($site['admin_email'])}',
         'timezone'    => 'Europe/Istanbul',
         'locale'      => 'tr_TR',
@@ -272,14 +272,14 @@ function render_locked(): string
 {
     return <<<HTML
 <!doctype html><html lang="tr"><head><meta charset="utf-8">
-<title>Kurulum kilitli — RAYU Tarim Makineleri</title>
+<title>Kurulum kilitli — RAYU Tarım Makineleri</title>
 <style>body{font-family:system-ui;margin:0;padding:4rem 1rem;text-align:center;background:#f5f7f4;color:#1a3d1f}
 h1{color:#2d5a3d}code{background:#e8efe6;padding:.2em .4em;border-radius:3px}</style>
 </head><body>
-<h1>Kurulum tamamlanmis</h1>
-<p>Bu site zaten kurulu. Yeniden kurmak istiyorsaniz sunucudan asagidaki dosyayi silmelisiniz:</p>
+<h1>Kurulum tamamlanmış</h1>
+<p>Bu site zaten kurulu. Yeniden kurmak istiyorsanız sunucudan aşağıdaki dosyayı silmelisiniz:</p>
 <p><code>inc/.installed</code></p>
-<p style="margin-top:2rem"><a href="/">Anasayfaya don</a></p>
+<p style="margin-top:2rem"><a href="/">Anasayfaya dön</a></p>
 </body></html>
 HTML;
 }
@@ -289,7 +289,7 @@ HTML;
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RAYU Tarim Makineleri — Kurulum (Adim <?= h_step($step) ?>/5)</title>
+<title>RAYU Tarım Makineleri — Kurulum (Adım <?= h_step($step) ?>/5)</title>
 <style>
   :root {
     --bg: #f5f7f4;
@@ -344,13 +344,13 @@ HTML;
 <div class="wrap">
   <div class="brand">
     <h1>RAYU TARIM MAKİNELERİ</h1>
-    <p>Kurulum Sihirbazi — v<?= h(ru_version()) ?></p>
+    <p>Kurulum Sihirbazı — v<?= h(ru_version()) ?></p>
   </div>
 
   <div class="steps">
     <div class="<?= step_class(1, $step) ?>">1. Gereksinim</div>
-    <div class="<?= step_class(2, $step) ?>">2. Veritabani</div>
-    <div class="<?= step_class(3, $step) ?>">3. Yonetici</div>
+    <div class="<?= step_class(2, $step) ?>">2. Veritabanı</div>
+    <div class="<?= step_class(3, $step) ?>">3. Yönetici</div>
     <div class="<?= step_class(4, $step) ?>">4. Uygula</div>
     <div class="<?= step_class(5, $step) ?>">5. Tamam</div>
   </div>
@@ -362,12 +362,12 @@ HTML;
 
   <?php if ($step === 1): ?>
     <h2>1. Sistem Gereksinimleri</h2>
-    <p class="muted">Devam etmek icin asagidaki tum kontroller yesil olmali.</p>
+    <p class="muted">Devam etmek için aşağıdaki tüm kontroller yeşil olmalı.</p>
     <table class="reqs">
       <?php foreach ($reqs as $name => $ok): ?>
         <tr>
           <td><?= h($name) ?></td>
-          <td class="<?= $ok ? 'ok' : 'fail' ?>"><?= $ok ? 'TAMAM' : 'EKSIK' ?></td>
+          <td class="<?= $ok ? 'ok' : 'fail' ?>"><?= $ok ? 'TAMAM' : 'EKSİK' ?></td>
         </tr>
       <?php endforeach; ?>
     </table>
@@ -375,40 +375,40 @@ HTML;
       <a class="btn" href="install.php?step=2">Devam Et &rarr;</a>
     <?php else: ?>
       <div class="alert alert-error" style="margin-top:1.5rem">
-        Eksikleri tamamlayip bu sayfayi yenileyin. PHP eklentileri icin hosting saglayicinizla iletisime gecin.
+        Eksikleri tamamlayıp bu sayfayı yenileyin. PHP eklentileri için hosting sağlayıcınızla iletişime geçin.
       </div>
     <?php endif; ?>
 
   <?php elseif ($step === 2): ?>
-    <h2>2. Veritabani Ayarlari</h2>
-    <p class="muted">MySQL/MariaDB baglanti bilgilerinizi girin. DirectAdmin'de "MySQL Yonetimi" altinda olusturdugunuz veritabani.</p>
+    <h2>2. Veritabanı Ayarları</h2>
+    <p class="muted">MySQL/MariaDB bağlantı bilgilerinizi girin. DirectAdmin'de "MySQL Yönetimi" altında oluşturduğunuz veritabanı.</p>
     <form method="post">
       <input type="hidden" name="step" value="2">
       <div class="row">
         <div><label>Sunucu</label><input type="text" name="db_host" value="<?= h($_POST['db_host'] ?? 'localhost') ?>" required></div>
         <div><label>Port</label><input type="number" name="db_port" value="<?= h($_POST['db_port'] ?? '3306') ?>" required></div>
       </div>
-      <label>Veritabani Adi</label>
+      <label>Veritabanı Adı</label>
       <input type="text" name="db_name" value="<?= h($_POST['db_name'] ?? '') ?>" placeholder="orn: rayutarim_db" required>
       <div class="row">
-        <div><label>Kullanici Adi</label><input type="text" name="db_user" value="<?= h($_POST['db_user'] ?? '') ?>" required></div>
-        <div><label>Sifre</label><input type="password" name="db_pass" value="" required></div>
+        <div><label>Kullanıcı Adı</label><input type="text" name="db_user" value="<?= h($_POST['db_user'] ?? '') ?>" required></div>
+        <div><label>Şifre</label><input type="password" name="db_pass" value="" required></div>
       </div>
 
       <h2 style="margin-top:2rem;font-size:1.2rem">Site Bilgileri</h2>
       <label>Site URL</label>
       <input type="url" name="site_url" value="<?= h($_POST['site_url'] ?? 'https://rayutarim.com') ?>" required>
       <div class="row">
-        <div><label>Site Adi</label><input type="text" name="site_name" value="<?= h($_POST['site_name'] ?? 'RAYU Tarim Makineleri') ?>" required></div>
-        <div><label>Yonetici E-posta</label><input type="email" name="admin_email" value="<?= h($_POST['admin_email'] ?? 'info@rayutarim.com') ?>" required></div>
+        <div><label>Site Adı</label><input type="text" name="site_name" value="<?= h($_POST['site_name'] ?? 'RAYU Tarım Makineleri') ?>" required></div>
+        <div><label>Yönetici E-posta</label><input type="email" name="admin_email" value="<?= h($_POST['admin_email'] ?? 'info@rayutarim.com') ?>" required></div>
       </div>
       <button class="btn" type="submit">Test Et &amp; Devam Et &rarr;</button>
     </form>
 
   <?php elseif ($step === 3): ?>
     <?php $autoEmail = $_SESSION['ru_install']['site']['admin_email'] ?? ''; ?>
-    <h2>3. Yonetici Hesabi</h2>
-    <p class="muted">Yonetim paneline gireceginiz ilk superadmin hesabi.</p>
+    <h2>3. Yönetici Hesabı</h2>
+    <p class="muted">Yönetim paneline gireceğiniz ilk superadmin hesabı.</p>
     <form method="post">
       <input type="hidden" name="step" value="3">
       <label>Ad Soyad</label>
@@ -416,23 +416,23 @@ HTML;
       <label>E-posta</label>
       <input type="email" name="admin_email" value="<?= h($_POST['admin_email'] ?? $autoEmail) ?>" required>
       <div class="row">
-        <div><label>Sifre (en az 8)</label><input type="password" name="admin_pass" required minlength="8"></div>
-        <div><label>Sifre Tekrar</label><input type="password" name="admin_pass2" required minlength="8"></div>
+        <div><label>Şifre (en az 8)</label><input type="password" name="admin_pass" required minlength="8"></div>
+        <div><label>Şifre Tekrar</label><input type="password" name="admin_pass2" required minlength="8"></div>
       </div>
       <button class="btn" type="submit">Devam Et &rarr;</button>
     </form>
 
   <?php elseif ($step === 4): ?>
     <h2>4. Kurulumu Uygula</h2>
-    <p class="muted">Asagidaki ozeti onaylayin. "Kurulumu Tamamla" basildiginda:</p>
+    <p class="muted">Aşağıdaki özeti onaylayın. "Kurulumu Tamamla" basıldığında:</p>
     <ul>
-      <li><code>inc/config.php</code> olusturulacak</li>
-      <li><code>migrations/migration.sql</code> calistirilacak</li>
-      <li>Yonetici hesabi <strong><?= h($_SESSION['ru_install']['admin']['email'] ?? '') ?></strong> olusturulacak</li>
-      <li><code>inc/.installed</code> markeri yazilacak</li>
+      <li><code>inc/config.php</code> oluşturulacak</li>
+      <li><code>migrations/migration.sql</code> çalıştırılacak</li>
+      <li>Yönetici hesabı <strong><?= h($_SESSION['ru_install']['admin']['email'] ?? '') ?></strong> oluşturulacak</li>
+      <li><code>inc/.installed</code> markeri yazılacak</li>
     </ul>
     <div class="alert alert-info">
-      Kurulum birkac saniye surer. Bittikten sonra <code>install.php</code> dosyasini sunucudan silmeniz onerilir.
+      Kurulum birkaç saniye sürer. Bittikten sonra <code>install.php</code> dosyasını sunucudan silmeniz önerilir.
     </div>
     <form method="post">
       <input type="hidden" name="step" value="4">
@@ -442,16 +442,16 @@ HTML;
   <?php elseif ($step === 5): ?>
     <h2>5. Kurulum Tamam</h2>
     <div class="alert alert-success">
-      Tebrikler — RAYU Tarim Makineleri v<?= h(ru_version()) ?> basariyla kuruldu.
+      Tebrikler — RAYU Tarım Makineleri v<?= h(ru_version()) ?> başarıyla kuruldu.
     </div>
-    <h3 style="color:var(--primary-dark)">Sonraki Adimlar</h3>
+    <h3 style="color:var(--primary-dark)">Sonraki Adımlar</h3>
     <ol>
-      <li><strong><code>install.php</code> dosyasini sunucudan silin</strong> (guvenlik).</li>
-      <li>Yonetim paneli henuz aktif degil — <strong>Faz 4</strong> ile gelecek.</li>
-      <li>Public tema icin <strong>Faz 2</strong> guncellemesini bekleyin.</li>
+      <li><strong><code>install.php</code> dosyasını sunucudan silin</strong> (güvenlik).</li>
+      <li>Yönetim paneline <strong><code>/admin/login.php</code></strong> adresinden giriş yapın.</li>
+      <li>Site ayarları, ürünler, kategoriler, sayfalar, slider ve talepleri admin panelinden yönetin.</li>
     </ol>
-    <p>Su anki durum: cekirdek altyapi hazir. <code>/</code> adresinde Faz 1 karsilama sayfasi gosterilir.</p>
-    <a class="btn" href="/">Anasayfayi Goruntule</a>
+    <p>Şu anki durum: kurumsal vitrin, ürün kataloğu, yönetim paneli ve Smart Update altyapısı hazır.</p>
+    <a class="btn" href="/">Anasayfayı Görüntüle</a>
 
   <?php endif; ?>
   </div>

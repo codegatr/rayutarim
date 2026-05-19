@@ -1,6 +1,6 @@
 <?php
 /**
- * Iletisim Sayfasi
+ * İletişim Sayfası
  */
 declare(strict_types=1);
 
@@ -16,8 +16,8 @@ $lng     = (string)ru_setting('contact_lng', '32.4932');
 <section class="page-hero">
   <div class="page-hero__overlay"></div>
   <div class="container page-hero__inner">
-    <h1 class="page-hero__title">Iletisim</h1>
-    <p class="page-hero__sub">Bize ulasin — sorulariniz, teklif istekleriniz ve bayilik basvurulariniz icin buradayiz.</p>
+    <h1 class="page-hero__title">İletişim</h1>
+    <p class="page-hero__sub">Bize ulaşın, sorularınız, teklif istekleriniz ve bayilik başvurularınız için buradayız.</p>
   </div>
 </section>
 
@@ -25,7 +25,7 @@ $lng     = (string)ru_setting('contact_lng', '32.4932');
 ru_partial('breadcrumb', [
     'items' => [
         ['label' => 'Anasayfa', 'url' => '/'],
-        ['label' => 'Iletisim'],
+        ['label' => 'İletişim'],
     ],
 ]);
 ?>
@@ -37,7 +37,7 @@ ru_partial('breadcrumb', [
 
       <!-- Bilgiler -->
       <div class="contact__info">
-        <h2 class="contact__h">Iletisim Bilgileri</h2>
+        <h2 class="contact__h">İletişim Bilgileri</h2>
 
         <?php if ($address): ?>
           <div class="contact-card">
@@ -81,7 +81,7 @@ ru_partial('breadcrumb', [
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm.5 5h-1v6l5.25 3.15.5-.82-4.75-2.83V7z"/></svg>
             </div>
             <div>
-              <div class="contact-card__label">Calisma Saatleri</div>
+              <div class="contact-card__label">Çalışma Saatleri</div>
               <div class="contact-card__value"><?= h($hours) ?></div>
             </div>
           </div>
@@ -90,14 +90,14 @@ ru_partial('breadcrumb', [
         <?php if ($wpp): ?>
           <a class="btn btn--wpp btn--lg" href="https://wa.me/<?= h(preg_replace('/[^0-9]/', '', $wpp)) ?>" target="_blank" rel="noopener" style="margin-top:1rem;width:100%;justify-content:center">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
-            WhatsApp ile Yazin
+            WhatsApp ile Yazın
           </a>
         <?php endif; ?>
       </div>
 
       <!-- Form -->
       <div class="contact__form">
-        <h2 class="contact__h">Mesaj Gonderin</h2>
+        <h2 class="contact__h">Mesaj Gönderin</h2>
         <?php foreach (ru_flash_get() as $flash): ?>
           <p class="contact__note"><?= h($flash['message'] ?? '') ?></p>
         <?php endforeach; ?>
@@ -154,7 +154,7 @@ ru_partial('breadcrumb', [
       <iframe
         src="https://www.openstreetmap.org/export/embed.html?bbox=<?= (float)$lng - 0.02 ?>%2C<?= (float)$lat - 0.01 ?>%2C<?= (float)$lng + 0.02 ?>%2C<?= (float)$lat + 0.01 ?>&amp;layer=mapnik&amp;marker=<?= h($lat) ?>%2C<?= h($lng) ?>"
         loading="lazy"
-        title="Konum haritasi"
+        title="Konum haritası"
         style="border:0;width:100%;height:100%;display:block"></iframe>
     </div>
     <?php endif; ?>

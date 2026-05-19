@@ -1,10 +1,10 @@
 <?php
 /**
- * Footer — sirket / linkler / iletisim / alt bar
+ * Footer — şirket / linkler / iletişim / alt bar
  */
 declare(strict_types=1);
 
-$siteName    = (string)ru_setting('site_name', 'RAYU Tarim Makineleri');
+$siteName    = (string)ru_setting('site_name', 'RAYU Tarım Makineleri');
 $about       = (string)ru_setting('footer_about', '');
 $phone       = (string)ru_setting('site_phone', '');
 $email       = (string)ru_setting('site_email', '');
@@ -51,7 +51,7 @@ $col3 = ru_menu_items('footer_3');
     </div>
 
     <div class="site-footer__col">
-      <h4 class="site-footer__h">Urunler</h4>
+      <h4 class="site-footer__h">Ürünler</h4>
       <ul class="site-footer__list">
         <?php foreach ($col2 as $item): ?>
           <li><a href="<?= h($item['url']) ?>" <?= $item['target'] === '_blank' ? 'target="_blank" rel="noopener"' : '' ?>><?= h($item['label']) ?></a></li>
@@ -60,7 +60,7 @@ $col3 = ru_menu_items('footer_3');
     </div>
 
     <div class="site-footer__col">
-      <h4 class="site-footer__h">Iletisim</h4>
+      <h4 class="site-footer__h">İletişim</h4>
       <ul class="site-footer__list site-footer__list--contact">
         <?php if ($address): ?>
           <li>
@@ -103,9 +103,9 @@ $col3 = ru_menu_items('footer_3');
 
   <div class="site-footer__bottom">
     <div class="container site-footer__bottom-inner">
-      <div>&copy; <?= date('Y') ?> <?= h($siteName) ?>. Tum haklari saklidir.</div>
+      <div>&copy; <?= date('Y') ?> <?= h($siteName) ?>. Tüm hakları saklıdır.</div>
       <div class="site-footer__credit">
-        v<?= h(ru_version()) ?> &middot; <a href="https://codega.com.tr" target="_blank" rel="noopener">CODEGA</a> tarafindan gelistirildi
+        v<?= h(ru_version()) ?> &middot; <a href="https://codega.com.tr" target="_blank" rel="noopener">CODEGA</a> tarafından geliştirildi
       </div>
     </div>
   </div>

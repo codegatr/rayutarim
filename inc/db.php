@@ -1,6 +1,6 @@
 <?php
 /**
- * RAYU TARIM MAKİNELERİ — Veritabani Katmani
+ * RAYU TARIM MAKİNELERİ — Veritabanı Katmanı
  *
  * - PDO baglantisi (PHP 8.3+, prepared statements)
  * - Settings k/v cache (ru_settings)

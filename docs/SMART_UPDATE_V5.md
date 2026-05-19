@@ -1,16 +1,16 @@
 # Smart Update v5
 
-RAYU Smart Update v5, GitHub Release uzerinden yayinlanan ZIP paketini indirir, guncelleme oncesi yedek alir, `manifest.json` icindeki `paths.tracked` yollarini senkronize eder ve `paths.preserved` altindaki kullanici dosyalarina dokunmaz.
+RAYU Smart Update v5, GitHub Release üzerinden yayınlanan ZIP paketini indirir, güncelleme öncesi yedek alır, `manifest.json` içindeki `paths.tracked` yollarını senkronize eder ve `paths.preserved` altındaki kullanıcı dosyalarına dokunmaz.
 
 ## Release paketi
 
-1. GitHub release etiketi `v0.6.0` formatinda olmalidir.
-2. Asset adi manifestteki kaliba uymali: `rayutarim-v{version}.zip`.
-3. ZIP kokunde `manifest.json` bulunmalidir. Tek bir ust klasor icine alinmis ZIP de desteklenir.
+1. GitHub release etiketi `v0.6.0` formatında olmalıdır.
+2. Asset adı manifestteki kalıba uymalı: `rayutarim-v{version}.zip`.
+3. ZIP kökünde `manifest.json` bulunmalıdır. Tek bir üst klasör içine alınmış ZIP de desteklenir.
 
 ## Korunan yollar
 
-Asagidaki yollar guncellemede korunur:
+Aşağıdaki yollar güncellemede korunur:
 
 - `uploads/`
 - `inc/config.php`
@@ -18,18 +18,18 @@ Asagidaki yollar guncellemede korunur:
 - `backups/`
 - `logs/`
 
-## CLI kullanimi
+## CLI kullanımı
 
 ```bash
 php admin/update.php check
 php admin/update.php apply
 ```
 
-`check` yalnizca son release bilgisini okur. `apply` yedek alir, release ZIP'ini indirir, dosyalari kopyalar ve `migrations/migration.sql` dosyasini calistirir.
+`check` yalnızca son release bilgisini okur. `apply` yedek alır, release ZIP'ini indirir, dosyaları kopyalar ve `migrations/migration.sql` dosyasını çalıştırır.
 
 ## Web endpoint
 
-Yonetim paneli tamamlanana kadar endpoint token ile korunur. `inc/config.php` icinde guclu bir token tanimlayin:
+Web endpoint token ile korunur. `inc/config.php` içinde güçlü bir token tanımlayın:
 
 ```php
 'update' => [
@@ -48,4 +48,4 @@ https://rayutarim.com/admin/update.php?action=check&token=UZUN_RASTGELE_TOKEN
 https://rayutarim.com/admin/update.php?action=apply&token=UZUN_RASTGELE_TOKEN
 ```
 
-Private repo kullaniliyorsa `github_token` alanina sadece release okuma yetkisi olan GitHub tokeni girilmelidir.
+Private repo kullanılıyorsa `github_token` alanına sadece release okuma yetkisi olan GitHub tokeni girilmelidir.
