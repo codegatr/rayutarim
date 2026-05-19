@@ -1,5 +1,5 @@
 /* ============================================================================
-   RAY-U TARIM — Public Tema
+   RAYU TARIM MAKİNELERİ — Public Tema
    v0.2.0 — Faz 2: Public Tema
    Vanilla CSS, mobil-first, kurumsal yesil/altin palet
    ============================================================================ */
@@ -8,21 +8,25 @@
    DESIGN TOKENS
    ────────────────────────────────────────────────────────────────────────── */
 :root {
-  /* Renkler */
+  /* Renkler — RAYU logo paletinden */
   --c-bg:           #ffffff;
-  --c-bg-soft:      #f7faf6;
-  --c-bg-alt:       #eef3eb;
-  --c-bg-dark:      #0e2920;
-  --c-bg-darker:    #081d16;
+  --c-bg-soft:      #f5f4f0;
+  --c-bg-alt:       #ebebe5;
+  --c-bg-dark:      #163B27;
+  --c-bg-darker:    #0E2A1B;
 
-  --c-primary:      #2d5a3d;
-  --c-primary-dark: #1a3d2a;
-  --c-primary-mid:  #3d7050;
-  --c-primary-light:#5b9070;
+  --c-primary:      #1F4D33;   /* koyu yesil — logo metni */
+  --c-primary-dark: #163B27;
+  --c-primary-mid:  #2A6244;
+  --c-primary-light:#2E8B3D;   /* acik yesil — bugday */
 
-  --c-accent:       #d4a017;
-  --c-accent-light: #e8c463;
-  --c-accent-dark:  #a87f0d;
+  --c-accent:       #2E8B3D;   /* acik yesil = bugday yesili (eski altinin yerine) */
+  --c-accent-light: #3CAE4A;
+  --c-accent-dark:  #1F6B2B;
+
+  --c-secondary:    #5A6878;   /* gri — disli */
+  --c-secondary-light: #8A95A2;
+  --c-secondary-dark:  #404B58;
 
   --c-text:         #1a2622;
   --c-text-soft:    #4a574f;
@@ -53,10 +57,10 @@
   --radius-xl: 24px;
 
   /* Govde */
-  --shadow-sm: 0 1px 3px rgba(14,41,32,.06), 0 1px 2px rgba(14,41,32,.04);
-  --shadow:    0 4px 12px rgba(14,41,32,.08), 0 2px 4px rgba(14,41,32,.05);
-  --shadow-lg: 0 12px 28px rgba(14,41,32,.12), 0 4px 10px rgba(14,41,32,.06);
-  --shadow-xl: 0 24px 56px rgba(14,41,32,.18), 0 8px 16px rgba(14,41,32,.08);
+  --shadow-sm: 0 1px 3px rgba(14,42,27,.06), 0 1px 2px rgba(14,42,27,.04);
+  --shadow:    0 4px 12px rgba(14,42,27,.08), 0 2px 4px rgba(14,42,27,.05);
+  --shadow-lg: 0 12px 28px rgba(14,42,27,.12), 0 4px 10px rgba(14,42,27,.06);
+  --shadow-xl: 0 24px 56px rgba(14,42,27,.18), 0 8px 16px rgba(14,42,27,.08);
 
   /* Animasyon */
   --t-fast: .15s ease;
@@ -206,20 +210,30 @@ input, select, textarea { font: inherit; }
 
 /* Brand */
 .brand { display: inline-flex; align-items: center; gap: .85rem; text-decoration: none; }
+.brand__logo {
+  max-height: 52px;
+  width: auto;
+  display: block;
+}
+.brand__logo--default {
+  max-height: 56px;
+}
+@media (max-width: 760px) {
+  .brand__logo, .brand__logo--default { max-height: 44px; }
+}
 .brand__mark {
   width: 44px; height: 44px;
   background: linear-gradient(135deg, var(--c-primary), var(--c-primary-dark));
-  border-radius: 11px;
+  border-radius: 50%;
   display: grid; place-items: center;
-  color: var(--c-accent-light);
+  color: #fff;
   font-weight: 900;
-  font-size: 1.1rem;
-  font-family: var(--f-display);
-  box-shadow: 0 6px 16px rgba(45,90,61,.25);
-  border: 1px solid rgba(212,160,23,.2);
+  font-size: .82rem;
+  font-family: var(--f-sans);
+  box-shadow: 0 6px 16px rgba(31,77,51,.25);
   letter-spacing: -.02em;
 }
-.brand__mark--lg { width: 52px; height: 52px; font-size: 1.25rem; border-radius: 13px; }
+.brand__mark--lg { width: 56px; height: 56px; font-size: 1rem; }
 .brand__text { display: flex; flex-direction: column; line-height: 1; }
 .brand__name {
   color: var(--c-primary-dark);
@@ -235,7 +249,6 @@ input, select, textarea { font: inherit; }
   margin-top: .25rem;
   font-family: var(--f-mono);
 }
-.brand__logo { max-height: 50px; width: auto; }
 
 /* Main nav */
 .main-nav { flex: 1; display: flex; justify-content: center; }
@@ -348,13 +361,13 @@ input, select, textarea { font: inherit; }
 .btn--primary {
   background: var(--c-primary);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(45,90,61,.25);
+  box-shadow: 0 4px 12px rgba(31,77,51,.25);
 }
 .btn--primary:hover {
   background: var(--c-primary-dark);
   color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(45,90,61,.35);
+  box-shadow: 0 8px 20px rgba(31,77,51,.35);
 }
 .btn--gold {
   background: linear-gradient(135deg, var(--c-accent), var(--c-accent-light));
@@ -425,7 +438,7 @@ input, select, textarea { font: inherit; }
 .hero__bg--gradient {
   background:
     radial-gradient(ellipse at top right, rgba(212,160,23,.18), transparent 50%),
-    radial-gradient(ellipse at bottom left, rgba(74,138,93,.25), transparent 55%),
+    radial-gradient(ellipse at bottom left, rgba(46,139,61,.25), transparent 55%),
     linear-gradient(135deg, var(--c-bg-darker) 0%, var(--c-bg-dark) 100%);
 }
 .hero__bg--gradient::after {
@@ -627,13 +640,13 @@ input, select, textarea { font: inherit; }
 }
 .cat-card:hover .cat-card__bg { transform: scale(1.05); }
 .cat-card__bg--1 {
-  background-image: linear-gradient(135deg, rgba(14,41,32,.7) 0%, rgba(45,90,61,.5) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><pattern id="g" width="80" height="80" patternUnits="userSpaceOnUse"><circle cx="40" cy="40" r="2" fill="%23d4a017" opacity=".4"/></pattern></defs><rect fill="%23244033" width="800" height="600"/><rect fill="url(%23g)" width="800" height="600"/><path d="M0 400 Q200 350 400 380 T800 400 L800 600 L0 600 Z" fill="%231a3d2a"/><path d="M0 450 Q200 410 400 440 T800 460 L800 600 L0 600 Z" fill="%230e2920"/></svg>');
+  background-image: linear-gradient(135deg, rgba(14,42,27,.7) 0%, rgba(31,77,51,.5) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><pattern id="g" width="80" height="80" patternUnits="userSpaceOnUse"><circle cx="40" cy="40" r="2" fill="%232E8B3D" opacity=".4"/></pattern></defs><rect fill="%231F4D33" width="800" height="600"/><rect fill="url(%23g)" width="800" height="600"/><path d="M0 400 Q200 350 400 380 T800 400 L800 600 L0 600 Z" fill="%23163B27"/><path d="M0 450 Q200 410 400 440 T800 460 L800 600 L0 600 Z" fill="%230E2A1B"/></svg>');
 }
 .cat-card__bg--2 {
-  background-image: linear-gradient(135deg, rgba(168,127,13,.85) 0%, rgba(212,160,23,.6) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><pattern id="leaf" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M30 10 Q40 30 30 50 Q20 30 30 10" fill="%231a3d2a" opacity=".3"/></pattern></defs><rect fill="%23a87f0d" width="600" height="600"/><rect fill="url(%23leaf)" width="600" height="600"/></svg>');
+  background-image: linear-gradient(135deg, rgba(64,75,88,.85) 0%, rgba(90,104,120,.65) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><pattern id="leaf" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M30 10 Q40 30 30 50 Q20 30 30 10" fill="%23163B27" opacity=".3"/></pattern></defs><rect fill="%23404B58" width="600" height="600"/><rect fill="url(%23leaf)" width="600" height="600"/></svg>');
 }
 .cat-card__bg--3 {
-  background-image: linear-gradient(135deg, rgba(14,41,32,.85) 0%, rgba(74,138,93,.5) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="40" height="40" fill="%23244033"/><rect x="20" y="20" width="20" height="20" fill="%231a3d2a"/></pattern></defs><rect fill="url(%23d)" width="600" height="600"/></svg>');
+  background-image: linear-gradient(135deg, rgba(14,42,27,.85) 0%, rgba(46,139,61,.5) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="40" height="40" fill="%231F4D33"/><rect x="20" y="20" width="20" height="20" fill="%23163B27"/></pattern></defs><rect fill="url(%23d)" width="600" height="600"/></svg>');
 }
 .cat-card__overlay {
   position: absolute; inset: 0;
@@ -681,7 +694,7 @@ input, select, textarea { font: inherit; }
   position: relative;
   background:
     radial-gradient(ellipse at top right, rgba(212,160,23,.18), transparent 50%),
-    radial-gradient(ellipse at bottom left, rgba(74,138,93,.2), transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(46,139,61,.2), transparent 60%),
     linear-gradient(135deg, var(--c-bg-darker) 0%, var(--c-bg-dark) 100%);
 }
 .about-strip::before {
@@ -827,7 +840,7 @@ input, select, textarea { font: inherit; }
 .prose h2:first-child { margin-top: 0; }
 .prose h3 { font-size: 1.35rem; margin: 1.75rem 0 .75rem; color: var(--c-primary-dark); }
 .prose p { margin: 0 0 1.25rem; }
-.prose a { color: var(--c-primary); text-decoration: underline; text-decoration-color: rgba(45,90,61,.3); text-underline-offset: 3px; }
+.prose a { color: var(--c-primary); text-decoration: underline; text-decoration-color: rgba(31,77,51,.3); text-underline-offset: 3px; }
 .prose a:hover { color: var(--c-accent-dark); text-decoration-color: var(--c-accent); }
 .prose ul, .prose ol { margin: 0 0 1.25rem; padding-left: 1.5rem; }
 .prose li { margin: .35rem 0; }
@@ -930,7 +943,7 @@ input, select, textarea { font: inherit; }
 .form-group textarea:focus {
   outline: none;
   border-color: var(--c-primary);
-  box-shadow: 0 0 0 3px rgba(45,90,61,.12);
+  box-shadow: 0 0 0 3px rgba(31,77,51,.12);
 }
 .form-group input[disabled],
 .form-group select[disabled],
@@ -1031,8 +1044,22 @@ input, select, textarea { font: inherit; }
 @media (max-width: 980px) { .site-footer__top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .site-footer__top { grid-template-columns: 1fr; gap: 2rem; } }
 
-.site-footer .brand__name { color: var(--c-text-light); }
+.site-footer .brand { display: inline-flex; gap: .75rem; align-items: center; }
+.site-footer .brand__name { color: var(--c-text-light); font-size: 1.05rem; }
 .site-footer .brand__sub  { color: var(--c-text-muted); }
+.site-footer .brand__logo--footer {
+  max-height: 80px;
+  width: auto;
+  background: #fff;
+  padding: .5rem 1rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+}
+.site-footer .brand__logo--icon {
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+}
+.brand--footer .brand__text { line-height: 1.15; }
 .site-footer__about {
   margin: 1.25rem 0 1.5rem;
   font-size: .92rem;

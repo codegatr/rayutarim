@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Kurulum Sihirbazi
+ * RAYU TARIM MAKİNELERİ — Kurulum Sihirbazi
  *
  * Adimlar:
  *  1. Sistem gereksinim kontrolu (PHP 8.3+, eklentiler, yazma izinleri)
@@ -68,7 +68,7 @@ if ($step === 2 && $_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     $site = [
         'url'         => rtrim(trim((string)($_POST['site_url'] ?? '')), '/'),
-        'name'        => trim((string)($_POST['site_name'] ?? 'Ray-U Tarim')),
+        'name'        => trim((string)($_POST['site_name'] ?? 'RAYU Tarim Makineleri')),
         'admin_email' => trim((string)($_POST['admin_email'] ?? '')),
     ];
 
@@ -205,7 +205,7 @@ function build_config_php(array $db, array $site, string $appKey): string
     return <<<PHP
 <?php
 /**
- * RAY-U TARIM — Otomatik olusturulan yapilandirma
+ * RAYU TARIM MAKİNELERİ — Otomatik olusturulan yapilandirma
  * install.php tarafindan {$site['name']} icin uretildi.
  */
 
@@ -272,7 +272,7 @@ function render_locked(): string
 {
     return <<<HTML
 <!doctype html><html lang="tr"><head><meta charset="utf-8">
-<title>Kurulum kilitli — Ray-U Tarim</title>
+<title>Kurulum kilitli — RAYU Tarim Makineleri</title>
 <style>body{font-family:system-ui;margin:0;padding:4rem 1rem;text-align:center;background:#f5f7f4;color:#1a3d1f}
 h1{color:#2d5a3d}code{background:#e8efe6;padding:.2em .4em;border-radius:3px}</style>
 </head><body>
@@ -289,7 +289,7 @@ HTML;
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ray-U Tarim — Kurulum (Adim <?= h_step($step) ?>/5)</title>
+<title>RAYU Tarim Makineleri — Kurulum (Adim <?= h_step($step) ?>/5)</title>
 <style>
   :root {
     --bg: #f5f7f4;
@@ -343,7 +343,7 @@ HTML;
 <body>
 <div class="wrap">
   <div class="brand">
-    <h1>RAY-U TARIM</h1>
+    <h1>RAYU TARIM MAKİNELERİ</h1>
     <p>Kurulum Sihirbazi — v<?= h(ru_version()) ?></p>
   </div>
 
@@ -399,7 +399,7 @@ HTML;
       <label>Site URL</label>
       <input type="url" name="site_url" value="<?= h($_POST['site_url'] ?? 'https://rayutarim.com') ?>" required>
       <div class="row">
-        <div><label>Site Adi</label><input type="text" name="site_name" value="<?= h($_POST['site_name'] ?? 'Ray-U Tarim') ?>" required></div>
+        <div><label>Site Adi</label><input type="text" name="site_name" value="<?= h($_POST['site_name'] ?? 'RAYU Tarim Makineleri') ?>" required></div>
         <div><label>Yonetici E-posta</label><input type="email" name="admin_email" value="<?= h($_POST['admin_email'] ?? 'info@rayutarim.com') ?>" required></div>
       </div>
       <button class="btn" type="submit">Test Et &amp; Devam Et &rarr;</button>
@@ -442,7 +442,7 @@ HTML;
   <?php elseif ($step === 5): ?>
     <h2>5. Kurulum Tamam</h2>
     <div class="alert alert-success">
-      Tebrikler — Ray-U Tarim v<?= h(ru_version()) ?> basariyla kuruldu.
+      Tebrikler — RAYU Tarim Makineleri v<?= h(ru_version()) ?> basariyla kuruldu.
     </div>
     <h3 style="color:var(--primary-dark)">Sonraki Adimlar</h3>
     <ol>

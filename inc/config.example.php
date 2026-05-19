@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Yapilandirma Sablonu
+ * RAYU TARIM MAKİNELERİ — Yapilandirma Sablonu
  *
  * KURULUM:
  * 1. Bu dosyayi inc/config.php olarak kopyalayin
@@ -34,7 +34,7 @@ return [
     // ─────────────────────────────────────────────────────────────────
     'site' => [
         'url'       => 'https://rayutarim.com',
-        'name'      => 'Ray-U Tarim',
+        'name'      => 'RAYU Tarim Makineleri',
         'tagline'   => 'Tarim makineleri ve ziraai ilaclar',
         'admin_email' => 'admin@rayutarim.com',
         'timezone'  => 'Europe/Istanbul',
@@ -88,7 +88,7 @@ return [
         'user'     => 'noreply@rayutarim.com',
         'pass'     => '',
         'from'     => 'noreply@rayutarim.com',
-        'from_name'=> 'Ray-U Tarim',
+        'from_name'=> 'RAYU Tarim Makineleri',
         'secure'   => 'tls',                   // tls | ssl | ''
     ],
 ];

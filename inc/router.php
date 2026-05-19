@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Basit Router
+ * RAYU TARIM MAKİNELERİ — Basit Router
  *
  * Faz 2: anasayfa, kurumsal sayfalar (slug ile), iletisim, 404
  * Faz 3: /urunler, /urunler/{kategori}, /urunler/{kategori}/{urun}

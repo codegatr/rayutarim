@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — 404 Sayfa Bulunamadi
+ * RAYU TARIM MAKİNELERİ — 404 Sayfa Bulunamadi
  */
 
 declare(strict_types=1);
@@ -8,9 +8,9 @@ declare(strict_types=1);
 // Bootstrap'i guvenli yukle (kurulu degilse direk render et)
 if (is_file(__DIR__ . '/inc/bootstrap.php') && is_file(__DIR__ . '/inc/config.php')) {
     require_once __DIR__ . '/inc/bootstrap.php';
-    $siteName = (string)(ru_setting('site_name', 'Ray-U Tarim'));
+    $siteName = (string)(ru_setting('site_name', 'RAYU Tarim Makineleri'));
 } else {
-    $siteName = 'Ray-U Tarim';
+    $siteName = 'RAYU Tarim Makineleri';
 }
 
 http_response_code(404);

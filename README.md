@@ -1,4 +1,4 @@
-# Ray-U Tarım
+# RAYU Tarım Makineleri
 
 > Kurumsal tarım makineleri ve ziraai ilaç satış platformu
 > PHP 8.3+ • MySQL 5.7+ • DirectAdmin/LiteSpeed uyumlu • GitHub Release tabanlı Smart Update v5
@@ -151,4 +151,4 @@ Faz 7'de aktiflenecek diller (DB'de stub olarak hazır):
 
 Proprietary — © CODEGA, 2026. Tüm hakları saklıdır.
 
-Bu yazılım Ray-U Tarım için özel olarak geliştirilmiştir; izinsiz çoğaltma, dağıtım veya yeniden satışı yasaktır.
+Bu yazılım RAYU Tarım Makineleri için özel olarak geliştirilmiştir; izinsiz çoğaltma, dağıtım veya yeniden satışı yasaktır.

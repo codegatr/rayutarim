@@ -19,7 +19,7 @@ if (empty($slides)) {
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__content hero__content--left">
-      <span class="hero__badge">Ray-U Tarim</span>
+      <span class="hero__badge">RAYU Tarim Makineleri</span>
       <h1 class="hero__title"><?= h($heroTitle) ?></h1>
       <?php if ($heroSub): ?><p class="hero__sub"><?= h($heroSub) ?></p><?php endif; ?>
       <div class="hero__cta">

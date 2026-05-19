@@ -5,7 +5,7 @@
 declare(strict_types=1);
 
 $navItems = ru_menu_items('header');
-$siteName = (string)ru_setting('site_name', 'Ray-U Tarim');
+$siteName = (string)ru_setting('site_name', 'RAYU Tarim Makineleri');
 $logo     = (string)ru_setting('site_logo', '');
 $phone    = (string)ru_setting('site_phone', '');
 $email    = (string)ru_setting('site_email', '');
@@ -53,11 +53,10 @@ $li       = (string)ru_setting('site_linkedin', '');
         <?php if ($logo): ?>
           <img src="<?= h(ru_upload_url($logo)) ?>" alt="<?= h($siteName) ?>" class="brand__logo">
         <?php else: ?>
-          <div class="brand__mark">RU</div>
-          <div class="brand__text">
-            <span class="brand__name"><?= h($siteName) ?></span>
-            <span class="brand__sub">EST. <?= h((string)ru_setting('founded_year', '2010')) ?> &middot; Konya</span>
-          </div>
+          <img src="/assets/img/logo.png"
+               srcset="/assets/img/logo.png 2x"
+               alt="<?= h($siteName) ?>"
+               class="brand__logo brand__logo--default">
         <?php endif; ?>
       </a>
 

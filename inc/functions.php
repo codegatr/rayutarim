@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Genel Yardimci Fonksiyonlar
+ * RAYU TARIM MAKİNELERİ — Genel Yardimci Fonksiyonlar
  */
 
 declare(strict_types=1);

@@ -76,7 +76,7 @@ $headerPages = $headerPages ?? [];
         <div class="cat-card__body">
           <span class="cat-card__eyebrow">Pazar</span>
           <h3 class="cat-card__title">2. El</h3>
-          <p class="cat-card__text">Ekspertiz onayli ikinci el makineleri Ray-U guvencesiyle.</p>
+          <p class="cat-card__text">Ekspertiz onayli ikinci el makineleri RAYU guvencesiyle.</p>
           <span class="cat-card__cta">Pazara Gir <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M14 5l7 7-7 7M21 12H3"/></svg></span>
         </div>
       </a>

@@ -1,4 +1,4 @@
-# Mimari Notları — Ray-U Tarım
+# Mimari Notları — RAYU Tarım Makineleri
 
 ## Tablo Şeması (Faz Faz)
 

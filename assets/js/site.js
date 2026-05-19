@@ -1,5 +1,5 @@
 /**
- * RAY-U TARIM — Public site JS
+ * RAYU TARIM MAKİNELERİ — Public site JS
  * v0.2.0 — Vanilla, dependency-free
  *
  * Modules:

@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-$siteName    = (string)ru_setting('site_name', 'Ray-U Tarim');
+$siteName    = (string)ru_setting('site_name', 'RAYU Tarim Makineleri');
 $about       = (string)ru_setting('footer_about', '');
 $phone       = (string)ru_setting('site_phone', '');
 $email       = (string)ru_setting('site_email', '');
@@ -25,12 +25,16 @@ $col3 = ru_menu_items('footer_3');
   <div class="container site-footer__top">
 
     <div class="site-footer__col site-footer__col--brand">
-      <div class="brand">
-        <div class="brand__mark brand__mark--lg">RU</div>
-        <div class="brand__text">
-          <span class="brand__name"><?= h($siteName) ?></span>
-          <span class="brand__sub">EST. <?= h($founded) ?> &middot; Konya</span>
-        </div>
+      <div class="brand brand--footer">
+        <?php if ($logo = (string)ru_setting('site_logo', '')): ?>
+          <img src="<?= h(ru_upload_url($logo)) ?>" alt="<?= h($siteName) ?>" class="brand__logo brand__logo--footer">
+        <?php else: ?>
+          <img src="/assets/img/favicon-192.png" alt="<?= h($siteName) ?>" class="brand__logo--icon" width="48" height="48">
+          <div class="brand__text">
+            <span class="brand__name"><?= h($siteName) ?></span>
+            <span class="brand__sub">EST. <?= h($founded) ?> &middot; Konya</span>
+          </div>
+        <?php endif; ?>
       </div>
       <p class="site-footer__about"><?= h($about) ?></p>
       <div class="site-footer__social">

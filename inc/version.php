@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Surum Bilgisi (Single Source of Truth)
+ * RAYU TARIM MAKİNELERİ — Surum Bilgisi (Single Source of Truth)
  *
  * Bu dosya manifest.json'dan calistirma zamaninda surum okur.
  * Tum kod buradan get_version() / get_manifest() kullanmalidir.
@@ -83,7 +83,7 @@ function ru_version_info(): array
 {
     $m = ru_manifest();
     return [
-        'name'         => (string)($m['name'] ?? 'Ray-U Tarim'),
+        'name'         => (string)($m['name'] ?? 'RAYU Tarim Makineleri'),
         'version'      => ru_version(),
         'release_date' => (string)($m['release_date'] ?? ''),
         'repo'         => ru_repo(),

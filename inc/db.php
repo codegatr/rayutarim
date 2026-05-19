@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Veritabani Katmani
+ * RAYU TARIM MAKİNELERİ — Veritabani Katmani
  *
  * - PDO baglantisi (PHP 8.3+, prepared statements)
  * - Settings k/v cache (ru_settings)

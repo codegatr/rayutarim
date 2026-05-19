@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-$siteName = h((string)ru_setting('site_name', 'Ray-U Tarim'));
+$siteName = h((string)ru_setting('site_name', 'RAYU Tarim Makineleri'));
 $tagline  = h((string)ru_setting('site_tagline', ''));
 $logo     = (string)ru_setting('site_logo', '');
 
@@ -48,7 +48,12 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Favicon -->
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="shortcut icon" href="/assets/img/favicon.ico">
+<meta name="theme-color" content="#1F4D33">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,9 +68,9 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "<?= addslashes((string)ru_setting('site_name', 'Ray-U Tarim')) ?>",
+  "name": "<?= addslashes((string)ru_setting('site_name', 'RAYU Tarim Makineleri')) ?>",
   "url": "<?= addslashes((string)ru_setting('site_url', 'https://rayutarim.com')) ?>",
-  "logo": "<?= $logo ? addslashes(ru_upload_url($logo)) : 'https://rayutarim.com/assets/img/favicon.svg' ?>",
+  "logo": "<?= $logo ? addslashes(ru_upload_url($logo)) : 'https://rayutarim.com/assets/img/logo.png' ?>",
   "telephone": "<?= addslashes((string)ru_setting('site_phone', '')) ?>",
   "email": "<?= addslashes((string)ru_setting('site_email', '')) ?>",
   "address": {

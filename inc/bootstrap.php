@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Bootstrap
+ * RAYU TARIM MAKİNELERİ — Bootstrap
  *
  * Tum giris noktalari (index.php, admin/*.php, ajax handlerlari)
  * sadece bunu require eder:

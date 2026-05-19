@@ -1,6 +1,6 @@
 <?php
 /**
- * RAY-U TARIM — Public Giris Noktasi
+ * RAYU TARIM MAKİNELERİ — Public Giris Noktasi
  *
  * Tum public istekler buradan gecer. Router dispatch eder.
  */

@@ -125,8 +125,9 @@ VALUES
 
 -- Cekirdek site ayarlari (varsayilan degerler)
 INSERT IGNORE INTO `ru_settings` (`skey`, `sval`) VALUES
-  ('site_name',         'Ray-U Tarim'),
-  ('site_tagline',      'Tarim Makineleri ve Ziraai Ilaclar'),
+  ('site_name',         'RAYU Tarim Makineleri'),
+  ('site_tagline',      'Toprak Islemede Uzman'),
+  ('site_url',          'https://rayutarim.com'),
   ('site_phone',        '+90 332 000 00 00'),
   ('site_email',        'info@rayutarim.com'),
   ('site_address',      'Konya, Turkiye'),
@@ -137,10 +138,10 @@ INSERT IGNORE INTO `ru_settings` (`skey`, `sval`) VALUES
   ('site_whatsapp',     ''),
   ('site_logo',         ''),
   ('site_favicon',      ''),
-  ('about_short',       'Tarim teknolojisinin kalbinde, ureticinin yaninda.'),
-  ('hero_title',        'Topragin Gucunu Teknolojiyle Bulusturuyoruz'),
-  ('hero_subtitle',     'Tarim aletleri ve ziraai ilac coziimlerinde guvenilir adresiniz.'),
-  ('footer_about',      'Ray-U Tarim, ureticinin verimliligini artiran ekipman ve coziimleriyle Anadolu topraklarinin yaninda.'),
+  ('about_short',       'Toprak isleme makinelerinde uzmanlasmis, ureticinin yaninda kurumsal yapi.'),
+  ('hero_title',        'Toprak Islemede Uzman'),
+  ('hero_subtitle',     'Tarim makineleri ve ziraai ilac coziimlerinde guvenilir adresiniz.'),
+  ('footer_about',      'RAYU Tarim Makineleri, toprak isleme alaninda uzmanlasmis ekipman ve coziimleriyle Anadolu topraklarinin yaninda.'),
   ('maintenance_mode',  '0'),
   ('founded_year',      '2010'),
   ('show_used_section', '1');
@@ -261,8 +262,8 @@ INSERT IGNORE INTO `ru_pages`
   (`slug`, `title`, `subtitle`, `excerpt`, `content`, `template`, `sort_order`, `is_active`, `show_in_header`, `show_in_footer`)
 VALUES
   ('hakkimizda', 'Hakkimizda', 'Topraktan gelen guc',
-   'Ray-U Tarim, ureticinin yaninda olan teknoloji ortagidir.',
-   '<p>Ray-U Tarim, Konya merkezli kurumsal yapisi ile tarim makineleri ve ziraai ilac sektorunde Turkiye genelinde hizmet veren oncu firmalardan biridir. Yillarin verdigi tecrube ile cifticilerimize en kaliteli urun ve hizmeti sunmayi misyon edinmistir.</p><p>Modern uretim tesislerimizde gelistirilen tarim makineleri, dunya kalite standartlarinda uretilmekte; teknik servis ve yedek parca agimiz ile ureticilerimize kesintisiz destek saglanmaktadir.</p>',
+   'RAYU Tarim Makineleri, ureticinin yaninda olan teknoloji ortagidir.',
+   '<p>RAYU Tarim Makineleri, Konya merkezli kurumsal yapisi ile tarim makineleri ve ziraai ilac sektorunde Turkiye genelinde hizmet veren oncu firmalardan biridir. Yillarin verdigi tecrube ile cifticilerimize en kaliteli urun ve hizmeti sunmayi misyon edinmistir.</p><p>Modern uretim tesislerimizde gelistirilen tarim makineleri, dunya kalite standartlarinda uretilmekte; teknik servis ve yedek parca agimiz ile ureticilerimize kesintisiz destek saglanmaktadir.</p>',
    'default', 1, 1, 1, 1),
 
   ('misyon-vizyon', 'Misyon & Vizyon', 'Yarinin tarimi icin bugun',
@@ -272,7 +273,7 @@ VALUES
 
   ('tarihce', 'Tarihce', 'Kilometre taslari',
    NULL,
-   '<p>Ray-U Tarim, kurulusundan bu yana sektorde emin adimlarla ilerlemis, her gecen yil portfoyunu ve servis agini genisletmistir.</p>',
+   '<p>RAYU Tarim Makineleri, kurulusundan bu yana sektorde emin adimlarla ilerlemis, her gecen yil portfoyunu ve servis agini genisletmistir.</p>',
    'default', 3, 1, 1, 0),
 
   ('kalite-politikasi', 'Kalite Politikasi', 'Standardin otesi',
@@ -331,5 +332,38 @@ VALUES
       '', '/urunler/ziraai-ilaclar', 'Katalogu Goruntule', 'center', 2, 1),
   (3, '2. El Pazari',
       'Guvenli, garantili, ekspertiz onayli',
-      'Ikinci el tarim makinelerini Ray-U guvencesiyle alip satin. Tum ilanlar uzman ekibimizce kontrol edilir.',
+      'Ikinci el tarim makinelerini RAYU guvencesiyle alip satin. Tum ilanlar uzman ekibimizce kontrol edilir.',
       '', '/ikinci-el', '2. El Pazarina Gir', 'right', 3, 1);
+
+-- ============================================================================
+-- v0.2.1 — Marka Kimligi Migrasyonu
+-- Sadece eski default degerlere uyanlari guncelle (kullanici degistirmisse dokunma)
+-- ============================================================================
+UPDATE `ru_settings` SET `sval` = 'RAYU Tarim Makineleri'
+  WHERE `skey` = 'site_name' AND `sval` = 'Ray-U Tarim';
+
+UPDATE `ru_settings` SET `sval` = 'Toprak Islemede Uzman'
+  WHERE `skey` = 'site_tagline' AND `sval` = 'Tarim Makineleri ve Ziraai Ilaclar';
+
+UPDATE `ru_settings` SET `sval` = 'Toprak Islemede Uzman'
+  WHERE `skey` = 'hero_title' AND `sval` = 'Topragin Gucunu Teknolojiyle Bulusturuyoruz';
+
+UPDATE `ru_settings` SET `sval` = 'Toprak isleme makinelerinde uzmanlasmis, ureticinin yaninda kurumsal yapi.'
+  WHERE `skey` = 'about_short' AND `sval` = 'Tarim teknolojisinin kalbinde, ureticinin yaninda.';
+
+UPDATE `ru_settings` SET `sval` = 'RAYU Tarim Makineleri, toprak isleme alaninda uzmanlasmis ekipman ve coziimleriyle Anadolu topraklarinin yaninda.'
+  WHERE `skey` = 'footer_about' AND `sval` = 'Ray-U Tarim, ureticinin verimliligini artiran ekipman ve coziimleriyle Anadolu topraklarinin yaninda.';
+
+-- site_url ayari eklenmediyse ekle (Faz 1'de yoktu)
+INSERT IGNORE INTO `ru_settings` (`skey`, `sval`) VALUES ('site_url', 'https://rayutarim.com');
+
+-- ru_pages icerigindeki marka referanslarini guncelle (idempotent: REPLACE)
+UPDATE `ru_pages` SET
+  `content` = REPLACE(`content`, 'Ray-U Tarim', 'RAYU Tarim Makineleri'),
+  `excerpt` = REPLACE(IFNULL(`excerpt`, ''), 'Ray-U Tarim', 'RAYU Tarim Makineleri')
+WHERE `content` LIKE '%Ray-U Tarim%' OR `excerpt` LIKE '%Ray-U Tarim%';
+
+-- ru_slider'daki marka referanslarini guncelle
+UPDATE `ru_slider` SET
+  `description` = REPLACE(IFNULL(`description`, ''), 'Ray-U guvencesiyle', 'RAYU guvencesiyle')
+WHERE `description` LIKE '%Ray-U guvencesiyle%';
