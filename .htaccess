@@ -36,14 +36,18 @@ ErrorDocument 404 /404.php
 </IfModule>
 
 # ----------------------------------------------------------------------------
-# Clean URL — Faz 2'de aktiflesecek (su an pasif)
+# Clean URL — Faz 2'den itibaren aktif
 # ----------------------------------------------------------------------------
-# <IfModule mod_rewrite.c>
-#   RewriteEngine On
-#   RewriteCond %{REQUEST_FILENAME} !-f
-#   RewriteCond %{REQUEST_FILENAME} !-d
-#   RewriteRule ^(.*)$ index.php?_route=$1 [L,QSA]
-# </IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # uploads ve assets dizinleri rewrite'a takilmasin
+  RewriteRule ^(uploads|assets|admin)/ - [L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php?_route=$1 [L,QSA]
+</IfModule>
 
 # ----------------------------------------------------------------------------
 # Guvenlik basliklari

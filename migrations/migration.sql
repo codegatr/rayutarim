@@ -144,3 +144,192 @@ INSERT IGNORE INTO `ru_settings` (`skey`, `sval`) VALUES
   ('maintenance_mode',  '0'),
   ('founded_year',      '2010'),
   ('show_used_section', '1');
+
+-- ============================================================================
+-- FAZ 2 TABLOLARI (v0.2.0)
+-- ============================================================================
+
+-- ============================================================================
+-- TABLO: ru_pages — Statik sayfalar (Hakkimizda, Misyon, Iletisim, vs.)
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS `ru_pages` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `parent_id` INT UNSIGNED NULL,
+  `slug` VARCHAR(160) NOT NULL,
+  `title` VARCHAR(200) NOT NULL,
+  `subtitle` VARCHAR(300) NOT NULL DEFAULT '',
+  `excerpt` TEXT NULL,
+  `content` LONGTEXT NULL,
+  `meta_description` VARCHAR(300) NOT NULL DEFAULT '',
+  `meta_keywords` VARCHAR(300) NOT NULL DEFAULT '',
+  `template` VARCHAR(40) NOT NULL DEFAULT 'default',
+  `hero_image` VARCHAR(255) NOT NULL DEFAULT '',
+  `og_image` VARCHAR(255) NOT NULL DEFAULT '',
+  `icon` VARCHAR(40) NOT NULL DEFAULT '',
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `show_in_header` TINYINT(1) NOT NULL DEFAULT 0,
+  `show_in_footer` TINYINT(1) NOT NULL DEFAULT 0,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_slug` (`slug`),
+  KEY `idx_parent` (`parent_id`),
+  KEY `idx_active_sort` (`is_active`, `sort_order`),
+  KEY `idx_header` (`show_in_header`, `sort_order`),
+  KEY `idx_footer` (`show_in_footer`, `sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
+-- TABLO: ru_slider — Anasayfa slider'lari
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS `ru_slider` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(200) NOT NULL DEFAULT '',
+  `subtitle` VARCHAR(300) NOT NULL DEFAULT '',
+  `description` TEXT NULL,
+  `image` VARCHAR(255) NOT NULL DEFAULT '',
+  `image_mobile` VARCHAR(255) NOT NULL DEFAULT '',
+  `link_url` VARCHAR(500) NOT NULL DEFAULT '',
+  `link_text` VARCHAR(80) NOT NULL DEFAULT '',
+  `link_target` ENUM('_self','_blank') NOT NULL DEFAULT '_self',
+  `text_position` ENUM('left','center','right') NOT NULL DEFAULT 'left',
+  `text_color` VARCHAR(20) NOT NULL DEFAULT 'light',
+  `overlay_opacity` TINYINT UNSIGNED NOT NULL DEFAULT 40,
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `start_at` DATETIME NULL,
+  `end_at` DATETIME NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_active_sort` (`is_active`, `sort_order`),
+  KEY `idx_schedule` (`start_at`, `end_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
+-- TABLO: ru_menu — Navigasyon menu ogeleri (header / footer kolonlari)
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS `ru_menu` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `parent_id` INT UNSIGNED NULL,
+  `location` ENUM('header','footer_1','footer_2','footer_3','mobile') NOT NULL DEFAULT 'header',
+  `label` VARCHAR(120) NOT NULL,
+  `url` VARCHAR(500) NOT NULL DEFAULT '#',
+  `target` ENUM('_self','_blank') NOT NULL DEFAULT '_self',
+  `icon` VARCHAR(40) NOT NULL DEFAULT '',
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `css_class` VARCHAR(80) NOT NULL DEFAULT '',
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_location_sort` (`location`, `sort_order`),
+  KEY `idx_parent` (`parent_id`),
+  KEY `idx_active` (`is_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
+-- FAZ 2 — Seed verileri (idempotent)
+-- ============================================================================
+
+-- Yeni settings (Faz 2)
+INSERT IGNORE INTO `ru_settings` (`skey`, `sval`) VALUES
+  ('hero_cta_primary_text',  'Urunlerimizi Inceleyin'),
+  ('hero_cta_primary_url',   '/urunler'),
+  ('hero_cta_secondary_text','Bize Ulasin'),
+  ('hero_cta_secondary_url', '/iletisim'),
+  ('feature_1_icon',         'M3 21V8l9-7 9 7v13h-6v-7h-6v7H3z'),
+  ('feature_1_title',        'Yerli Uretim'),
+  ('feature_1_text',         'Anadolu mhendisligi, dunya standartlarinda kalite'),
+  ('feature_2_icon',         'M12 2L1 21h22L12 2zm0 4l8 14H4l8-14z'),
+  ('feature_2_title',        '7/24 Servis'),
+  ('feature_2_text',         'Yetkin teknik kadromuz her zaman yaninizda'),
+  ('feature_3_icon',         'M21 13.255V21h-9.5v-7.745L3 21l9-9 9 9z'),
+  ('feature_3_title',        'Genis Bayi Agi'),
+  ('feature_3_text',         '50+ il, 200+ bayi ile Turkiye genelinde'),
+  ('feature_4_icon',         'M20 12a8 8 0 11-16 0 8 8 0 0116 0z'),
+  ('feature_4_title',        'Garantili Hizmet'),
+  ('feature_4_text',         '2 yil garanti + uzun donem yedek parca destegi'),
+  ('contact_address_full',   'Konya Organize Sanayi Bolgesi, Konya / Turkiye'),
+  ('contact_lat',            '37.8746'),
+  ('contact_lng',            '32.4932'),
+  ('contact_working_hours',  'Pzt - Cmt: 08:30 - 18:30');
+
+-- Default sayfalar
+INSERT IGNORE INTO `ru_pages`
+  (`slug`, `title`, `subtitle`, `excerpt`, `content`, `template`, `sort_order`, `is_active`, `show_in_header`, `show_in_footer`)
+VALUES
+  ('hakkimizda', 'Hakkimizda', 'Topraktan gelen guc',
+   'Ray-U Tarim, ureticinin yaninda olan teknoloji ortagidir.',
+   '<p>Ray-U Tarim, Konya merkezli kurumsal yapisi ile tarim makineleri ve ziraai ilac sektorunde Turkiye genelinde hizmet veren oncu firmalardan biridir. Yillarin verdigi tecrube ile cifticilerimize en kaliteli urun ve hizmeti sunmayi misyon edinmistir.</p><p>Modern uretim tesislerimizde gelistirilen tarim makineleri, dunya kalite standartlarinda uretilmekte; teknik servis ve yedek parca agimiz ile ureticilerimize kesintisiz destek saglanmaktadir.</p>',
+   'default', 1, 1, 1, 1),
+
+  ('misyon-vizyon', 'Misyon & Vizyon', 'Yarinin tarimi icin bugun',
+   NULL,
+   '<h2>Misyonumuz</h2><p>Ureticinin verimliligini artiran, kullaniciya deger katan, cevre dostu tarim coziimleri sunmak.</p><h2>Vizyonumuz</h2><p>Tarim teknolojisinde sadece Turkiye degil, bolgesinde de ilk akla gelen kurumsal marka olmak.</p>',
+   'default', 2, 1, 1, 0),
+
+  ('tarihce', 'Tarihce', 'Kilometre taslari',
+   NULL,
+   '<p>Ray-U Tarim, kurulusundan bu yana sektorde emin adimlarla ilerlemis, her gecen yil portfoyunu ve servis agini genisletmistir.</p>',
+   'default', 3, 1, 1, 0),
+
+  ('kalite-politikasi', 'Kalite Politikasi', 'Standardin otesi',
+   NULL,
+   '<p>Tum urunlerimiz ISO 9001 kalite yonetim sistemi cercevesinde uretilmekte, CE belgesi ile uluslararasi standartlara uygunluk teyit edilmektedir.</p>',
+   'default', 4, 1, 0, 1),
+
+  ('insan-kaynaklari', 'Insan Kaynaklari', 'Bizimle calismak isteyenler icin',
+   NULL,
+   '<p>Tutkulu, yenilikci ve takim ruhuna sahip arkadaslarimizi aramizda gormekten mutlu oluruz. CV gonderiminiz icin: <strong>ik@rayutarim.com</strong></p>',
+   'default', 5, 1, 0, 1),
+
+  ('iletisim', 'Iletisim', 'Bize ulasin', NULL, NULL,
+   'contact', 99, 1, 1, 1);
+
+-- Default menuler — header
+INSERT IGNORE INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`) VALUES
+  ('header', 'Anasayfa',   '/',             1, 1),
+  ('header', 'Kurumsal',   '/hakkimizda',   2, 1),
+  ('header', 'Urunler',    '/urunler',      3, 1),
+  ('header', '2. El',      '/ikinci-el',    4, 1),
+  ('header', 'Iletisim',   '/iletisim',     5, 1);
+
+-- Default menuler — footer kolon 1
+INSERT IGNORE INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`) VALUES
+  ('footer_1', 'Hakkimizda',         '/hakkimizda',         1, 1),
+  ('footer_1', 'Misyon & Vizyon',    '/misyon-vizyon',      2, 1),
+  ('footer_1', 'Tarihce',            '/tarihce',            3, 1),
+  ('footer_1', 'Insan Kaynaklari',   '/insan-kaynaklari',   4, 1);
+
+-- Default menuler — footer kolon 2
+INSERT IGNORE INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`) VALUES
+  ('footer_2', 'Tum Urunler',        '/urunler',            1, 1),
+  ('footer_2', 'Tarim Aletleri',     '/urunler/tarim-aletleri', 2, 1),
+  ('footer_2', 'Ziraai Ilaclar',     '/urunler/ziraai-ilaclar', 3, 1),
+  ('footer_2', '2. El',              '/ikinci-el',          4, 1);
+
+-- Default menuler — footer kolon 3
+INSERT IGNORE INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`) VALUES
+  ('footer_3', 'Iletisim',           '/iletisim',           1, 1),
+  ('footer_3', 'Kalite Politikasi',  '/kalite-politikasi',  2, 1),
+  ('footer_3', 'Gizlilik',           '/gizlilik',           3, 1),
+  ('footer_3', 'KVKK',               '/kvkk',               4, 1);
+
+-- Demo slider'lar (admin panelden silinebilir/duzenlenebilir)
+INSERT IGNORE INTO `ru_slider`
+  (`id`, `title`, `subtitle`, `description`, `image`, `link_url`, `link_text`, `text_position`, `sort_order`, `is_active`)
+VALUES
+  (1, 'Topragin Gucunu Teknolojiyle Bulusturuyoruz',
+      'Yeni nesil tarim makineleri',
+      'Hububat ekim makinelerinden topraj isleme ekipmanlarina, urun yelpazemiz ile her ureticinin yaninda.',
+      '', '/urunler', 'Urunleri Kesfet', 'left', 1, 1),
+  (2, 'Ziraai Ilac Kataloglari',
+      'Bitki saglik koruma uzmanligi',
+      'Lisansli ziraai ilac portfoyumuz, bilingli tarim uygulamalari icin guvenilir secimler sunar.',
+      '', '/urunler/ziraai-ilaclar', 'Katalogu Goruntule', 'center', 2, 1),
+  (3, '2. El Pazari',
+      'Guvenli, garantili, ekspertiz onayli',
+      'Ikinci el tarim makinelerini Ray-U guvencesiyle alip satin. Tum ilanlar uzman ekibimizce kontrol edilir.',
+      '', '/ikinci-el', '2. El Pazarina Gir', 'right', 3, 1);

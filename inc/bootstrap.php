@@ -21,6 +21,8 @@ if (!defined('RU_BASE')) {
 require_once __DIR__ . '/version.php';
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/template.php';
+require_once __DIR__ . '/router.php';
 
 // config.php yoksa kurulumu zorla
 $configPath = __DIR__ . '/config.php';

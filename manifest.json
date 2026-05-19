@@ -2,7 +2,7 @@
   "name": "Ray-U Tarim",
   "slug": "rayutarim",
   "description": "Kurumsal tarim makineleri ve ziraai ilac satis platformu",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "release_date": "2026-05-19",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -23,7 +23,7 @@
     {
       "version": "0.2.0",
       "title": "Public Tema",
-      "released": null,
+      "released": "2026-05-19",
       "summary": "Header/footer, slider, anasayfa, kurumsal sayfalar (Hakkimizda, Misyon/Vizyon, Tarihce, Iletisim)"
     },
     {
@@ -69,6 +69,7 @@
     "tracked": [
       "inc/",
       "admin/",
+      "views/",
       "assets/",
       "migrations/",
       "docs/",
