@@ -43,13 +43,14 @@ function ru_dispatch(): void
         return;
     }
 
-    // Faz 3+ icin reserved rotalar (gecici karsilama)
+    // Public katalog
     if (str_starts_with($route, '/urunler')) {
-        ru_handle_placeholder('Urunler', 'Urun katalogumuz Faz 3 (v0.3.0) ile yayina alinacak.');
+        $category = trim(substr($route, strlen('/urunler')), '/');
+        ru_handle_products($category);
         return;
     }
     if (str_starts_with($route, '/ikinci-el')) {
-        ru_handle_placeholder('2. El Pazari', '2. el satis modulu Faz 5 (v0.5.0) ile yayina alinacak.');
+        ru_handle_used_products();
         return;
     }
 
@@ -113,6 +114,34 @@ function ru_handle_contact(): void
         'page'        => $page ?: ['title' => 'Iletisim', 'content' => ''],
         'page_title'  => 'Iletisim',
         'page_class'  => 'page-contact',
+    ]);
+}
+
+function ru_handle_products(string $category = ''): void
+{
+    $categories = ru_catalog_categories();
+    if ($category !== '' && !isset($categories[$category])) {
+        http_response_code(404);
+        ru_render('404', [
+            'page_title' => 'Kategori Bulunamadi',
+            'page_class' => 'page-404',
+        ]);
+    }
+
+    ru_render('products', [
+        'categories' => $categories,
+        'products'   => $category === '' ? ru_catalog_products() : ru_catalog_products_by_category($category),
+        'activeCategory' => $category,
+        'page_title' => $category === '' ? 'Urunler' : $categories[$category]['title'],
+        'page_class' => 'page-products',
+    ]);
+}
+
+function ru_handle_used_products(): void
+{
+    ru_render('used', [
+        'page_title' => '2. El',
+        'page_class' => 'page-used',
     ]);
 }
 

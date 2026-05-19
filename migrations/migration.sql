@@ -367,3 +367,73 @@ WHERE `content` LIKE '%Ray-U Tarim%' OR `excerpt` LIKE '%Ray-U Tarim%';
 UPDATE `ru_slider` SET
   `description` = REPLACE(IFNULL(`description`, ''), 'Ray-U guvencesiyle', 'RAYU guvencesiyle')
 WHERE `description` LIKE '%Ray-U guvencesiyle%';
+
+-- ============================================================================
+-- v0.6.0 - Kurumsal katalog ve Smart Update v5
+-- ============================================================================
+UPDATE `ru_settings` SET `sval` = 'RAYU Tarım Makineleri'
+  WHERE `skey` = 'site_name';
+
+UPDATE `ru_settings` SET `sval` = 'Toprak İşlemede Uzman'
+  WHERE `skey` = 'site_tagline';
+
+UPDATE `ru_settings` SET `sval` = 'Toprağın gücünü teknolojiyle buluşturuyoruz'
+  WHERE `skey` = 'hero_title';
+
+UPDATE `ru_settings` SET `sval` = 'Tarım makineleri, zirai ilaçlama ve servis çözümlerinde Türkiye geneli kurumsal satış platformu.'
+  WHERE `skey` = 'hero_subtitle';
+
+UPDATE `ru_settings` SET `sval` = 'RAYU Tarım Makineleri; toprak işleme, ekim, ilaçlama, yedek parça ve servis süreçlerini tek kurumsal çatı altında yöneten satış ve destek platformudur.'
+  WHERE `skey` = 'footer_about';
+
+UPDATE `ru_settings` SET `sval` = 'Yerli mühendislik'
+  WHERE `skey` = 'feature_1_title';
+UPDATE `ru_settings` SET `sval` = 'Anadolu saha tecrübesi, dünya kalite standardı'
+  WHERE `skey` = 'feature_1_text';
+UPDATE `ru_settings` SET `sval` = 'Satış sonrası servis'
+  WHERE `skey` = 'feature_2_title';
+UPDATE `ru_settings` SET `sval` = 'Bakım, yedek parça ve sezon desteği tek ekipte'
+  WHERE `skey` = 'feature_2_text';
+UPDATE `ru_settings` SET `sval` = 'Bayi ve filo satışı'
+  WHERE `skey` = 'feature_3_title';
+UPDATE `ru_settings` SET `sval` = 'Türkiye genelinde kurumsal teklif ve teslimat akışı'
+  WHERE `skey` = 'feature_3_text';
+UPDATE `ru_settings` SET `sval` = 'Garanti ve kayıt'
+  WHERE `skey` = 'feature_4_title';
+UPDATE `ru_settings` SET `sval` = 'Her teslimatta ürün, servis ve bakım kaydı'
+  WHERE `skey` = 'feature_4_text';
+
+UPDATE `ru_menu` SET `label` = 'Ürünler' WHERE `location` = 'header' AND `url` = '/urunler';
+UPDATE `ru_menu` SET `label` = 'İletişim' WHERE `location` = 'header' AND `url` = '/iletisim';
+UPDATE `ru_menu` SET `label` = 'Hakkımızda' WHERE `url` = '/hakkimizda';
+UPDATE `ru_menu` SET `label` = 'Tüm Ürünler' WHERE `url` = '/urunler';
+UPDATE `ru_menu` SET `label` = 'Toprak İşleme' WHERE `url` = '/urunler/tarim-aletleri';
+UPDATE `ru_menu` SET `url` = '/urunler/toprak-isleme' WHERE `url` = '/urunler/tarim-aletleri';
+UPDATE `ru_menu` SET `label` = 'Zirai İlaçlama' WHERE `url` = '/urunler/ziraai-ilaclar';
+UPDATE `ru_menu` SET `url` = '/urunler/ilaclama' WHERE `url` = '/urunler/ziraai-ilaclar';
+
+UPDATE `ru_pages` SET
+  `title` = 'Hakkımızda',
+  `subtitle` = 'Topraktan gelen güç, kurumsal satış disiplini',
+  `excerpt` = 'RAYU Tarım Makineleri, üreticinin yanında olan teknoloji ve servis ortağıdır.',
+  `content` = '<p>RAYU Tarım Makineleri, Konya merkezli yapısıyla tarım makineleri, zirai ilaçlama çözümleri, yedek parça ve saha servis süreçlerini tek kurumsal çatı altında sunar.</p><p>Satış ekibimiz ürün seçimini toprak yapısı, traktör gücü, ürün deseni ve sezon takvimine göre planlar. Teslimat sonrasında bakım, yedek parça ve operatör desteğiyle üreticinin yanında kalır.</p><h2>Kurumsal çalışma modelimiz</h2><p>Bayi yönetimi, filo satışı, teknik teklif, teslimat ve servis kayıtları ölçülebilir süreçlerle ilerler. Amacımız yalnızca makine satmak değil, sezon verimliliğini artıran sürdürülebilir bir iş ortaklığı kurmaktır.</p>'
+  WHERE `slug` = 'hakkimizda';
+
+UPDATE `ru_pages` SET
+  `content` = '<h2>Misyonumuz</h2><p>Üreticinin verimliliğini artıran, kullanıcıya değer katan, çevreye duyarlı tarım makineleri ve bitki sağlığı çözümleri sunmak.</p><h2>Vizyonumuz</h2><p>Türkiye’de güvenilir satış ve servis standardını yükselten, bölgesel pazarlarda tercih edilen kurumsal tarım teknolojileri markası olmak.</p>'
+  WHERE `slug` = 'misyon-vizyon';
+
+UPDATE `ru_slider` SET
+  `title` = 'Toprağın Gücünü Teknolojiyle Buluşturuyoruz',
+  `subtitle` = 'Kurumsal tarım makineleri satışı',
+  `description` = 'Toprak işleme, ekim, ilaçlama ve yedek parça çözümlerini teknik teklif ve servis desteğiyle sunuyoruz.',
+  `link_text` = 'Ürünleri İncele'
+  WHERE `id` = 1;
+
+UPDATE `ru_slider` SET
+  `title` = 'Zirai İlaçlama ve Bitki Sağlığı',
+  `subtitle` = 'Doğru ürün, doğru uygulama',
+  `description` = 'Lisanslı portföy ve saha danışmanlığıyla bitki sağlığı süreçlerinizi planlayın.',
+  `link_url` = '/urunler/ilaclama',
+  `link_text` = 'Kataloğu Gör'
+  WHERE `id` = 2;

@@ -38,7 +38,7 @@ http_response_code(404);
     font-size:clamp(8rem, 22vw, 14rem);font-weight:900;line-height:1;
     background:linear-gradient(135deg, var(--accent), #e8c463);
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    letter-spacing:-.05em;margin:0;
+    letter-spacing:0;margin:0;
   }
   h1{margin:0 0 .75rem;font-size:1.6rem;font-weight:600}
   p{color:var(--muted);max-width:480px;margin:0 auto 2rem}

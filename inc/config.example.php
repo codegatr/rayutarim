@@ -73,6 +73,7 @@ return [
     'update' => [
         // GitHub PAT (sadece private repo icin gerekli)
         'github_token'   => '',
+        'web_token'      => '',
         'backup_dir'     => 'backups',
         'auto_check'     => true,
         'check_interval' => 3600,              // 1 saat

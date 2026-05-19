@@ -307,7 +307,7 @@ HTML;
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:2rem 1rem;line-height:1.6}
   .wrap{max-width:720px;margin:0 auto}
   .brand{text-align:center;margin-bottom:1.5rem}
-  .brand h1{margin:0;color:var(--primary-dark);font-size:1.8rem;letter-spacing:-.02em}
+  .brand h1{margin:0;color:var(--primary-dark);font-size:1.8rem;letter-spacing:0}
   .brand p{margin:.25rem 0 0;color:var(--muted);font-size:.95rem}
   .steps{display:flex;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1.5rem;font-size:.85rem}
   .steps div{flex:1;text-align:center;color:var(--muted);position:relative;padding:.4rem .25rem}

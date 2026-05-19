@@ -19,9 +19,14 @@ if (empty($slides)) {
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__content hero__content--left">
-      <span class="hero__badge">RAYU Tarim Makineleri</span>
+      <span class="hero__badge">RAYU Tarım Makineleri</span>
       <h1 class="hero__title"><?= h($heroTitle) ?></h1>
       <?php if ($heroSub): ?><p class="hero__sub"><?= h($heroSub) ?></p><?php endif; ?>
+      <div class="hero__metrics" aria-label="Kurumsal kapsam">
+        <span><strong>50+</strong> ilde hizmet</span>
+        <span><strong>200+</strong> bayi ve servis noktası</span>
+        <span><strong>10K+</strong> üretici deneyimi</span>
+      </div>
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="<?= h($ctaPriUrl) ?>"><?= h($ctaPriText) ?></a>
         <a class="btn btn--ghost btn--lg" href="<?= h($ctaSecUrl) ?>"><?= h($ctaSecText) ?></a>

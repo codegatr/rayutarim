@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak Islemede Uzman",
   "description": "Kurumsal tarim makineleri ve ziraai ilac satis platformu",
-  "version": "0.2.1",
+  "version": "0.6.0",
   "release_date": "2026-05-19",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -36,8 +36,8 @@
     {
       "version": "0.3.0",
       "title": "Urun Katalogu",
-      "released": null,
-      "summary": "Kategori agaci, urun listesi, detay sayfasi, galeri, ozellik tablosu, arama ve filtre"
+      "released": "2026-05-19",
+      "summary": "Public katalog sayfalari, urun gruplari, teknik teklif akisi ve kurumsal satis sunumu"
     },
     {
       "version": "0.4.0",
@@ -48,13 +48,13 @@
     {
       "version": "0.5.0",
       "title": "2. El Satis & Formlar",
-      "released": null,
-      "summary": "Ikinci el urun listesi, kullanici basvuru formu, admin moderasyon, teklif/iletisim formlari"
+      "released": "2026-05-19",
+      "summary": "Ikinci el guven sayfasi, ekspertiz ve basvuru akisi"
     },
     {
       "version": "0.6.0",
       "title": "Smart Update v5",
-      "released": null,
+      "released": "2026-05-19",
       "summary": "GitHub Release tabanli otomatik guncelleme, yedek, migration runner, dosya senkronizasyonu"
     },
     {

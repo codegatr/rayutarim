@@ -29,11 +29,7 @@ $col3 = ru_menu_items('footer_3');
         <?php if ($logo = (string)ru_setting('site_logo', '')): ?>
           <img src="<?= h(ru_upload_url($logo)) ?>" alt="<?= h($siteName) ?>" class="brand__logo brand__logo--footer">
         <?php else: ?>
-          <img src="/assets/img/favicon-192.png" alt="<?= h($siteName) ?>" class="brand__logo--icon" width="48" height="48">
-          <div class="brand__text">
-            <span class="brand__name"><?= h($siteName) ?></span>
-            <span class="brand__sub">EST. <?= h($founded) ?> &middot; Konya</span>
-          </div>
+          <img src="/assets/img/logo.svg" alt="<?= h($siteName) ?>" class="brand__logo brand__logo--footer">
         <?php endif; ?>
       </div>
       <p class="site-footer__about"><?= h($about) ?></p>

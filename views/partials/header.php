@@ -53,8 +53,7 @@ $li       = (string)ru_setting('site_linkedin', '');
         <?php if ($logo): ?>
           <img src="<?= h(ru_upload_url($logo)) ?>" alt="<?= h($siteName) ?>" class="brand__logo">
         <?php else: ?>
-          <img src="/assets/img/logo.png"
-               srcset="/assets/img/logo.png 2x"
+          <img src="/assets/img/logo.svg"
                alt="<?= h($siteName) ?>"
                class="brand__logo brand__logo--default">
         <?php endif; ?>
