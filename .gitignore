@@ -1,0 +1,50 @@
+# Hassas yapilandirma
+inc/config.php
+inc/.installed
+.env
+.env.local
+
+# Yedek ve gunluk
+backups/
+logs/
+*.log
+*.bak
+*.swp
+
+# Kullanici yuklemeleri (Smart Update'te de preserved listede)
+uploads/slider/*
+uploads/products/*
+uploads/pages/*
+!uploads/slider/.gitkeep
+!uploads/products/.gitkeep
+!uploads/pages/.gitkeep
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-*
+.DS_Store
+Thumbs.db
+
+# OS
+.~lock.*
+*.tmp
+*.temp
+
+# Composer / NPM (ileride kullanilirsa)
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+
+# Test / build
+/build/
+/dist/
+/coverage/
+phpunit.xml
+.phpunit.result.cache
+
+# Sertifika
+*.pem
+*.key
+*.crt

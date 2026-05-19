@@ -1,0 +1,113 @@
+{
+  "name": "Ray-U Tarim",
+  "slug": "rayutarim",
+  "description": "Kurumsal tarim makineleri ve ziraai ilac satis platformu",
+  "version": "0.1.0",
+  "release_date": "2026-05-19",
+  "repo": "codegatr/rayutarim",
+  "php_min": "8.3",
+  "mysql_min": "5.7",
+  "license": "Proprietary - CODEGA",
+  "author": {
+    "name": "CODEGA",
+    "url": "https://codega.com.tr",
+    "email": "info@codega.com.tr"
+  },
+  "phases": [
+    {
+      "version": "0.1.0",
+      "title": "Cekirdek & Iskelet",
+      "released": "2026-05-19",
+      "summary": "Repo iskeleti, manifest, version SSOT, PDO db, idempotent migration, .htaccess, kurulum sihirbazi taslagi"
+    },
+    {
+      "version": "0.2.0",
+      "title": "Public Tema",
+      "released": null,
+      "summary": "Header/footer, slider, anasayfa, kurumsal sayfalar (Hakkimizda, Misyon/Vizyon, Tarihce, Iletisim)"
+    },
+    {
+      "version": "0.3.0",
+      "title": "Urun Katalogu",
+      "released": null,
+      "summary": "Kategori agaci, urun listesi, detay sayfasi, galeri, ozellik tablosu, arama ve filtre"
+    },
+    {
+      "version": "0.4.0",
+      "title": "Yonetim Paneli",
+      "released": null,
+      "summary": "Auth, dashboard, slider/sayfa/urun/kullanici CRUD, ayarlar"
+    },
+    {
+      "version": "0.5.0",
+      "title": "2. El Satis & Formlar",
+      "released": null,
+      "summary": "Ikinci el urun listesi, kullanici basvuru formu, admin moderasyon, teklif/iletisim formlari"
+    },
+    {
+      "version": "0.6.0",
+      "title": "Smart Update v5",
+      "released": null,
+      "summary": "GitHub Release tabanli otomatik guncelleme, yedek, migration runner, dosya senkronizasyonu"
+    },
+    {
+      "version": "0.7.0",
+      "title": "Uluslararasilasma (i18n)",
+      "released": null,
+      "summary": "TR/EN/AR/RU dil sistemi, cevirilebilir alanlar, locale switcher, slug i18n"
+    }
+  ],
+  "update": {
+    "channel": "stable",
+    "endpoint": "https://api.github.com/repos/codegatr/rayutarim/releases/latest",
+    "asset_pattern": "rayutarim-v{version}.zip",
+    "backup_before_update": true,
+    "backup_keep_count": 5,
+    "migration_dir": "migrations"
+  },
+  "paths": {
+    "tracked": [
+      "inc/",
+      "admin/",
+      "assets/",
+      "migrations/",
+      "docs/",
+      "index.php",
+      "404.php",
+      "install.php",
+      "manifest.json",
+      ".htaccess"
+    ],
+    "preserved": [
+      "uploads/",
+      "inc/config.php",
+      ".user.ini",
+      "backups/",
+      "logs/"
+    ],
+    "writable": [
+      "uploads/",
+      "uploads/slider/",
+      "uploads/products/",
+      "uploads/pages/",
+      "backups/",
+      "logs/"
+    ]
+  },
+  "db": {
+    "prefix": "ru_",
+    "charset": "utf8mb4",
+    "collation": "utf8mb4_unicode_ci"
+  },
+  "features": {
+    "slider": true,
+    "products": true,
+    "categories": true,
+    "used_products": true,
+    "news": true,
+    "inquiries": true,
+    "multi_language": false,
+    "currency": "TRY",
+    "currencies_planned": ["TRY", "USD", "EUR"]
+  }
+}

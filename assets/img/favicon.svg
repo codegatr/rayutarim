@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d4a017"/>
+      <stop offset="1" stop-color="#e8c463"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2d5a3d"/>
+      <stop offset="1" stop-color="#1a3d2a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#g2)"/>
+  <!-- Bugday basagi motifi -->
+  <g stroke="url(#g)" stroke-width="2" stroke-linecap="round" fill="none" opacity=".35">
+    <path d="M32 14 L32 50"/>
+    <path d="M32 20 L26 16"/><path d="M32 20 L38 16"/>
+    <path d="M32 28 L25 23"/><path d="M32 28 L39 23"/>
+    <path d="M32 36 L24 30"/><path d="M32 36 L40 30"/>
+    <path d="M32 44 L24 38"/><path d="M32 44 L40 38"/>
+  </g>
+  <!-- RU monogrami -->
+  <text x="32" y="42" font-family="-apple-system,Segoe UI,Roboto,sans-serif"
+        font-size="22" font-weight="800" text-anchor="middle"
+        fill="url(#g)">RU</text>
+</svg>
