@@ -11,13 +11,14 @@ $hours   = (string)ru_setting('contact_working_hours', '');
 $wpp     = (string)ru_setting('site_whatsapp', '');
 $lat     = (string)ru_setting('contact_lat', '37.8746');
 $lng     = (string)ru_setting('contact_lng', '32.4932');
+$selectedType = (string)($_GET['type'] ?? '');
 ?>
 
 <section class="page-hero">
   <div class="page-hero__overlay"></div>
   <div class="container page-hero__inner">
     <h1 class="page-hero__title">İletişim</h1>
-    <p class="page-hero__sub">Bize ulaşın, sorularınız, teklif istekleriniz ve bayilik başvurularınız için buradayız.</p>
+    <p class="page-hero__sub">Ürün teklifi, tedarikçi başvurusu, ikinci el ilanı ve servis talepleriniz için buradayız.</p>
   </div>
 </section>
 
@@ -131,11 +132,12 @@ ru_partial('breadcrumb', [
           <div class="form-group">
             <label>Konu</label>
             <select name="type">
-              <option value="contact">Genel Bilgi</option>
-              <option value="quote">Ürün Teklifi</option>
-              <option value="dealer">Bayilik Başvurusu</option>
-              <option value="service">Teknik Servis</option>
-              <option value="used">2. El Başvurusu</option>
+              <option value="contact" <?= $selectedType === 'contact' ? 'selected' : '' ?>>Genel Bilgi</option>
+              <option value="quote" <?= $selectedType === 'quote' ? 'selected' : '' ?>>Ürün Teklifi</option>
+              <option value="supplier" <?= $selectedType === 'supplier' ? 'selected' : '' ?>>Tedarikçi / Firma Başvurusu</option>
+              <option value="dealer" <?= $selectedType === 'dealer' ? 'selected' : '' ?>>Bayilik Başvurusu</option>
+              <option value="service" <?= $selectedType === 'service' ? 'selected' : '' ?>>Teknik Servis</option>
+              <option value="used" <?= $selectedType === 'used' ? 'selected' : '' ?>>2. El Başvurusu</option>
             </select>
           </div>
           <input type="hidden" name="subject" value="Web sitesi iletişim formu">

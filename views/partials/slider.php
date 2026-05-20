@@ -8,24 +8,24 @@ declare(strict_types=1);
 $slides = $slides ?? [];
 if (empty($slides)) {
     // Fallback hero — slider hiç yoksa veya hepsi pasif ise
-    $heroTitle    = (string)ru_setting('hero_title', 'Toprağın gücünü teknolojiyle buluşturuyoruz');
-    $heroSub      = (string)ru_setting('hero_subtitle', '');
-    $ctaPriText   = (string)ru_setting('hero_cta_primary_text', 'Ürünler');
+    $heroTitle    = (string)ru_setting('hero_title', 'Tarım makinelerinde çok markalı satış platformu');
+    $heroSub      = (string)ru_setting('hero_subtitle', 'Yeni, ikinci el, yedek parça ve servis ihtiyaçlarını güvenilir tedarikçilerden tek merkezde topluyoruz.');
+    $ctaPriText   = (string)ru_setting('hero_cta_primary_text', 'Ürünleri karşılaştır');
     $ctaPriUrl    = (string)ru_setting('hero_cta_primary_url', '/urunler');
-    $ctaSecText   = (string)ru_setting('hero_cta_secondary_text', 'İletişim');
-    $ctaSecUrl    = (string)ru_setting('hero_cta_secondary_url', '/iletisim');
+    $ctaSecText   = (string)ru_setting('hero_cta_secondary_text', 'Tedarikçi başvurusu');
+    $ctaSecUrl    = (string)ru_setting('hero_cta_secondary_url', '/tedarikci-basvurusu');
 ?>
 <section class="hero hero--fallback" aria-label="Hero">
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__content hero__content--left">
-      <span class="hero__badge">RAYU Tarım Makineleri</span>
+      <span class="hero__badge">RAYU Tarım Pazaryeri</span>
       <h1 class="hero__title"><?= h($heroTitle) ?></h1>
       <?php if ($heroSub): ?><p class="hero__sub"><?= h($heroSub) ?></p><?php endif; ?>
       <div class="hero__metrics" aria-label="Kurumsal kapsam">
-        <span><strong>50+</strong> ilde hizmet</span>
-        <span><strong>200+</strong> bayi ve servis noktası</span>
-        <span><strong>10K+</strong> üretici deneyimi</span>
+        <span><strong>Çoklu</strong> marka teklifi</span>
+        <span><strong>81</strong> ile açık tedarik ağı</span>
+        <span><strong>Tek</strong> talep, çok seçenek</span>
       </div>
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="<?= h($ctaPriUrl) ?>"><?= h($ctaPriText) ?></a>

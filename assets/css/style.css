@@ -84,6 +84,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+.site-main { min-height: 58vh; }
 h1, h2, h3, h4, h5, h6 { margin: 0; line-height: 1.2; letter-spacing: 0; font-weight: 700; }
 p { margin: 0 0 1rem; }
 a { color: var(--c-primary); text-decoration: none; transition: color var(--t-fast); }
@@ -268,6 +269,7 @@ input, select, textarea { font: inherit; }
   border-radius: var(--radius-sm);
   position: relative;
   transition: all var(--t-fast);
+  white-space: nowrap;
 }
 .main-nav__link::after {
   content: "";
@@ -496,6 +498,10 @@ input, select, textarea { font: inherit; }
   margin: 0 0 2rem;
   max-width: 540px;
 }
+@media (min-width: 981px) and (max-width: 1160px) {
+  .brand__logo, .brand__logo--default { max-height: 50px; min-width: 180px; }
+  .main-nav__link { padding-inline: .65rem; font-size: .9rem; }
+}
 .hero__metrics {
   display: flex;
   flex-wrap: wrap;
@@ -627,6 +633,47 @@ input, select, textarea { font: inherit; }
   .trust-strip__inner { grid-template-columns: 1fr; }
   .trust-strip__inner div { border-right: 0; border-bottom: 1px solid var(--c-border); }
   .trust-strip__inner div:last-child { border-bottom: 0; }
+}
+
+.market-command {
+  background: var(--c-bg-darker);
+  color: var(--c-text-light);
+  padding: 3.2rem 0;
+}
+.market-command__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+  gap: 3rem;
+  align-items: center;
+}
+.market-command h2 {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+.market-command p { color: var(--c-text-light-soft); font-size: 1.05rem; max-width: 720px; }
+.market-command__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .8rem;
+}
+.market-command__stats article {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  border-radius: var(--radius-sm);
+  padding: 1.2rem;
+}
+.market-command__stats strong {
+  display: block;
+  color: #fff;
+  font-size: 1.45rem;
+}
+.market-command__stats span { display: block; color: var(--c-text-light-soft); margin-top: .3rem; }
+@media (max-width: 900px) {
+  .market-command__inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .market-command__stats { grid-template-columns: 1fr; }
 }
 .features__grid {
   display: grid;
@@ -829,6 +876,19 @@ input, select, textarea { font: inherit; }
   font-weight: 700;
 }
 .product-card__body { padding: 1.25rem; }
+.product-card__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: .2rem .55rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: var(--c-bg-soft);
+  color: var(--c-primary);
+  font-size: .72rem;
+  font-weight: 800;
+  margin-bottom: .65rem;
+}
 .product-card h3 { color: var(--c-primary-dark); font-size: 1.15rem; margin-bottom: .55rem; }
 .product-card p { color: var(--c-text-soft); font-size: .94rem; line-height: 1.55; }
 .product-card ul {
@@ -852,6 +912,78 @@ input, select, textarea { font: inherit; }
   color: var(--c-primary);
   font-weight: 800;
   font-size: .92rem;
+}
+
+.brand-network { background: #fff; }
+.network-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.network-grid article {
+  min-height: 170px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, #fff, var(--c-bg-soft));
+  padding: 1.25rem;
+}
+.network-grid strong {
+  display: block;
+  color: var(--c-primary-dark);
+  font-size: 1.05rem;
+  margin-bottom: .55rem;
+}
+.network-grid span { color: var(--c-text-soft); font-size: .92rem; line-height: 1.5; }
+.brand-network__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.6rem; }
+@media (max-width: 980px) { .network-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .network-grid { grid-template-columns: 1fr; } }
+
+.catalog-intro {
+  background: var(--c-bg-soft);
+  border-bottom: 1px solid var(--c-border);
+}
+.catalog-intro__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.catalog-intro article {
+  padding: 1.2rem 1.4rem;
+  border-right: 1px solid var(--c-border);
+}
+.catalog-intro article:last-child { border-right: 0; }
+.catalog-intro strong { display: block; color: var(--c-primary-dark); }
+.catalog-intro span { display: block; color: var(--c-text-soft); font-size: .9rem; line-height: 1.45; margin-top: .25rem; }
+.procurement-flow__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.procurement-flow__grid article {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+.procurement-flow__grid span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #fff;
+  font-weight: 900;
+  margin-bottom: .9rem;
+}
+.procurement-flow__grid strong { display: block; color: var(--c-primary-dark); margin-bottom: .45rem; }
+.procurement-flow__grid p { color: var(--c-text-soft); font-size: .92rem; margin: 0; }
+@media (max-width: 980px) {
+  .catalog-intro__grid, .procurement-flow__grid { grid-template-columns: 1fr 1fr; }
+  .catalog-intro article { border-right: 0; border-bottom: 1px solid var(--c-border); }
+}
+@media (max-width: 560px) {
+  .catalog-intro__grid, .procurement-flow__grid { grid-template-columns: 1fr; }
 }
 
 .corporate-flow__inner,
@@ -1330,7 +1462,7 @@ input, select, textarea { font: inherit; }
 }
 .maintenance__contact { gap: 2rem; color: var(--c-text-soft); font-size: 1rem; }
 
-.page-404 { padding: 5rem 0; min-height: 60vh; display: flex; align-items: center; }
+.page-404 { padding: 4rem 0; min-height: 58vh; display: flex; align-items: center; }
 .page-404__inner { text-align: center; }
 .page-404__num {
   font-family: var(--f-display);
@@ -1359,6 +1491,7 @@ input, select, textarea { font: inherit; }
   background: var(--c-bg-darker);
   color: var(--c-text-light-soft);
   padding-top: 3.5rem;
+  clear: both;
 }
 .site-footer__top {
   display: grid;

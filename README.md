@@ -9,12 +9,14 @@ Kurumsal tarım makineleri, zirai ilaçlama, yedek parça, servis ve ikinci el g
 
 ## Kapsam
 
-v0.6.9 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı, Türkçe metin standardı ve anlaşılır Smart Update ekranı kurumsal satış seviyesine taşındı:
+v0.7.0 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı, Türkçe metin standardı, anlaşılır Smart Update ekranı ve çok markalı pazaryeri konumlandırması kurumsal satış seviyesine taşındı:
 
 - Temiz SVG marka seti: `assets/img/logo.svg`
 - Kurumsal anasayfa: güven bandı, ürün grupları, öne çıkan ürünler, servis süreci
 - Katalog rotaları: `/urunler`, `/urunler/toprak-isleme`, `/urunler/ekim-dikim`, `/urunler/ilaclama`, `/urunler/yedek-parca`
 - 2. el güven sayfası: `/ikinci-el`
+- Marka ve tedarik ağı: `/markalar`
+- Tedarikçi/firma başvurusu: `/tedarikci-basvurusu`
 - Admin panel: `/admin/login.php`
 - Boş kullanıcı tablosu için token korumalı ilk admin kurtarma: `/admin/recover.php`
 - Ürün, kategori, sayfa, slider, menü, ayar, kullanıcı ve talep yönetimi
@@ -24,6 +26,7 @@ v0.6.9 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı, Tür
 - 2. el bölümü için premium ekspertiz ve güven pazarı sunumu
 - Aktif iletişim/teklif formu: kayıtlar admin panelde `Talepler` ekranına düşer
 - Smart Update v5: Release/tag sürüm karşılaştırması, ZIP indirme, yedek, korunan dosyalar, migration runner
+- Kritik kurumsal sayfalar için DB boş olsa bile çalışan fallback içerik
 
 ## Kurulum
 

@@ -89,7 +89,7 @@ function ru_dispatch(): void
     // ─────────────────────────────────────────────────────────────
     http_response_code(404);
     ru_render('404', [
-        'page_title' => 'Sayfa Bulunamadi',
+        'page_title' => 'Sayfa Bulunamadı',
         'page_class' => 'page-404',
     ]);
 }
@@ -159,9 +159,10 @@ function ru_handle_products(string $category = ''): void
     if ($category !== '' && !isset($categories[$category])) {
         http_response_code(404);
         ru_render('404', [
-            'page_title' => 'Kategori Bulunamadi',
+            'page_title' => 'Kategori Bulunamadı',
             'page_class' => 'page-404',
         ]);
+        return;
     }
 
     ru_render('products', [
@@ -215,6 +216,13 @@ function ru_handle_sitemap(): never
         }
     } catch (Throwable) {
         // Kurulum anında DB erişimi yoksa çekirdek URL'ler yeterlidir.
+    }
+    foreach (array_keys(ru_static_pages()) as $slug) {
+        $urls[] = [
+            'loc' => '/' . $slug,
+            'priority' => in_array($slug, ['hakkimizda', 'markalar', 'tedarikci-basvurusu'], true) ? '0.8' : '0.6',
+            'changefreq' => 'monthly',
+        ];
     }
 
     $seen = [];

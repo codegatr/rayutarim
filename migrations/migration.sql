@@ -649,3 +649,81 @@ INSERT IGNORE INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_acti
   ('footer_3', 'Çerez Politikası', '/cerez-politikasi', 5, 1);
 UPDATE `ru_menu` SET `label` = 'Gizlilik Politikası' WHERE `url` = '/gizlilik';
 UPDATE `ru_menu` SET `label` = 'KVKK Aydınlatma Metni' WHERE `url` = '/kvkk';
+
+-- ============================================================================
+-- FAZ 7 — Çok markalı pazaryeri omurgası (v0.7.0)
+-- ============================================================================
+
+INSERT INTO `ru_settings` (`skey`, `sval`, `updated_at`) VALUES
+  ('site_name', 'RAYU Tarım Pazaryeri', NOW()),
+  ('site_tagline', 'Tarım makinelerinde çok markalı satış ve tedarik platformu', NOW()),
+  ('hero_title', 'Tarım makinelerinde çok markalı satış platformu', NOW()),
+  ('hero_subtitle', 'Yeni, ikinci el, yedek parça ve servis ihtiyaçlarını güvenilir tedarikçilerden tek merkezde topluyoruz.', NOW()),
+  ('hero_cta_primary_text', 'Ürünleri karşılaştır', NOW()),
+  ('hero_cta_primary_url', '/urunler', NOW()),
+  ('hero_cta_secondary_text', 'Tedarikçi başvurusu', NOW()),
+  ('hero_cta_secondary_url', '/tedarikci-basvurusu', NOW()),
+  ('seo_default_description', 'RAYU Tarım; traktör, tarım makineleri, zirai ilaçlama ekipmanları, yedek parça, servis ve ikinci el ürünlerde çok markalı satış platformudur.', NOW()),
+  ('footer_about', 'RAYU Tarım; üretici, bayi, ithalatçı ve çiftçiyi aynı kurumsal satış akışında buluşturan çok markalı tarım pazaryeri platformudur.', NOW())
+ON DUPLICATE KEY UPDATE `sval` = VALUES(`sval`), `updated_at` = NOW();
+
+INSERT INTO `ru_pages` (`slug`, `title`, `subtitle`, `excerpt`, `content`, `meta_description`, `template`, `sort_order`, `is_active`, `show_in_header`, `show_in_footer`)
+VALUES
+  ('markalar', 'Markalar ve Tedarik Ağı', 'Farklı firmaların ürünlerini tek satış standardında buluşturuyoruz', 'RAYU Tarım markalar ve tedarik ağı.', '<p>RAYU Tarım; yerli üreticiler, ithalatçılar, bölge bayileri, yedek parça tedarikçileri ve ikinci el makine sahipleri için tek merkezli satış kanalı oluşturur.</p><h2>Platforma alınan ürün grupları</h2><ul><li>Traktör ve güç ekipmanları</li><li>Toprak işleme, ekim, gübreleme ve hasat ekipmanları</li><li>Zirai ilaçlama makineleri ve uygulama ekipmanları</li><li>Yedek parça, sarf malzeme ve servis paketleri</li><li>Ekspertizli ikinci el tarım makineleri</li></ul><h2>Nasıl çalışır?</h2><p>Tedarikçi ürününü, teknik bilgisini ve ticari şartlarını iletir. RAYU ekibi ürün sınıflandırmasını, satış metnini, talep akışını ve teklif yönetimini kurumsal standartla yönetir.</p><p><a class="btn btn--primary" href="/tedarikci-basvurusu">Tedarikçi başvurusu yap</a></p>', 'RAYU Tarım markalar ve tedarik ağı: tarım makineleri, ekipman, yedek parça ve ikinci el ürünlerde çok markalı satış platformu.', 'default', 7, 1, 1, 1),
+  ('tedarikci-basvurusu', 'Tedarikçi Başvurusu', 'Ürünlerinizi RAYU satış ağına dahil edin', 'Tarım firmaları için tedarikçi başvuru sayfası.', '<p>Tarım makinesi, ekipman, yedek parça, zirai uygulama teknolojisi veya ikinci el ürün portföyünüz varsa RAYU satış ağına başvurabilirsiniz.</p><h2>Kimler başvurabilir?</h2><ul><li>Üretici ve ithalatçı firmalar</li><li>Bölge bayileri ve distribütörler</li><li>Servis ve yedek parça tedarikçileri</li><li>Kurumsal ikinci el makine satıcıları</li></ul><h2>Başvuru için gereken bilgiler</h2><p>Firma adı, şehir, ürün grupları, marka bilgisi, garanti/servis koşulları, teslimat bölgeleri ve satış temsilcisi iletişim bilgileri yeterlidir.</p><p><a class="btn btn--primary" href="/iletisim?type=supplier">Başvuru formuna git</a></p>', 'Tarım makineleri, ekipman ve yedek parça firmaları için RAYU Tarım tedarikçi başvuru sayfası.', 'default', 8, 1, 0, 1)
+ON DUPLICATE KEY UPDATE
+  `title` = VALUES(`title`),
+  `subtitle` = VALUES(`subtitle`),
+  `excerpt` = VALUES(`excerpt`),
+  `content` = VALUES(`content`),
+  `meta_description` = VALUES(`meta_description`),
+  `is_active` = VALUES(`is_active`),
+  `show_in_header` = VALUES(`show_in_header`),
+  `show_in_footer` = VALUES(`show_in_footer`),
+  `updated_at` = NOW();
+
+UPDATE `ru_pages` SET
+  `subtitle` = 'Tarım ekipmanlarında çok markalı satış ve danışmanlık ağı',
+  `meta_description` = 'RAYU Tarım, tarım makineleri, zirai ilaçlama ekipmanları, yedek parça ve ikinci el ürünlerde çok markalı kurumsal satış platformudur.',
+  `content` = '<p>RAYU Tarım, tek bir üretici vitrini olmak yerine üretici, bayi, ithalatçı ve çiftçiyi aynı ticari akışta buluşturan çok markalı tarım satış platformu olarak konumlanır.</p><p>Amacımız; traktörden toprağa, ilaçlamadan hasada, yedek parçadan ikinci ele kadar üreticinin ihtiyacını doğru marka, doğru fiyat, doğru teslimat ve doğru servis güvencesiyle karşılamaktır.</p><h2>Çalışma modelimiz</h2><p>Ürün talebini teknik ihtiyaç, bölge, sezon, bütçe ve servis erişimiyle birlikte değerlendirir; uygun firmalardan teklifleri toplar, karşılaştırır ve satın alma kararını netleştiririz.</p><h2>RAYU farkı</h2><ul><li>Çok markalı ürün havuzu</li><li>Tedarikçi ve bayi başvuru altyapısı</li><li>Kurumsal teklif ve talep yönetimi</li><li>Yeni, ikinci el, yedek parça ve servis akışının tek çatı altında toplanması</li></ul>'
+WHERE `slug` = 'hakkimizda';
+
+UPDATE `ru_pages` SET
+  `subtitle` = 'Tarım ticaretinde güvenilir aracı kurum standardı',
+  `content` = '<h2>Misyonumuz</h2><p>Çiftçinin doğru ürüne, üreticinin doğru müşteriye, bayinin doğru satış kanalına ulaşmasını sağlayan şeffaf ve güvenilir bir tarım ticareti altyapısı kurmak.</p><h2>Vizyonumuz</h2><p>Türkiye genelinde tarım makineleri, zirai ilaçlama ekipmanları, yedek parça, servis ve ikinci el satışında ilk akla gelen çok markalı kurumsal platform olmak.</p><h2>İlkelerimiz</h2><ul><li>Markalar arası şeffaf karşılaştırma</li><li>Belgelendirilebilir teklif ve teslimat süreci</li><li>Satış sonrası servis ve parça sürekliliği</li><li>Üretici, bayi ve çiftçi için kazan-kazan modeli</li></ul>'
+WHERE `slug` = 'misyon-vizyon';
+
+UPDATE `ru_product_categories` SET `summary` = 'Farklı üreticilerden pulluk, kültivatör, çizel, merdane ve tarla hazırlık ekipmanları.' WHERE `slug` = 'toprak-isleme';
+UPDATE `ru_product_categories` SET `summary` = 'Hassas ekim makineleri, mibzerler, dikim makineleri ve gübre üniteleri.' WHERE `slug` = 'ekim-dikim';
+UPDATE `ru_product_categories` SET `summary` = 'Pülverizatör, atomizör, drone destekli uygulama ve doğru ilaçlama ekipmanları.' WHERE `slug` = 'ilaclama';
+UPDATE `ru_product_categories` SET `summary` = 'Markaya göre yedek parça, sarf malzeme, servis paketi ve bakım planlama.' WHERE `slug` = 'yedek-parca';
+
+INSERT IGNORE INTO `ru_product_categories` (`slug`, `title`, `summary`, `icon`, `sort_order`, `is_active`) VALUES
+  ('traktor-ekipman', 'Traktör & Güç Ekipmanları', 'Traktör, ön yükleyici, kuyruk mili ekipmanları ve güç aktarım çözümleri.', 'M3 13h2l2-4h10l2 4h2a3 3 0 0 1 3 3v2h2a3 3 0 0 1 3-3z', 1, 1),
+  ('hasat', 'Hasat & Paketleme', 'Hasat makineleri, balya, römork, taşıma ve paketleme çözümleri.', 'M4 17h16v2H4v-2zm2-4h12m-9 4h6m-6 4h4z', 5, 1);
+
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'traktor-on-yukleyici-paketi', 'Traktör & Ön Yükleyici Paketi', 'Yeni / stok', 'Bölgesel bayi stokları, finansman seçenekleri ve ekipman uyumu birlikte değerlendirilir.', 'Traktör ve güç ekipmanları için çok markalı teklif dosyası hazırlanır.', '["50-120 HP","Ataşman seçimi","Teslimat planı"]', 1, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'traktor-ekipman';
+INSERT IGNORE INTO `ru_products` (`category_id`, `slug`, `name`, `badge`, `summary`, `description`, `specs_json`, `sort_order`, `is_featured`, `is_active`)
+SELECT c.id, 'balya-tasima-cozumleri', 'Balya & Taşıma Çözümleri', 'Sezon teslimi', 'Balya, römork ve taşıma ekipmanlarında stok, servis ve yedek parça karşılaştırması.', 'Hasat dönemine uygun teslimat ve servis kapsamıyla değerlendirilir.', '["Balya","Römork","Servis kapsamı"]', 1, 1, 1 FROM `ru_product_categories` c WHERE c.slug = 'hasat';
+
+UPDATE `ru_products` SET `badge` = 'Karşılaştırmalı teklif', `summary` = 'Derin patlatma için farklı üretici seçenekleri, HP uyumu ve teslimat karşılaştırması.' WHERE `slug` = 'agir-tip-cizel';
+UPDATE `ru_products` SET `summary` = 'Anız parçalama ve homojen karıştırma için uygun marka ve disk geometrisi seçimi.' WHERE `slug` = 'diskli-goble';
+UPDATE `ru_products` SET `summary` = 'Tohum aralığı kontrolü, gübre ünitesi ve sezonluk kalibrasyon destekli marka seçimi.' WHERE `slug` = 'pnomatik-hassas-ekim';
+UPDATE `ru_products` SET `summary` = 'Dengeli bom yapısı, nozul seçenekleri ve uygulama standardına göre teklif.' WHERE `slug` = 'asilir-tip-pulverizator';
+
+INSERT INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`)
+SELECT 'header', 'Markalar', '/markalar', 4, 1
+WHERE NOT EXISTS (SELECT 1 FROM `ru_menu` WHERE `location` = 'header' AND `url` = '/markalar');
+INSERT INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`)
+SELECT 'footer_1', 'Markalar', '/markalar', 3, 1
+WHERE NOT EXISTS (SELECT 1 FROM `ru_menu` WHERE `location` = 'footer_1' AND `url` = '/markalar');
+INSERT INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`)
+SELECT 'footer_1', 'Tedarikçi Başvurusu', '/tedarikci-basvurusu', 4, 1
+WHERE NOT EXISTS (SELECT 1 FROM `ru_menu` WHERE `location` = 'footer_1' AND `url` = '/tedarikci-basvurusu');
+INSERT INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`)
+SELECT 'footer_2', 'Traktör & Ekipman', '/urunler/traktor-ekipman', 2, 1
+WHERE NOT EXISTS (SELECT 1 FROM `ru_menu` WHERE `location` = 'footer_2' AND `url` = '/urunler/traktor-ekipman');
+INSERT INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`)
+SELECT 'footer_2', 'Hasat & Paketleme', '/urunler/hasat', 5, 1
+WHERE NOT EXISTS (SELECT 1 FROM `ru_menu` WHERE `location` = 'footer_2' AND `url` = '/urunler/hasat');

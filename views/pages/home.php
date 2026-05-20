@@ -13,9 +13,25 @@ $products = array_slice(ru_catalog_products(), 0, 3);
 
 <section class="trust-strip" aria-label="Kurumsal guven">
   <div class="container trust-strip__inner">
-    <div><strong>Türkiye geneli satış</strong><span>Bölge, ürün deseni ve traktör gücüne göre doğru ekipman seçimi.</span></div>
-    <div><strong>Satış sonrası destek</strong><span>Yedek parça, servis kaydı ve sezon öncesi bakım planı.</span></div>
-    <div><strong>Kurumsal teklif süreci</strong><span>Teklif, termin, teslimat ve eğitim adımları tek dosyada izlenir.</span></div>
+    <div><strong>Çok markalı ürün havuzu</strong><span>Üretici, ithalatçı, bayi ve ikinci el satıcılarını tek satış akışında toplar.</span></div>
+    <div><strong>Tek talep, çok teklif</strong><span>Bölge, bütçe, traktör gücü ve termin ihtiyacına göre seçenekler karşılaştırılır.</span></div>
+    <div><strong>Satış sonrası takip</strong><span>Yedek parça, servis, garanti ve teslimat bilgileri aynı dosyada izlenir.</span></div>
+  </div>
+</section>
+
+<section class="market-command">
+  <div class="container market-command__inner">
+    <div>
+      <span class="section__eyebrow">Aracı Kurum Modeli</span>
+      <h2>Tarım makinelerinde alıcı ile firmayı doğru noktada buluşturuyoruz</h2>
+      <p>RAYU; sadece kendi ürününü anlatan bir web sitesi değil, çiftçinin ihtiyacını tedarikçi ağıyla eşleştiren kurumsal satış merkezidir. Ürün, marka, fiyat, teslimat, servis ve yedek parça aynı satın alma dosyasında değerlendirilir.</p>
+    </div>
+    <div class="market-command__stats">
+      <article><strong>Yeni</strong><span>Makine ve ekipman</span></article>
+      <article><strong>2. El</strong><span>Ekspertizli ilan akışı</span></article>
+      <article><strong>Parça</strong><span>Marka uyumlu tedarik</span></article>
+      <article><strong>Servis</strong><span>Bölgesel destek planı</span></article>
+    </div>
   </div>
 </section>
 
@@ -50,8 +66,8 @@ $products = array_slice(ru_catalog_products(), 0, 3);
   <div class="container">
     <header class="section__head">
       <span class="section__eyebrow">Ürün Grupları</span>
-      <h2 class="section__title">Makine, ilaçlama ve servis aynı kurumsal çatı altında</h2>
-      <p class="section__lead">Sadece ürün listeleyen bir site değil; çiftçinin sezon kararını hızlandıran, bayilik ve filo satışını destekleyen bir satış platformu.</p>
+      <h2 class="section__title">Bir markaya sıkışmayan, ihtiyaca göre ürün seçen satış yapısı</h2>
+      <p class="section__lead">Traktör, ekipman, ilaçlama, hasat, yedek parça ve ikinci el seçenekleri tek talep formunda toplanır; uygun firmalarla eşleştirilir.</p>
     </header>
 
     <div class="category-suite__grid">
@@ -86,6 +102,7 @@ $products = array_slice(ru_catalog_products(), 0, 3);
             <span><?= h($product['badge']) ?></span>
           </div>
           <div class="product-card__body">
+            <div class="product-card__brand"><?= h((string)($product['brand'] ?? 'RAYU tedarik ağı')) ?></div>
             <h3><?= h($product['name']) ?></h3>
             <p><?= h($product['summary']) ?></p>
             <ul>
@@ -99,22 +116,44 @@ $products = array_slice(ru_catalog_products(), 0, 3);
   </div>
 </section>
 
+<section class="section brand-network">
+  <div class="container">
+    <div class="section-split">
+      <div>
+        <span class="section__eyebrow">Marka ve Firma Ağı</span>
+        <h2 class="section__title">Üretici, bayi ve ithalatçı için satış kanalı</h2>
+      </div>
+      <p class="section__lead">RAYU tarafsız bir ürün vitrini kurar: firmalar ürünlerini ekler, alıcılar tek yerden talep oluşturur, satış ekibi teknik karşılaştırmayı yönetir.</p>
+    </div>
+    <div class="network-grid">
+      <article><strong>Üreticiler</strong><span>Yerli tarım makineleri ve ekipman portföyleri</span></article>
+      <article><strong>İthalatçılar</strong><span>Türkiye dağıtımı, stok ve teslimat planı</span></article>
+      <article><strong>Bölge Bayileri</strong><span>Şehir bazlı fiyat, servis ve sevkiyat avantajı</span></article>
+      <article><strong>Servis & Parça</strong><span>Marka uyumlu yedek parça ve bakım paketleri</span></article>
+    </div>
+    <div class="brand-network__cta">
+      <a class="btn btn--primary btn--lg" href="/tedarikci-basvurusu">Firma olarak başvur</a>
+      <a class="btn btn--ghost btn--lg" href="/markalar">Marka ağını incele</a>
+    </div>
+  </div>
+</section>
+
 <section class="section corporate-flow">
   <div class="container corporate-flow__inner">
     <div>
       <span class="section__eyebrow">Kurumsal Yapı</span>
       <h2 class="section__title">Satıştan servise kadar ölçülebilir operasyon</h2>
-      <p class="section__lead">RAYU Tarım Makineleri; ürün danışmanlığı, bölgesel bayi yönetimi, servis planlama ve yedek parça tedariğini tek süreçte toplar.</p>
+      <p class="section__lead">RAYU; ürün danışmanlığı, tedarikçi yönetimi, fiyat karşılaştırma, teslimat, servis planlama ve yedek parça tedariğini tek süreçte toplar.</p>
       <div class="about-strip__cta">
         <a class="btn btn--primary btn--lg" href="/hakkimizda">Kurumsal profili gör</a>
-        <a class="btn btn--ghost btn--lg" href="/iletisim">Bayilik başvurusu</a>
+        <a class="btn btn--ghost btn--lg" href="/tedarikci-basvurusu">Tedarikçi başvurusu</a>
       </div>
     </div>
     <div class="process-list">
-      <article><span>01</span><strong>İhtiyaç analizi</strong><p>Toprak yapısı, ekim deseni, traktör gücü ve bütçe birlikte değerlendirilir.</p></article>
-      <article><span>02</span><strong>Teknik teklif</strong><p>Ürün, opsiyon, termin, teslimat ve eğitim kapsamı net dokümante edilir.</p></article>
-      <article><span>03</span><strong>Teslimat ve eğitim</strong><p>Saha kurulumu, operatör kullanımı ve ilk bakım kontrolleri planlanır.</p></article>
-      <article><span>04</span><strong>Servis yaşam döngüsü</strong><p>Yedek parça ve periyodik bakım takibiyle sezon kaybı azaltılır.</p></article>
+      <article><span>01</span><strong>Talep toplama</strong><p>Alıcının şehir, ürün, bütçe, traktör gücü ve teslimat beklentisi alınır.</p></article>
+      <article><span>02</span><strong>Tedarikçi eşleştirme</strong><p>Uygun üretici, bayi, ithalatçı veya ikinci el satıcıları belirlenir.</p></article>
+      <article><span>03</span><strong>Karşılaştırmalı teklif</strong><p>Fiyat, garanti, servis, teslimat ve opsiyonlar tek dosyada sunulur.</p></article>
+      <article><span>04</span><strong>Satış sonrası kayıt</strong><p>Teslimat, servis ve yedek parça süreci takip edilir.</p></article>
     </div>
   </div>
 </section>
@@ -122,8 +161,8 @@ $products = array_slice(ru_catalog_products(), 0, 3);
 <section class="cta-band">
   <div class="container cta-band__inner">
     <div>
-      <h2 class="cta-band__title">Yeni sezon için doğru ekipmanı birlikte seçelim</h2>
-      <p class="cta-band__sub">Teknik ekibimiz işletmenizin büyüklüğüne, ürün desenine ve çalışma takviminize göre makine ve ilaçlama programını planlar.</p>
+      <h2 class="cta-band__title">Tek talep bırakın, uygun firmaları sizin için karşılaştıralım</h2>
+      <p class="cta-band__sub">Makine, ekipman, yedek parça veya ikinci el ihtiyacınızı iletin; RAYU satış ekibi marka, fiyat, servis ve teslimat seçeneklerini netleştirsin.</p>
     </div>
     <div class="cta-band__actions">
       <a class="btn btn--primary btn--lg" href="/iletisim">Teklif alın</a>

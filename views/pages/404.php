@@ -8,13 +8,14 @@ declare(strict_types=1);
   <div class="container container--narrow">
     <div class="page-404__inner">
       <div class="page-404__num">404</div>
-      <h1 class="page-404__title">Aradiginiz sayfa bulunamadi</h1>
+      <h1 class="page-404__title">Aradığınız sayfa bulunamadı</h1>
       <p class="page-404__text">
-        Adres yanlis yazilmis olabilir, sayfa tasinmis ya da kaldirilmis olabilir.
-        Endiselenmeyin, asagidaki yollardan biriyle devam edebilirsiniz:
+        Adres yanlış yazılmış olabilir ya da sayfa taşınmış olabilir.
+        Tarım makineleri, marka ağı ve tedarikçi başvurusu sayfalarından devam edebilirsiniz.
       </p>
       <div class="page-404__cta">
-        <a class="btn btn--primary btn--lg" href="/">Anasayfaya Don</a>
+        <a class="btn btn--primary btn--lg" href="/urunler">Ürünleri İncele</a>
+        <a class="btn btn--ghost btn--lg" href="/markalar">Markalar</a>
         <a class="btn btn--ghost btn--lg" href="/iletisim">Bize Ulaşın</a>
       </div>
     </div>

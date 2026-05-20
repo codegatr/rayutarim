@@ -24,7 +24,8 @@ $fullTitle   = isset($page_title) && $page_title !== null && $page_title !== ''
     : $titleSuffix;
 
 $ogImage = !empty($page_og_image) ? ru_upload_url($page_og_image) : '/assets/img/og-default.jpg';
-$canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER['REQUEST_URI'] ?? '/');
+$canonicalPath = strtok((string)($_SERVER['REQUEST_URI'] ?? '/'), '?') ?: '/';
+$canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . $canonicalPath;
 ?><!doctype html>
 <html lang="tr">
 <head>

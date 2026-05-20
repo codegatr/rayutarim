@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "release_date": "2026-05-20",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -113,6 +113,12 @@
     },
     {
       "version": "0.7.0",
+      "title": "Çok Markalı Pazaryeri Omurgası",
+      "released": "2026-05-20",
+      "summary": "RAYU aracı kurum konumlandırması, tedarikçi başvurusu, marka ağı, kritik sayfa fallbackleri ve katalog satın alma akışı"
+    },
+    {
+      "version": "0.8.0",
       "title": "Uluslararasılaşma (i18n)",
       "released": null,
       "summary": "TR/EN/AR/RU dil sistemi, çevrilebilir alanlar, locale switcher, slug i18n"
