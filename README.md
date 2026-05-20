@@ -17,6 +17,7 @@ v0.7.0 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı, Tür
 - 2. el güven sayfası: `/ikinci-el`
 - Marka ve tedarik ağı: `/markalar`
 - Tedarikçi/firma başvurusu: `/tedarikci-basvurusu`
+- Güncel pazar perspektifi: `/sektor-analizi`
 - Admin panel: `/admin/login.php`
 - Boş kullanıcı tablosu için token korumalı ilk admin kurtarma: `/admin/recover.php`
 - Ürün, kategori, sayfa, slider, menü, ayar, kullanıcı ve talep yönetimi

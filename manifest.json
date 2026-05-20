@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "release_date": "2026-05-20",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -122,6 +122,12 @@
       "title": "Smart Update Migration Runner",
       "released": "2026-05-20",
       "summary": "Smart Update migration dosyasını statement bazlı çalıştırır, hata bağlamı verir ve ru_migrations kaydı yazar"
+    },
+    {
+      "version": "0.7.2",
+      "title": "Sektör Odaklı Kurumsal İçerikler",
+      "released": "2026-05-20",
+      "summary": "Eksik kurumsal sayfalar güncel tarım makineleri pazarı, çok markalı satış, tedarikçi ağı, kalite ve kariyer içerikleriyle dolduruldu"
     },
     {
       "version": "0.8.0",
