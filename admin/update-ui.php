@@ -23,7 +23,7 @@ ob_start();
 <section class="admin-panel">
   <div class="admin-panel__head"><h2>Smart Update v5</h2><a class="btn" href="/admin/update.php?action=check&token=<?= h((string)(ru_config('update.web_token') ?? '')) ?>" target="_blank">JSON Endpoint</a></div>
   <?php if ($error): ?><div class="admin-alert admin-alert--error"><?= h($error) ?></div><?php endif; ?>
-  <p>GitHub Release üzerinden son sürüm kontrol edilir, ZIP indirilir, yedek alınır ve korunan dosyalara dokunmadan güncelleme yapılır.</p>
+  <p>GitHub Release üzerinden son sürüm kontrol edilir. Release asset bulunamazsa en güncel GitHub tag ZIP arşivi kullanılır; ZIP indirilir, yedek alınır ve korunan dosyalara dokunmadan güncelleme yapılır.</p>
   <form method="post" class="admin-actions">
     <?= ru_csrf_field() ?>
     <button class="btn" name="action" value="check">Kontrol Et</button>

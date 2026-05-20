@@ -82,12 +82,55 @@ final class RuSmartUpdater
             $endpoint = 'https://api.github.com/repos/' . ru_repo() . '/releases/latest';
         }
 
-        $json = $this->httpGet($endpoint);
+        try {
+            $json = $this->httpGet($endpoint);
+        } catch (RuUpdateException $e) {
+            if (!str_contains($endpoint, '/releases/latest')) {
+                throw $e;
+            }
+            return $this->latestTagRelease();
+        }
+
         $data = json_decode($json, true);
         if (!is_array($data)) {
             throw new RuUpdateException('GitHub release yanıtı okunamadı.');
         }
         return $data;
+    }
+
+    private function latestTagRelease(): array
+    {
+        $json = $this->httpGet('https://api.github.com/repos/' . ru_repo() . '/tags');
+        $tags = json_decode($json, true);
+        if (!is_array($tags) || empty($tags[0]['name'])) {
+            throw new RuUpdateException('GitHub release bulunamadı ve tag listesi okunamadı.');
+        }
+
+        $latest = null;
+        foreach ($tags as $tag) {
+            $name = (string)($tag['name'] ?? '');
+            if ($name === '') {
+                continue;
+            }
+            if ($latest === null || version_compare(ltrim($name, 'v'), ltrim((string)$latest['name'], 'v'), '>')) {
+                $latest = $tag;
+            }
+        }
+        if (!$latest || empty($latest['zipball_url'])) {
+            throw new RuUpdateException('GitHub tag ZIP bağlantısı bulunamadı.');
+        }
+
+        $version = ltrim((string)$latest['name'], 'v');
+        return [
+            'tag_name' => (string)$latest['name'],
+            'name' => (string)$latest['name'] . ' source archive',
+            'published_at' => '',
+            'source' => 'tag',
+            'assets' => [[
+                'name' => 'github-source-' . $version . '.zip',
+                'browser_download_url' => (string)$latest['zipball_url'],
+            ]],
+        ];
     }
 
     private function selectAsset(array $release, string $version): ?array
@@ -103,6 +146,12 @@ final class RuSmartUpdater
             if (str_ends_with((string)($asset['name'] ?? ''), '.zip')) {
                 return $asset;
             }
+        }
+        if (!empty($release['zipball_url'])) {
+            return [
+                'name' => 'github-source-' . $version . '.zip',
+                'browser_download_url' => (string)$release['zipball_url'],
+            ];
         }
         return null;
     }

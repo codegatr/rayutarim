@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "release_date": "2026-05-20",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -98,6 +98,12 @@
       "title": "Kurumsal İçerik ve SEO",
       "released": "2026-05-20",
       "summary": "Eksik kurumsal sayfalar, ikinci el premium sunum, örnek slider görselleri, sitemap, robots ve Search Console uyumu"
+    },
+    {
+      "version": "0.6.8",
+      "title": "Smart Update Tag Fallback",
+      "released": "2026-05-20",
+      "summary": "GitHub Release asset yoksa en güncel tag ZIP arşivinden otomatik güncelleme"
     },
     {
       "version": "0.7.0",
