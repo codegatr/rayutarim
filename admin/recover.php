@@ -13,9 +13,10 @@ if ($count > 0) {
 }
 
 $appKey = (string)(ru_config('security.app_key') ?? '');
-$expectedToken = $appKey !== '' ? substr(hash('sha256', $appKey), 0, 24) : '';
+$expectedHash = $appKey !== '' ? hash('sha256', $appKey) : '';
+$expectedToken = $expectedHash !== '' ? substr($expectedHash, 0, 24) : '';
 $token = (string)($_GET['token'] ?? $_POST['token'] ?? '');
-$tokenOk = $expectedToken !== '' && hash_equals($expectedToken, $token);
+$tokenOk = $expectedToken !== '' && (hash_equals($expectedToken, $token) || hash_equals($expectedHash, $token));
 $error = '';
 
 if (!$tokenOk) {
@@ -23,8 +24,9 @@ if (!$tokenOk) {
     echo '<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Admin Kurtarma</title>';
     echo '<link rel="stylesheet" href="/admin/assets/admin.css"></head><body class="login-body">';
     echo '<div class="login-card"><img src="/assets/img/logo.svg" alt="RAYU"><h1>Kurtarma Tokeni Gerekli</h1>';
-    echo '<p><code>inc/config.php</code> içindeki <code>security.app_key</code> değerinin SHA-256 özetinin ilk 24 karakterini URL tokeni olarak girin.</p>';
-    echo '<p><code>/admin/recover.php?token=TOKEN</code></p></div></body></html>';
+    echo '<p><code>inc/config.php</code> içindeki <code>security.app_key</code> değerinin SHA-256 özetini URL tokeni olarak girin. Tam 64 karakterlik özet veya ilk 24 karakter kabul edilir.</p>';
+    echo '<p><code>/admin/recover.php?token=TOKEN</code></p>';
+    echo '<p>Not: Tokeni doğru yazmanıza rağmen bu ekran geliyorsa sunucudaki <code>admin/recover.php</code> dosyasını güncel paketle değiştirin.</p></div></body></html>';
     exit;
 }
 
