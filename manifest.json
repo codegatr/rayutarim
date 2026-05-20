@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "release_date": "2026-05-19",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -86,6 +86,12 @@
       "title": "Kurtarma Token Uyumu",
       "released": "2026-05-20",
       "summary": "Admin kurtarma ekranında tam SHA-256 tokeni veya ilk 24 karakteri kabul etme"
+    },
+    {
+      "version": "0.6.6",
+      "title": "Tek Kullanımlık Admin Kurtarma",
+      "released": "2026-05-20",
+      "summary": "Boş kullanıcı tablosunda tokensiz ilk superadmin oluşturma; kullanıcı varsa otomatik kapanma"
     },
     {
       "version": "0.7.0",

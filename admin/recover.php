@@ -12,23 +12,7 @@ if ($count > 0) {
     exit;
 }
 
-$appKey = (string)(ru_config('security.app_key') ?? '');
-$expectedHash = $appKey !== '' ? hash('sha256', $appKey) : '';
-$expectedToken = $expectedHash !== '' ? substr($expectedHash, 0, 24) : '';
-$token = (string)($_GET['token'] ?? $_POST['token'] ?? '');
-$tokenOk = $expectedToken !== '' && (hash_equals($expectedToken, $token) || hash_equals($expectedHash, $token));
 $error = '';
-
-if (!$tokenOk) {
-    http_response_code(403);
-    echo '<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Admin Kurtarma</title>';
-    echo '<link rel="stylesheet" href="/admin/assets/admin.css"></head><body class="login-body">';
-    echo '<div class="login-card"><img src="/assets/img/logo.svg" alt="RAYU"><h1>Kurtarma Tokeni Gerekli</h1>';
-    echo '<p><code>inc/config.php</code> içindeki <code>security.app_key</code> değerinin SHA-256 özetini URL tokeni olarak girin. Tam 64 karakterlik özet veya ilk 24 karakter kabul edilir.</p>';
-    echo '<p><code>/admin/recover.php?token=TOKEN</code></p>';
-    echo '<p>Not: Tokeni doğru yazmanıza rağmen bu ekran geliyorsa sunucudaki <code>admin/recover.php</code> dosyasını güncel paketle değiştirin.</p></div></body></html>';
-    exit;
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!ru_csrf_check()) {
@@ -72,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>İlk Admin Oluştur</h1>
     <?php if ($error): ?><div class="admin-alert admin-alert--error"><?= h($error) ?></div><?php endif; ?>
     <?= ru_csrf_field() ?>
-    <input type="hidden" name="token" value="<?= h($token) ?>">
+    <p style="margin-top:0;color:#667">Bu ekran yalnızca veritabanında hiç yönetici yokken çalışır. Hesabı oluşturduktan sonra <code>admin/recover.php</code> dosyasını silin.</p>
     <label>Ad Soyad<input name="full_name" required autofocus></label>
     <label>E-posta<input type="email" name="email" value="info@rayutarim.com" required></label>
     <label>Şifre<input type="password" name="password" required minlength="10"></label>
