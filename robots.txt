@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /inc/
+Disallow: /migrations/
+Disallow: /backups/
+Disallow: /logs/
+
+Sitemap: https://rayutarim.com/sitemap.xml

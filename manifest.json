@@ -3,8 +3,8 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.6.6",
-  "release_date": "2026-05-19",
+  "version": "0.6.7",
+  "release_date": "2026-05-20",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
   "mysql_min": "5.7",
@@ -94,6 +94,12 @@
       "summary": "Boş kullanıcı tablosunda tokensiz ilk superadmin oluşturma; kullanıcı varsa otomatik kapanma"
     },
     {
+      "version": "0.6.7",
+      "title": "Kurumsal İçerik ve SEO",
+      "released": "2026-05-20",
+      "summary": "Eksik kurumsal sayfalar, ikinci el premium sunum, örnek slider görselleri, sitemap, robots ve Search Console uyumu"
+    },
+    {
       "version": "0.7.0",
       "title": "Uluslararasılaşma (i18n)",
       "released": null,
@@ -119,6 +125,7 @@
       "index.php",
       "404.php",
       "install.php",
+      "robots.txt",
       "manifest.json",
       ".htaccess"
     ],

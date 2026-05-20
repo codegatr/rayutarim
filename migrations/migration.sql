@@ -595,3 +595,57 @@ UPDATE `ru_products` SET `name` = 'Diskli Goble', `badge` = 'Saha hazırlığı'
 UPDATE `ru_products` SET `name` = 'Pnömatik Hassas Ekim', `badge` = 'Yüksek verim', `summary` = 'Tohum aralığı kontrolü, gübre ünitesi ve sezonluk kalibrasyon desteği.', `description` = 'Hassas ekim performansı ve farklı ürün desenlerine uyum için tasarlanmıştır.', `specs_json` = '["4-8 sıra","Vakum sistem","Gübre deposu"]' WHERE `slug` = 'pnomatik-hassas-ekim';
 UPDATE `ru_products` SET `name` = 'Asılır Tip Tarla Pülverizatörü', `badge` = 'Bitki sağlığı', `summary` = 'Dengeli bom yapısı ve kontrollü uygulama için nozül seçenekleri.', `description` = 'Tarla ilaçlamasında dengeli dağılım, kolay bakım ve güvenli kullanım sunar.', `specs_json` = '["600-1000 L","12-16 m bom","Basınç regülatörü"]' WHERE `slug` = 'asilir-tip-pulverizator';
 UPDATE `ru_products` SET `name` = 'Sezon Bakım Paketi', `summary` = 'Aşınan parçalar, rulman, bıçak, hortum ve saha servis planı.', `description` = 'Sezon öncesi bakım ve hızlı parça tedariği için kurumsal servis paketi.', `specs_json` = '["Hızlı sevk","Orijinal parça","Servis kaydı"]' WHERE `slug` = 'sezon-bakim-paketi';
+
+-- ============================================================================
+-- v0.6.7 - Kurumsal içerik, SEO ve örnek slider görselleri
+-- ============================================================================
+INSERT IGNORE INTO `ru_settings` (`skey`, `sval`) VALUES
+  ('google_site_verification', ''),
+  ('seo_default_description', 'RAYU Tarım Makineleri; tarım makineleri, zirai ilaçlama, yedek parça, servis ve ikinci el makine süreçlerinde kurumsal satış platformudur.');
+
+UPDATE `ru_slider` SET `image` = 'assets/img/slider/toprak-isleme.jpg', `link_url` = '/urunler/toprak-isleme' WHERE `id` = 1;
+UPDATE `ru_slider` SET `image` = 'assets/img/slider/ilaclama.jpg', `link_url` = '/urunler/ilaclama' WHERE `id` = 2;
+UPDATE `ru_slider` SET `image` = 'assets/img/slider/ikinci-el.jpg', `link_url` = '/ikinci-el' WHERE `id` = 3;
+
+INSERT IGNORE INTO `ru_pages`
+  (`slug`, `title`, `subtitle`, `excerpt`, `content`, `template`, `sort_order`, `is_active`, `show_in_header`, `show_in_footer`)
+VALUES
+  ('gizlilik', 'Gizlilik Politikası', 'Veri güvenliği ve şeffaf iletişim',
+   'RAYU Tarım Makineleri web sitesi üzerinden paylaşılan kişisel verilerin kullanım esasları.',
+   '<h2>Gizlilik yaklaşımımız</h2><p>RAYU Tarım Makineleri, web sitesi üzerinden iletilen iletişim, teklif, servis ve bayilik başvurusu bilgilerini yalnızca talebin değerlendirilmesi, hizmet sunumu ve yasal yükümlülüklerin yerine getirilmesi amacıyla işler.</p><h2>Toplanan bilgiler</h2><p>Ad soyad, firma bilgisi, telefon, e-posta, şehir, talep konusu, mesaj içeriği ve teknik güvenlik kayıtları işlenebilir. Bu bilgiler üçüncü kişilerle ticari amaçla paylaşılmaz.</p><h2>Güvenlik</h2><p>Veriler yetkisiz erişimi önlemek için rol bazlı yönetim paneli, güvenli oturum ve sunucu güvenlik önlemleriyle korunur.</p>',
+   'default', 60, 1, 0, 1),
+  ('kvkk', 'KVKK Aydınlatma Metni', 'Kişisel verilerin korunması',
+   '6698 sayılı KVKK kapsamında bilgilendirme metni.',
+   '<h2>Veri sorumlusu</h2><p>RAYU Tarım Makineleri, web sitesi ve satış süreçleri kapsamında iletilen kişisel verileri veri sorumlusu sıfatıyla işler.</p><h2>İşleme amaçları</h2><p>Teklif hazırlama, ürün ve servis taleplerini yanıtlama, ikinci el başvurularını değerlendirme, müşteri ilişkilerini yürütme ve yasal kayıt yükümlülüklerini yerine getirme amaçlarıyla veri işlenir.</p><h2>Haklarınız</h2><p>KVKK kapsamındaki erişim, düzeltme, silme, itiraz ve bilgi talebi haklarınız için iletişim sayfasındaki kanallardan bize ulaşabilirsiniz.</p>',
+   'default', 61, 1, 0, 1),
+  ('cerez-politikasi', 'Çerez Politikası', 'Web deneyimi ve ölçümleme',
+   'RAYU web sitesinde kullanılan çerez türleri ve tercih yönetimi.',
+   '<h2>Çerez kullanımı</h2><p>Web sitemiz güvenli oturum, performans, temel kullanım ölçümleme ve kullanıcı deneyimini iyileştirme amacıyla çerezlerden yararlanabilir.</p><h2>Zorunlu çerezler</h2><p>Oturum güvenliği, CSRF koruması ve admin panel işlevleri için gerekli çerezler kullanılır.</p><h2>Tercihler</h2><p>Tarayıcı ayarlarınız üzerinden çerezleri silebilir veya engelleyebilirsiniz. Bazı zorunlu çerezlerin kapatılması site işlevlerini etkileyebilir.</p>',
+   'default', 62, 1, 0, 1);
+
+UPDATE `ru_pages` SET
+  `title` = 'Misyon & Vizyon',
+  `subtitle` = 'Yarının tarımı için bugünden ölçülebilir değer',
+  `excerpt` = 'Verimlilik, güvenilir satış ve sürdürülebilir servis standardı.',
+  `meta_description` = 'RAYU Tarım Makineleri misyon ve vizyonu: tarım makineleri, zirai ilaçlama, servis ve yedek parçada kurumsal değer üretmek.',
+  `content` = '<h2>Misyonumuz</h2><p>Üreticinin verimliliğini artıran, kullanıcının iş yükünü azaltan, çevreye duyarlı tarım makineleri ve bitki sağlığı çözümlerini doğru ürün, doğru servis ve doğru zamanlama ile sunmak.</p><h2>Vizyonumuz</h2><p>Türkiye genelinde güvenilir satış ve servis standardını yükselten, bölgesel pazarlarda tercih edilen kurumsal tarım teknolojileri markası olmak.</p><h2>Çalışma ilkelerimiz</h2><ul><li>Teknik veriye dayalı ürün önerisi</li><li>Şeffaf teklif ve teslimat süreci</li><li>Yedek parça ve servis sürekliliği</li><li>Uzun vadeli bayi ve üretici ilişkisi</li></ul>'
+  WHERE `slug` = 'misyon-vizyon';
+
+UPDATE `ru_pages` SET
+  `title` = 'Hakkımızda',
+  `subtitle` = 'Topraktan gelen güç, kurumsal satış disiplini',
+  `meta_description` = 'RAYU Tarım Makineleri; tarım makineleri, zirai ilaçlama, yedek parça, servis ve ikinci el makine süreçlerini tek çatı altında sunar.',
+  `content` = '<p>RAYU Tarım Makineleri, Konya merkezli yapısıyla tarım makineleri, zirai ilaçlama çözümleri, yedek parça ve saha servis süreçlerini tek kurumsal çatı altında sunar.</p><p>Satış ekibimiz ürün seçimini toprak yapısı, traktör gücü, ürün deseni, sezon takvimi ve işletme ölçeğine göre planlar. Teslimat sonrasında bakım, yedek parça ve operatör desteğiyle üreticinin yanında kalır.</p><h2>Kurumsal çalışma modelimiz</h2><p>Bayi yönetimi, filo satışı, teknik teklif, teslimat ve servis kayıtları ölçülebilir süreçlerle ilerler. Amacımız yalnızca makine satmak değil, sezon verimliliğini artıran sürdürülebilir bir iş ortaklığı kurmaktır.</p><h2>Neden RAYU?</h2><ul><li>Türkiye geneli kurumsal teklif akışı</li><li>Ürün, servis ve yedek parça süreçlerinin tek panelden yönetimi</li><li>İkinci el makinelerde ekspertiz ve belge kontrolü</li><li>Satış sonrası bakım ve sezon planlama desteği</li></ul>'
+  WHERE `slug` = 'hakkimizda';
+
+UPDATE `ru_pages` SET
+  `title` = 'İnsan Kaynakları',
+  `subtitle` = 'Saha bilgisi, teknik disiplin ve ekip kültürü',
+  `meta_description` = 'RAYU Tarım Makineleri kariyer ve insan kaynakları yaklaşımı.',
+  `content` = '<h2>Birlikte büyüyelim</h2><p>RAYU Tarım Makineleri; satış, servis, yedek parça, saha operasyonu, dijital pazarlama ve bayi ilişkileri alanlarında güçlü ekip kültürüne önem verir.</p><h2>Aradığımız yetkinlikler</h2><ul><li>Tarım sektörünü ve üretici ihtiyaçlarını anlama</li><li>Teknik ürün bilgisi öğrenmeye açıklık</li><li>Şeffaf iletişim ve sorumluluk alma</li><li>Saha ve müşteri deneyimine önem verme</li></ul><p>Başvurularınızı iletişim formu üzerinden veya <strong>ik@rayutarim.com</strong> adresine iletebilirsiniz.</p>'
+  WHERE `slug` = 'insan-kaynaklari';
+
+INSERT IGNORE INTO `ru_menu` (`location`, `label`, `url`, `sort_order`, `is_active`) VALUES
+  ('footer_3', 'Çerez Politikası', '/cerez-politikasi', 5, 1);
+UPDATE `ru_menu` SET `label` = 'Gizlilik Politikası' WHERE `url` = '/gizlilik';
+UPDATE `ru_menu` SET `label` = 'KVKK Aydınlatma Metni' WHERE `url` = '/kvkk';

@@ -36,6 +36,14 @@ function ru_dispatch(): void
         ru_handle_home();
         return;
     }
+    if ($route === '/sitemap.xml') {
+        ru_handle_sitemap();
+        return;
+    }
+    if ($route === '/robots.txt') {
+        ru_handle_robots();
+        return;
+    }
 
     // İletişim sayfası (özel şablon)
     if ($route === '/iletisim') {
@@ -181,4 +189,68 @@ function ru_handle_placeholder(string $title, string $message): void
         'page_title'          => $title,
         'page_class'          => 'page-placeholder',
     ]);
+}
+
+function ru_handle_sitemap(): never
+{
+    $base = rtrim((string)ru_setting('site_url', (string)(ru_config('site.url') ?? 'https://rayutarim.com')), '/');
+    $urls = [
+        ['loc' => '/', 'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => '/urunler', 'priority' => '0.9', 'changefreq' => 'weekly'],
+        ['loc' => '/ikinci-el', 'priority' => '0.8', 'changefreq' => 'weekly'],
+        ['loc' => '/iletisim', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    ];
+
+    try {
+        foreach (ru_fetch_all('SELECT slug, updated_at FROM ' . ru_t('pages') . ' WHERE is_active = 1 ORDER BY sort_order ASC') as $page) {
+            $urls[] = [
+                'loc' => '/' . trim((string)$page['slug'], '/'),
+                'priority' => in_array((string)$page['slug'], ['hakkimizda', 'misyon-vizyon'], true) ? '0.8' : '0.6',
+                'changefreq' => 'monthly',
+                'lastmod' => substr((string)($page['updated_at'] ?? ''), 0, 10),
+            ];
+        }
+        foreach (ru_catalog_categories() as $slug => $category) {
+            $urls[] = ['loc' => '/urunler/' . $slug, 'priority' => '0.7', 'changefreq' => 'weekly'];
+        }
+    } catch (Throwable) {
+        // Kurulum anında DB erişimi yoksa çekirdek URL'ler yeterlidir.
+    }
+
+    $seen = [];
+    header('Content-Type: application/xml; charset=utf-8');
+    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    echo "<urlset xmlns=\"https://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+    foreach ($urls as $url) {
+        $path = '/' . ltrim((string)$url['loc'], '/');
+        if (isset($seen[$path])) {
+            continue;
+        }
+        $seen[$path] = true;
+        echo "  <url>\n";
+        echo '    <loc>' . h($base . $path) . "</loc>\n";
+        if (!empty($url['lastmod'])) {
+            echo '    <lastmod>' . h($url['lastmod']) . "</lastmod>\n";
+        }
+        echo '    <changefreq>' . h($url['changefreq'] ?? 'monthly') . "</changefreq>\n";
+        echo '    <priority>' . h($url['priority'] ?? '0.5') . "</priority>\n";
+        echo "  </url>\n";
+    }
+    echo "</urlset>\n";
+    exit;
+}
+
+function ru_handle_robots(): never
+{
+    $base = rtrim((string)ru_setting('site_url', (string)(ru_config('site.url') ?? 'https://rayutarim.com')), '/');
+    header('Content-Type: text/plain; charset=utf-8');
+    echo "User-agent: *\n";
+    echo "Allow: /\n";
+    echo "Disallow: /admin/\n";
+    echo "Disallow: /inc/\n";
+    echo "Disallow: /migrations/\n";
+    echo "Disallow: /backups/\n";
+    echo "Disallow: /logs/\n\n";
+    echo "Sitemap: {$base}/sitemap.xml\n";
+    exit;
 }

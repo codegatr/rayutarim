@@ -16,6 +16,7 @@ $siteName = h((string)ru_setting('site_name', 'RAYU Tarım Makineleri'));
 $tagline  = h((string)ru_setting('site_tagline', ''));
 $logo     = (string)ru_setting('site_logo', '');
 $favicon  = (string)ru_setting('site_favicon', '');
+$verification = (string)ru_setting('google_site_verification', '');
 
 $titleSuffix = $siteName . ($tagline ? ' — ' . $tagline : '');
 $fullTitle   = isset($page_title) && $page_title !== null && $page_title !== ''
@@ -39,6 +40,10 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER
 <meta name="keywords" content="<?= h($page_keywords) ?>">
 <?php endif; ?>
 <link rel="canonical" href="<?= h($canonical) ?>">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<?php if ($verification): ?>
+<meta name="google-site-verification" content="<?= h($verification) ?>">
+<?php endif; ?>
 
 <!-- OpenGraph / Twitter -->
 <meta property="og:type" content="website">
@@ -83,6 +88,19 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER
     "@type": "PostalAddress",
     "addressLocality": "Konya",
     "addressCountry": "TR"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "<?= addslashes((string)ru_setting('site_name', 'RAYU Tarım Makineleri')) ?>",
+  "url": "<?= addslashes((string)ru_setting('site_url', 'https://rayutarim.com')) ?>",
+  "inLanguage": "tr-TR",
+  "publisher": {
+    "@type": "Organization",
+    "name": "<?= addslashes((string)ru_setting('site_name', 'RAYU Tarım Makineleri')) ?>"
   }
 }
 </script>

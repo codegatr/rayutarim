@@ -2,7 +2,7 @@
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/inc/bootstrap.php';
 $user = ru_admin_require();
-$keys = ['site_name','site_tagline','site_url','site_phone','site_email','site_whatsapp','site_address','contact_address_full','contact_working_hours','hero_title','hero_subtitle','footer_about','site_facebook','site_instagram','site_youtube','site_linkedin','maintenance_mode','site_logo','site_favicon'];
+$keys = ['site_name','site_tagline','site_url','site_phone','site_email','site_whatsapp','site_address','contact_address_full','contact_working_hours','hero_title','hero_subtitle','footer_about','site_facebook','site_instagram','site_youtube','site_linkedin','google_site_verification','maintenance_mode','site_logo','site_favicon'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!ru_csrf_check()) ru_abort(400);
     try {
@@ -30,6 +30,7 @@ ob_start();
 <div class="admin-row"><label>Logo yolu<input name="site_logo" value="<?= h(ru_setting('site_logo','')) ?>"></label><label>Logo yükle<input type="file" name="site_logo_file" accept="image/*"></label></div>
 <div class="admin-row"><label>Favicon yolu<input name="site_favicon" value="<?= h(ru_setting('site_favicon','')) ?>"></label><label>Favicon yükle<input type="file" name="site_favicon_file" accept="image/*"></label></div>
 <div class="admin-row admin-row--3"><label>Facebook<input name="site_facebook" value="<?= h(ru_setting('site_facebook','')) ?>"></label><label>Instagram<input name="site_instagram" value="<?= h(ru_setting('site_instagram','')) ?>"></label><label>YouTube<input name="site_youtube" value="<?= h(ru_setting('site_youtube','')) ?>"></label></div>
-<div class="admin-row"><label>LinkedIn<input name="site_linkedin" value="<?= h(ru_setting('site_linkedin','')) ?>"></label><label>Bakım modu<select name="maintenance_mode"><option value="0">Kapalı</option><option value="1" <?= ru_setting('maintenance_mode','0')==='1'?'selected':'' ?>>Açık</option></select></label></div>
+<div class="admin-row"><label>LinkedIn<input name="site_linkedin" value="<?= h(ru_setting('site_linkedin','')) ?>"></label><label>Google Search Console doğrulama kodu<input name="google_site_verification" value="<?= h(ru_setting('google_site_verification','')) ?>"></label></div>
+<label>Bakım modu<select name="maintenance_mode"><option value="0">Kapalı</option><option value="1" <?= ru_setting('maintenance_mode','0')==='1'?'selected':'' ?>>Açık</option></select></label>
 <button class="btn btn--primary">Kaydet</button></form></section>
 <?php ru_admin_layout('Ayarlar', ob_get_clean(), $user);
