@@ -26,7 +26,9 @@ php admin/update.php check
 php admin/update.php apply
 ```
 
-`check` yalnızca son release bilgisini okur. `apply` yedek alır, release ZIP'ini indirir, dosyaları kopyalar ve `migrations/migration.sql` dosyasını çalıştırır.
+`check` yalnızca son release/tag bilgisini okur. `apply` yedek alır, ZIP paketini indirir, dosyaları kopyalar ve `migrations/migration.sql` dosyasını çalıştırır.
+
+Migration runner SQL dosyasını tek parça göndermek yerine statement statement çalıştırır. Böylece DirectAdmin/LiteSpeed ortamlarında çoklu SQL statement kapalı olsa bile migration güvenilir şekilde uygulanır. İşlem sonunda `ru_migrations` tablosuna sürüm, dosya adı ve çalıştırılan SQL sayısı kaydedilir.
 
 ## Web endpoint
 

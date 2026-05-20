@@ -27,6 +27,7 @@ $sourceLabel = $source === 'tag' ? 'GitHub tag ZIP' : 'GitHub Release';
 $assetName = (string)($result['asset']['name'] ?? 'Paket bekleniyor');
 $publishedAt = (string)($result['published_at'] ?? '');
 $publishedLabel = $publishedAt !== '' ? ru_date($publishedAt, 'd.m.Y H:i') : 'Tag arşivi';
+$migration = is_array($result['migrations'] ?? null) ? $result['migrations'] : null;
 $stateClass = $hasResult ? ($hasUpdate ? 'update-status--available' : 'update-status--current') : 'update-status--idle';
 $stateTitle = !$hasResult ? 'Henüz kontrol yapılmadı' : ($hasUpdate ? 'Yeni güncelleme var' : 'Sistem güncel');
 $stateText = !$hasResult
@@ -67,6 +68,9 @@ ob_start();
       <div><span>Paket</span><strong><?= h($assetName) ?></strong></div>
       <div><span>Yayın Bilgisi</span><strong><?= h($publishedLabel) ?></strong></div>
       <div><span>İşlem</span><strong><?= $hasUpdate ? 'Kurulabilir' : 'İşlem gerekmiyor' ?></strong></div>
+      <?php if ($migration): ?>
+        <div><span>Migration</span><strong><?= h((string)$migration['executed']) ?> SQL çalıştı</strong></div>
+      <?php endif; ?>
     </div>
   <?php endif; ?>
 

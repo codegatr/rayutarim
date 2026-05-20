@@ -61,7 +61,7 @@ final class RuSmartUpdater
             $this->download((string)$asset['browser_download_url'], $zip);
             $source = $this->extractRelease($zip, $work . '/extract');
             $this->syncTrackedPaths($source);
-            $this->runMigrations();
+            $migrations = $this->runMigrations((string)$check['latest_version']);
             $this->cleanupBackups();
             $this->removeDir($work);
 
@@ -69,6 +69,7 @@ final class RuSmartUpdater
                 'updated' => true,
                 'message' => 'Güncelleme tamamlandı.',
                 'backup' => $backup,
+                'migrations' => $migrations,
             ];
         } catch (Throwable $e) {
             $this->removeDir($work);
@@ -299,18 +300,132 @@ final class RuSmartUpdater
         }
     }
 
-    private function runMigrations(): void
+    private function runMigrations(string $targetVersion): array
     {
         $dir = trim((string)($this->update['migration_dir'] ?? 'migrations'), '/');
         $file = $this->base . '/' . $dir . '/migration.sql';
         if (!is_file($file)) {
-            return;
+            return ['file' => $dir . '/migration.sql', 'executed' => 0, 'message' => 'Migration dosyası bulunamadı.'];
         }
         $sql = file_get_contents($file);
         if ($sql === false || trim($sql) === '') {
-            return;
+            return ['file' => $dir . '/migration.sql', 'executed' => 0, 'message' => 'Migration dosyası boş.'];
         }
-        ru_db()->exec($sql);
+
+        $statements = $this->splitSqlStatements($sql);
+        $executed = 0;
+        foreach ($statements as $statement) {
+            $trimmed = trim($statement);
+            if ($trimmed === '') {
+                continue;
+            }
+            try {
+                ru_db()->exec($trimmed);
+                $executed++;
+            } catch (Throwable $e) {
+                $excerpt = preg_replace('/\s+/', ' ', substr($trimmed, 0, 180));
+                throw new RuUpdateException('Migration SQL çalışmadı: ' . $excerpt . ' — ' . $e->getMessage(), 0, $e);
+            }
+        }
+
+        $this->recordMigration($dir . '/migration.sql', $executed, $targetVersion);
+        return [
+            'file' => $dir . '/migration.sql',
+            'executed' => $executed,
+            'message' => $executed > 0 ? 'Migration başarıyla çalıştırıldı.' : 'Çalıştırılacak migration bulunamadı.',
+        ];
+    }
+
+    private function splitSqlStatements(string $sql): array
+    {
+        $statements = [];
+        $buffer = '';
+        $quote = null;
+        $len = strlen($sql);
+
+        for ($i = 0; $i < $len; $i++) {
+            $char = $sql[$i];
+            $next = $i + 1 < $len ? $sql[$i + 1] : '';
+
+            if ($quote === null && $char === '-' && $next === '-') {
+                while ($i < $len && $sql[$i] !== "\n") {
+                    $i++;
+                }
+                $buffer .= "\n";
+                continue;
+            }
+
+            if ($quote === null && $char === '#') {
+                while ($i < $len && $sql[$i] !== "\n") {
+                    $i++;
+                }
+                $buffer .= "\n";
+                continue;
+            }
+
+            if ($quote === null && $char === '/' && $next === '*') {
+                $i += 2;
+                while ($i < $len - 1 && !($sql[$i] === '*' && $sql[$i + 1] === '/')) {
+                    $i++;
+                }
+                $i++;
+                $buffer .= "\n";
+                continue;
+            }
+
+            if ($quote === $char && ($char === '"' || $char === "'" || $char === '`') && $next === $char) {
+                $buffer .= $char . $next;
+                $i++;
+                continue;
+            }
+
+            if (($char === '"' || $char === "'" || $char === '`') && ($i === 0 || $sql[$i - 1] !== '\\')) {
+                if ($quote === $char) {
+                    $quote = null;
+                } elseif ($quote === null) {
+                    $quote = $char;
+                }
+            }
+
+            if ($char === ';' && $quote === null) {
+                if (trim($buffer) !== '') {
+                    $statements[] = $buffer;
+                }
+                $buffer = '';
+                continue;
+            }
+
+            $buffer .= $char;
+        }
+
+        if (trim($buffer) !== '') {
+            $statements[] = $buffer;
+        }
+
+        return $statements;
+    }
+
+    private function recordMigration(string $filename, int $executed, string $targetVersion): void
+    {
+        try {
+            ru_db()->exec('CREATE TABLE IF NOT EXISTS ' . ru_t('migrations') . " (
+                `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                `version` VARCHAR(20) NOT NULL,
+                `filename` VARCHAR(190) NOT NULL,
+                `applied_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `success` TINYINT(1) NOT NULL DEFAULT 1,
+                `notes` TEXT NULL,
+                PRIMARY KEY (`id`),
+                UNIQUE KEY `uniq_filename` (`filename`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+            ru_exec(
+                'INSERT INTO ' . ru_t('migrations') . ' (`version`, `filename`, `success`, `notes`, `applied_at`) VALUES (?, ?, 1, ?, NOW())
+                 ON DUPLICATE KEY UPDATE `version` = VALUES(`version`), `success` = 1, `notes` = VALUES(`notes`), `applied_at` = NOW()',
+                [$targetVersion, $filename, $executed . ' SQL statement çalıştırıldı.']
+            );
+        } catch (Throwable) {
+            // Migration başarıyla çalıştıysa takip kaydı yazılamaması güncellemeyi durdurmasın.
+        }
     }
 
     private function cleanupBackups(): void

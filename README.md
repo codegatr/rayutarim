@@ -25,7 +25,7 @@ v0.7.0 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı, Tür
 - Hakkımızda, Misyon/Vizyon, İnsan Kaynakları, Gizlilik, KVKK ve Çerez Politikası içerikleri
 - 2. el bölümü için premium ekspertiz ve güven pazarı sunumu
 - Aktif iletişim/teklif formu: kayıtlar admin panelde `Talepler` ekranına düşer
-- Smart Update v5: Release/tag sürüm karşılaştırması, ZIP indirme, yedek, korunan dosyalar, migration runner
+- Smart Update v5: Release/tag sürüm karşılaştırması, ZIP indirme, yedek, korunan dosyalar, statement bazlı migration runner
 - Kritik kurumsal sayfalar için DB boş olsa bile çalışan fallback içerik
 
 ## Kurulum
