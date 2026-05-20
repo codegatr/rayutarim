@@ -126,3 +126,46 @@ function ru_admin_input(string $name, mixed $default = ''): string
 {
     return trim((string)($_POST[$name] ?? $default));
 }
+
+function ru_admin_upload(string $field, string $bucket): string
+{
+    if (empty($_FILES[$field]) || !is_array($_FILES[$field])) {
+        return '';
+    }
+    $file = $_FILES[$field];
+    if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+        return '';
+    }
+    if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
+        throw new RuntimeException('Dosya yüklenemedi.');
+    }
+
+    $max = (int)(ru_config('uploads.max_size_bytes') ?? (8 * 1024 * 1024));
+    if ((int)($file['size'] ?? 0) > $max) {
+        throw new RuntimeException('Dosya boyutu izin verilen sınırı aşıyor.');
+    }
+
+    $ext = strtolower(pathinfo((string)($file['name'] ?? ''), PATHINFO_EXTENSION));
+    $allowed = array_map('strtolower', (array)(ru_config('uploads.allowed_image') ?? ['jpg', 'jpeg', 'png', 'webp', 'gif']));
+    if (!in_array($ext, $allowed, true)) {
+        throw new RuntimeException('Sadece görsel dosyaları yüklenebilir.');
+    }
+
+    $bucket = trim(preg_replace('/[^a-z0-9_-]+/i', '-', $bucket) ?? 'media', '-');
+    $bucket = $bucket !== '' ? $bucket : 'media';
+    $relativeDir = 'uploads/' . $bucket;
+    $targetDir = RU_BASE . '/' . $relativeDir;
+    if (!is_dir($targetDir) && !mkdir($targetDir, 0755, true)) {
+        throw new RuntimeException('Yükleme klasörü oluşturulamadı.');
+    }
+
+    $base = pathinfo((string)($file['name'] ?? 'gorsel'), PATHINFO_FILENAME);
+    $name = ru_slugify($base) . '-' . date('YmdHis') . '-' . bin2hex(random_bytes(3)) . '.' . $ext;
+    $target = $targetDir . '/' . $name;
+    if (!move_uploaded_file((string)$file['tmp_name'], $target)) {
+        throw new RuntimeException('Dosya hedef klasöre taşınamadı.');
+    }
+    @chmod($target, 0644);
+
+    return $relativeDir . '/' . $name;
+}

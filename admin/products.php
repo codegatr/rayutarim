@@ -17,6 +17,12 @@ if ($action === 'delete' && $id > 0) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!ru_csrf_check()) ru_abort(400);
+    try {
+        $image = ru_admin_upload('image_file', 'products') ?: ru_admin_input('image');
+    } catch (Throwable $e) {
+        ru_flash('error', $e->getMessage());
+        ru_redirect($id > 0 ? '/admin/products.php?action=edit&id=' . $id : '/admin/products.php?action=new');
+    }
     $name = ru_admin_input('name');
     $slug = ru_admin_input('slug') ?: ru_slugify($name);
     $specs = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string)($_POST['specs'] ?? '')) ?: [])));
@@ -28,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ru_admin_input('summary'),
         ru_admin_input('description'),
         json_encode($specs, JSON_UNESCAPED_UNICODE),
-        ru_admin_input('image'),
+        $image,
         (int)($_POST['sort_order'] ?? 0),
         isset($_POST['is_featured']) ? 1 : 0,
         isset($_POST['is_active']) ? 1 : 0,
@@ -54,7 +60,7 @@ if ($action === 'new' || ($action === 'edit' && $id > 0)):
 ?>
 <section class="admin-panel">
   <div class="admin-panel__head"><h2><?= $id ? 'Ürün Düzenle' : 'Ürün Ekle' ?></h2><a class="btn" href="/admin/products.php">Listeye Dön</a></div>
-  <form class="admin-form" method="post">
+  <form class="admin-form" method="post" enctype="multipart/form-data">
     <?= ru_csrf_field() ?>
     <div class="admin-row">
       <label>Ürün Adı<input name="name" value="<?= h($row['name'] ?? '') ?>" required></label>
@@ -68,7 +74,10 @@ if ($action === 'new' || ($action === 'edit' && $id > 0)):
     <label>Kısa Açıklama<textarea name="summary"><?= h($row['summary'] ?? '') ?></textarea></label>
     <label>Detay<textarea name="description"><?= h($row['description'] ?? '') ?></textarea></label>
     <label>Teknik Özellikler<textarea name="specs" placeholder="Her satıra bir özellik"><?= h(implode("\n", is_array($specs) ? $specs : [])) ?></textarea></label>
-    <label>Görsel yolu<input name="image" value="<?= h($row['image'] ?? '') ?>" placeholder="uploads/products/ornek.webp"></label>
+    <div class="admin-row">
+      <label>Görsel yolu<input name="image" value="<?= h($row['image'] ?? '') ?>" placeholder="uploads/products/ornek.webp"></label>
+      <label>Görsel yükle<input type="file" name="image_file" accept="image/*"></label>
+    </div>
     <div class="admin-actions">
       <label><input type="checkbox" name="is_featured" value="1" <?= (int)($row['is_featured'] ?? 0) ? 'checked' : '' ?>> Öne çıkar</label>
       <label><input type="checkbox" name="is_active" value="1" <?= (int)($row['is_active'] ?? 1) ? 'checked' : '' ?>> Aktif</label>

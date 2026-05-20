@@ -32,7 +32,7 @@ ru_partial('breadcrumb', [
 <section class="page-body section">
   <div class="container container--narrow">
     <article class="prose">
-      <?= $content ?: '<p>Bu sayfa icin icerik henuz eklenmemis.</p>' ?>
+      <?= $content ?: '<p>Bu sayfa için içerik henüz eklenmemiş.</p>' ?>
     </article>
   </div>
 </section>

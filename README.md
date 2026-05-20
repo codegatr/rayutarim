@@ -9,7 +9,7 @@ Kurumsal tarım makineleri, zirai ilaçlama, yedek parça, servis ve ikinci el g
 
 ## Kapsam
 
-v0.6.2 ile public yüzey, yönetim paneli ve Türkçe metin standardı kurumsal satış seviyesine taşındı:
+v0.6.3 ile public yüzey, yönetim paneli, medya yükleme ve Türkçe metin standardı kurumsal satış seviyesine taşındı:
 
 - Temiz SVG marka seti: `assets/img/logo.svg`
 - Kurumsal anasayfa: güven bandı, ürün grupları, öne çıkan ürünler, servis süreci
@@ -17,6 +17,7 @@ v0.6.2 ile public yüzey, yönetim paneli ve Türkçe metin standardı kurumsal 
 - 2. el güven sayfası: `/ikinci-el`
 - Admin panel: `/admin/login.php`
 - Ürün, kategori, sayfa, slider, menü, ayar, kullanıcı ve talep yönetimi
+- Admin panelden ürün, slider, sayfa hero/OG, logo ve favicon görsel yükleme
 - Aktif iletişim/teklif formu: kayıtlar admin panelde `Talepler` ekranına düşer
 - Smart Update v5: release kontrolü, ZIP indirme, yedek, korunan dosyalar, migration runner
 

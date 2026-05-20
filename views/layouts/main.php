@@ -15,6 +15,7 @@ declare(strict_types=1);
 $siteName = h((string)ru_setting('site_name', 'RAYU Tarım Makineleri'));
 $tagline  = h((string)ru_setting('site_tagline', ''));
 $logo     = (string)ru_setting('site_logo', '');
+$favicon  = (string)ru_setting('site_favicon', '');
 
 $titleSuffix = $siteName . ($tagline ? ' — ' . $tagline : '');
 $fullTitle   = isset($page_title) && $page_title !== null && $page_title !== ''
@@ -48,11 +49,16 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'rayutarim.com') . ($_SERVER
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Favicon -->
+<?php if ($favicon): ?>
+<link rel="icon" href="<?= h(ru_upload_url($favicon)) ?>">
+<link rel="shortcut icon" href="<?= h(ru_upload_url($favicon)) ?>">
+<?php else: ?>
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
+<?php endif; ?>
 <meta name="theme-color" content="#1F4D33">
 
 <!-- Fonts -->

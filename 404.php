@@ -1,16 +1,16 @@
 <?php
 /**
- * RAYU TARIM MAKİNELERİ — 404 Sayfa Bulunamadi
+ * RAYU TARIM MAKİNELERİ — 404 Sayfa Bulunamadı
  */
 
 declare(strict_types=1);
 
-// Bootstrap'i guvenli yukle (kurulu degilse direk render et)
+// Bootstrap'i güvenli yükle (kurulu değilse direkt render et)
 if (is_file(__DIR__ . '/inc/bootstrap.php') && is_file(__DIR__ . '/inc/config.php')) {
     require_once __DIR__ . '/inc/bootstrap.php';
-    $siteName = (string)(ru_setting('site_name', 'RAYU Tarim Makineleri'));
+    $siteName = (string)(ru_setting('site_name', 'RAYU Tarım Makineleri'));
 } else {
-    $siteName = 'RAYU Tarim Makineleri';
+    $siteName = 'RAYU Tarım Makineleri';
 }
 
 http_response_code(404);
@@ -20,7 +20,7 @@ http_response_code(404);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>404 — Sayfa Bulunamadi — <?= htmlspecialchars($siteName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></title>
+<title>404 — Sayfa Bulunamadı — <?= htmlspecialchars($siteName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></title>
 <meta name="robots" content="noindex,nofollow">
 <style>
   :root {
@@ -53,9 +53,9 @@ http_response_code(404);
 <body>
   <div>
     <p class="num">404</p>
-    <h1>Aradiginiz sayfa bulunamadi</h1>
-    <p>Adres yanlis yazilmis olabilir veya sayfa tasinmis ya da kaldirilmis olabilir.</p>
-    <a href="/">Anasayfaya don &rarr;</a>
+    <h1>Aradığınız sayfa bulunamadı</h1>
+    <p>Adres yanlış yazılmış olabilir veya sayfa taşınmış ya da kaldırılmış olabilir.</p>
+    <a href="/">Anasayfaya dön &rarr;</a>
   </div>
 </body>
 </html>
