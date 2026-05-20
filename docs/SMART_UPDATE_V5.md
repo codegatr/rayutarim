@@ -7,7 +7,7 @@ RAYU Smart Update v5, GitHub Release ve GitHub tag listesini birlikte kontrol ed
 1. GitHub release etiketi `v0.6.0` formatında olmalıdır.
 2. Asset adı manifestteki kalıba uymalı: `rayutarim-v{version}.zip`.
 3. ZIP kökünde `manifest.json` bulunmalıdır. Tek bir üst klasör içine alınmış ZIP de desteklenir.
-4. GitHub Release oluşturulmamışsa updater en güncel `vX.Y.Z` tag arşivini indirerek devam eder.
+4. GitHub Release oluşturulmamışsa updater en güncel `vX.Y.Z` tag arşivini GitHub `codeload` ZIP bağlantısından indirerek devam eder.
 
 ## Korunan yollar
 

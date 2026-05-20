@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "release_date": "2026-05-20",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -128,6 +128,12 @@
       "title": "Sektör Odaklı Kurumsal İçerikler",
       "released": "2026-05-20",
       "summary": "Eksik kurumsal sayfalar güncel tarım makineleri pazarı, çok markalı satış, tedarikçi ağı, kalite ve kariyer içerikleriyle dolduruldu"
+    },
+    {
+      "version": "0.7.3",
+      "title": "GitHub Tag ZIP İndirme Düzeltmesi",
+      "released": "2026-05-20",
+      "summary": "Smart Update tag arşivlerini GitHub API zipball yerine codeload ZIP bağlantısından indirir ve HTTP 415 hatasını önler"
     },
     {
       "version": "0.8.0",

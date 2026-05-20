@@ -138,6 +138,7 @@ final class RuSmartUpdater
         }
 
         $version = ltrim((string)$latest['name'], 'v');
+        $downloadUrl = $this->tagDownloadUrl((string)$latest['name']);
         return [
             'tag_name' => (string)$latest['name'],
             'name' => (string)$latest['name'] . ' source archive',
@@ -145,9 +146,15 @@ final class RuSmartUpdater
             'source' => 'tag',
             'assets' => [[
                 'name' => 'github-source-' . $version . '.zip',
-                'browser_download_url' => (string)$latest['zipball_url'],
+                'browser_download_url' => $downloadUrl,
+                'api_zipball_url' => (string)$latest['zipball_url'],
             ]],
         ];
+    }
+
+    private function tagDownloadUrl(string $tagName): string
+    {
+        return 'https://codeload.github.com/' . ru_repo() . '/zip/refs/tags/' . rawurlencode($tagName);
     }
 
     private function selectAsset(array $release, string $version): ?array
@@ -165,9 +172,11 @@ final class RuSmartUpdater
             }
         }
         if (!empty($release['zipball_url'])) {
+            $tagName = (string)($release['tag_name'] ?? ('v' . $version));
             return [
                 'name' => 'github-source-' . $version . '.zip',
-                'browser_download_url' => (string)$release['zipball_url'],
+                'browser_download_url' => $this->tagDownloadUrl($tagName),
+                'api_zipball_url' => (string)$release['zipball_url'],
             ];
         }
         return null;
@@ -185,7 +194,7 @@ final class RuSmartUpdater
     {
         $headers = [
             'User-Agent: RAYU-Smart-Update/' . ru_version(),
-            'Accept: ' . ($binary ? 'application/octet-stream' : 'application/vnd.github+json'),
+            'Accept: ' . $this->acceptHeader($url, $binary),
         ];
         $token = (string)(ru_config('update.github_token') ?? '');
         if ($token !== '') {
@@ -216,6 +225,17 @@ final class RuSmartUpdater
             throw new RuUpdateException('GitHub isteği başarısız.');
         }
         return $body;
+    }
+
+    private function acceptHeader(string $url, bool $binary): string
+    {
+        if (!$binary) {
+            return 'application/vnd.github+json';
+        }
+        if (str_contains($url, '/releases/assets/')) {
+            return 'application/octet-stream';
+        }
+        return 'application/zip, application/octet-stream, */*';
     }
 
     private function backupCurrent(): string
