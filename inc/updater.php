@@ -26,7 +26,7 @@ final class RuSmartUpdater
         $release = $this->latestRelease();
         $latest = ltrim((string)($release['tag_name'] ?? ''), 'v');
         if ($latest === '') {
-            throw new RuUpdateException('GitHub release tag bulunamadi.');
+            throw new RuUpdateException('GitHub release tag bulunamadı.');
         }
 
         return [
@@ -35,6 +35,7 @@ final class RuSmartUpdater
             'has_update' => version_compare($latest, ru_version(), '>'),
             'release_name' => (string)($release['name'] ?? ''),
             'published_at' => (string)($release['published_at'] ?? ''),
+            'source' => (string)($release['source'] ?? 'release'),
             'asset' => $this->selectAsset($release, $latest),
         ];
     }
@@ -48,7 +49,7 @@ final class RuSmartUpdater
 
         $asset = $check['asset'];
         if (!$asset || empty($asset['browser_download_url'])) {
-            throw new RuUpdateException('Release asset ZIP bulunamadi.');
+            throw new RuUpdateException('Release asset ZIP bulunamadı.');
         }
 
         $work = $this->makeWorkDir();
@@ -95,6 +96,21 @@ final class RuSmartUpdater
         if (!is_array($data)) {
             throw new RuUpdateException('GitHub release yanıtı okunamadı.');
         }
+        $data['source'] = $data['source'] ?? 'release';
+
+        if (str_contains($endpoint, '/releases/latest')) {
+            try {
+                $tag = $this->latestTagRelease();
+                $releaseVersion = ltrim((string)($data['tag_name'] ?? ''), 'v');
+                $tagVersion = ltrim((string)($tag['tag_name'] ?? ''), 'v');
+                if ($releaseVersion === '' || version_compare($tagVersion, $releaseVersion, '>')) {
+                    return $tag;
+                }
+            } catch (RuUpdateException $e) {
+                // Release endpoint çalışıyorsa tag karşılaştırması zorunlu değildir.
+            }
+        }
+
         return $data;
     }
 

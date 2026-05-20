@@ -3,7 +3,7 @@
   "slug": "rayutarim",
   "tagline": "Toprak İşlemede Uzman",
   "description": "Kurumsal tarım makineleri ve zirai ilaç satış platformu",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "release_date": "2026-05-20",
   "repo": "codegatr/rayutarim",
   "php_min": "8.3",
@@ -104,6 +104,12 @@
       "title": "Smart Update Tag Fallback",
       "released": "2026-05-20",
       "summary": "GitHub Release asset yoksa en güncel tag ZIP arşivinden otomatik güncelleme"
+    },
+    {
+      "version": "0.6.9",
+      "title": "Smart Update Durum Ekranı",
+      "released": "2026-05-20",
+      "summary": "Release ve tag sürümleri birlikte karşılaştırılır; yönetim panelinde güncelleme durumu sade kartlarla gösterilir"
     },
     {
       "version": "0.7.0",

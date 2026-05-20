@@ -5,11 +5,11 @@ Kurumsal tarım makineleri, zirai ilaçlama, yedek parça, servis ve ikinci el g
 - Canlı alan adı: https://rayutarim.com
 - Repo: https://github.com/codegatr/rayutarim
 - Sunucu uyumu: DirectAdmin, LiteSpeed, Apache rewrite
-- Güncelleme: GitHub Release tabanlı Smart Update v5
+- Güncelleme: GitHub Release + tag arşivi uyumlu Smart Update v5
 
 ## Kapsam
 
-v0.6.7 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı ve Türkçe metin standardı kurumsal satış seviyesine taşındı:
+v0.6.9 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı, Türkçe metin standardı ve anlaşılır Smart Update ekranı kurumsal satış seviyesine taşındı:
 
 - Temiz SVG marka seti: `assets/img/logo.svg`
 - Kurumsal anasayfa: güven bandı, ürün grupları, öne çıkan ürünler, servis süreci
@@ -23,7 +23,7 @@ v0.6.7 ile public yüzey, yönetim paneli, medya yükleme, SEO altyapısı ve T�
 - Hakkımızda, Misyon/Vizyon, İnsan Kaynakları, Gizlilik, KVKK ve Çerez Politikası içerikleri
 - 2. el bölümü için premium ekspertiz ve güven pazarı sunumu
 - Aktif iletişim/teklif formu: kayıtlar admin panelde `Talepler` ekranına düşer
-- Smart Update v5: release kontrolü, ZIP indirme, yedek, korunan dosyalar, migration runner
+- Smart Update v5: Release/tag sürüm karşılaştırması, ZIP indirme, yedek, korunan dosyalar, migration runner
 
 ## Kurulum
 

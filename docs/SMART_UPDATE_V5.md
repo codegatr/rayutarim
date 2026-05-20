@@ -1,6 +1,6 @@
 # Smart Update v5
 
-RAYU Smart Update v5, GitHub Release üzerinden yayınlanan ZIP paketini indirir. Release asset bulunamazsa en güncel GitHub tag ZIP arşivini kullanır. Güncelleme öncesi yedek alır, `manifest.json` içindeki `paths.tracked` yollarını senkronize eder ve `paths.preserved` altındaki kullanıcı dosyalarına dokunmaz.
+RAYU Smart Update v5, GitHub Release ve GitHub tag listesini birlikte kontrol eder. En yüksek semantik sürüm hangisiyse onu esas alır; Release asset bulunamazsa ilgili GitHub tag ZIP arşivini kullanır. Güncelleme öncesi yedek alır, `manifest.json` içindeki `paths.tracked` yollarını senkronize eder ve `paths.preserved` altındaki kullanıcı dosyalarına dokunmaz.
 
 ## Release paketi
 
